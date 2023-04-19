@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Card = styled.div`
-    background-color: #222;
+    background-color: ${({ theme }) => theme.colors.backgroundSecondary};
     border-radius: 18px;
     width: 90%;
     height: 70%;
@@ -13,11 +13,12 @@ const Card = styled.div`
     align-items: flex-start; // changed from left
     text-align: left;
     transition: all 0.3s;
+    color: ${({ theme }) => theme.colors.text};
     box-shadow: rgba(50, 50, 50, 0.3) 0px 4px 6px, rgba(150, 150, 150, 0.3) 0px 5px 10px -3px, rgba(80, 80, 80, 0.3) 0px -3px 0px inset;
 
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 26px rgba(0, 200, 0, 0.5);
+        box-shadow: rgba(50, 50, 50, 0.6) 0px 8px 12px, rgba(150, 150, 150, 0.6) 0px 10px 20px -3px, rgba(80, 80, 80, 0.6) 0px -3px 0px inset;
     }
 `;
 
@@ -32,6 +33,7 @@ const ProjectTitle = styled.h2`
 `;
 
 const ProjectVersion = styled.p`
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: .9rem;
     margin: 0;
     margin-top: 5px;
@@ -39,6 +41,7 @@ const ProjectVersion = styled.p`
 `;
 
 const ProjectLanguages = styled.p`
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: 0.8rem;
     margin: 0;
     margin-top: 8px;
@@ -46,6 +49,7 @@ const ProjectLanguages = styled.p`
 `;
 
 const ProjectDeveloper = styled.p`
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: .8rem;
     margin: 0;
     margin-top: 8px;

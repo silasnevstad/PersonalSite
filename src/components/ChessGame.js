@@ -21,7 +21,7 @@ const ChessContainer = styled.div`
     align-items: center;
     text-align: center;
     width: 28%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
     border-radius: 10px;
 
@@ -43,11 +43,32 @@ const ButtonContainer = styled.div`
     margin-top: 10px;
 `;
 
+const ChessGameHeaderContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+`;
+
+const ChessGameHeaderLeft = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+
 const ChessGameControl = styled.h1`
     font-family: 'Roboto', sans-serif;
     font-size: 1.8rem;
     font-weight: 500;
-    margin: 0;
+`;
+
+const ChessGameTimeControl = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    opacity: 0.8;
 `;
 
 const ChessGameDate = styled.p`
@@ -62,8 +83,17 @@ const ChessGameResult = styled.p`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     margin: 0;
-    margin-top: 8px;
+    margin-top: -8px;
     opacity: 0.8;
+    align-self: flex-end;
+`;
+
+const ChessInfoMessage = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-size: .8rem;
+    margin: 0;
+    margin-top: 15px;
+    opacity: 0.6;
 `;
 
 //convert string yyyy.mm.dd to date string dd, month yyyy
@@ -74,6 +104,19 @@ const convertDate = (date) => {
     const monthString = new Date(year, month - 1, day).toLocaleString('default', { month: 'long' });
     return day + " " + monthString + " " + year;
 }
+
+const convertTimeControl = (timeControl) => {
+    const timeArr = timeControl.split("+");
+    const timeInit = timeArr[0] / 60;
+    const increment = timeArr[1];
+
+    if (increment === "0" || increment === undefined) {
+        return timeInit + " min";
+    } else {
+        return timeInit + " + " + increment;
+    }
+}
+
 
 
 const ChessGame = () => {
@@ -87,6 +130,7 @@ const ChessGame = () => {
     const [reverse, setReverse] = useState(true);
     const myUsername = "Sevstad";
     const [gameType, setGameType] = useState("bullet");
+    const [timeControl, setTimeControl] = useState("1+0");
     const [myRating, setMyRating] = useState(0);
     const [opponentRating, setOpponentRating] = useState(0);
     const [opponent, setOpponent] = useState("");
@@ -109,6 +153,10 @@ const ChessGame = () => {
         const dateArr = date.split('"');
         date = dateArr[1];
         const res = game.white.username === myUsername ? game.white.result : game.black.result;
+        const time = convertTimeControl(game.time_control);
+
+
+
         newGame.loadPgn(pgn);
 
         setGame(newGame);
@@ -116,6 +164,7 @@ const ChessGame = () => {
         setFen(fen);
         setOpponent(opp);
         setGameType(game.time_class);
+        setTimeControl(time);
         setMyRating(game.white.username === myUsername ? game.white.rating : game.black.rating);
         setOpponentRating(game.white.username === myUsername ? game.black.rating : game.white.rating);
         setOrientation(game.white.username === myUsername ? "white" : "black");
@@ -135,7 +184,7 @@ const ChessGame = () => {
         setGameIndex(games.length - 1);
         const lastGame = games[games.length - 1];
         
-        console.log('lastGame', lastGame)
+        console.log('lastGame', gamesResponse)
     
         if (lastGame) {
             loadGame(lastGame);
@@ -187,33 +236,36 @@ const ChessGame = () => {
         setReverse(!reverse);
     };
 
-    // const initStockfish = () => {
-    //     Stockfish().then((engine) => {
-    //       engine.addMessageListener((event) => {
-    //         console.log("Stockfish response:", event.data);
-    //       });
-    //       setStockfishEngine(engine);
-    //     });
-    //   };
+    // call next move when left/right arrow is pressed
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 37) {
+            onPlayMove(false);
+        } else if (event.keyCode === 39) {
+            onPlayMove(true);
+        }
+    };
 
-    // const getEvaluation = () => {
-    //     if (stockfishEngine) {
-    //       stockfishEngine.postMessage("position fen " + fen);
-    //       stockfishEngine.postMessage("go depth 10");
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     getEvaluation();
-    // }, [fen]);
+    // handle keydown event
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    });
 
     return (
         <ChessOuterContainer>
             {game ? (
 
             <ChessContainer>
-                <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)} Game</ChessGameControl>
-                <ChessGameDate>{convertDate(date)}</ChessGameDate>
+                <ChessGameHeaderContainer>
+                    <ChessGameHeaderLeft>
+                        <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
+                        <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
+                    </ChessGameHeaderLeft>
+                    <ChessGameDate>{convertDate(date)}</ChessGameDate>
+                </ChessGameHeaderContainer>
+                
                 <ChessGameResult>{result.charAt(0).toUpperCase() + result.slice(1)}</ChessGameResult>
                 <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
                 <Chessboard
@@ -246,18 +298,23 @@ const ChessGame = () => {
                 </ButtonContainer>
                 <ButtonContainer style={{marginTop: '20px', gap: '40px'}}>
                     <button onClick={() => onLastGame()} className="chess-button">
-                        <div class="arrow-wrapper">
-                            <div class="arrow left"></div>
-                        </div>
+                        {/* <div class="arrow-wrapper"> */}
+                            {/* <div class="arrow left"></div> */}
+                        {/* </div> */}
                         Last Game
                     </button>
                     <button onClick={() => onNextGame()} className="chess-button">
                         Next Game
-                        <div class="arrow-wrapper">
-                            <div class="arrow"></div>
-                        </div>
+                        {/* <div class="arrow-wrapper"> */}
+                            {/* <div class="arrow"></div> */}
+                        {/* </div> */}
                     </button>
                 </ButtonContainer>
+
+                <ChessInfoMessage>
+                    Use the arrow keys to navigate through the moves
+                </ChessInfoMessage>
+
             </ChessContainer>) : (
                 <p>No game found</p>
             )}

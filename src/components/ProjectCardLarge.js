@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
-    padding-top: 30px;
     margin: 10px;
 
     display: flex;
@@ -20,6 +19,7 @@ const CardLarge = styled.div`
 `;
 
 const ProjectTitle = styled.h2`
+    color: ${({ theme }) => theme.colors.secondary};
     font-size: 1.6rem;
     margin: 0;
 `;
@@ -32,6 +32,7 @@ const ProjectDescription = styled.p`
 `;
 
 const ProjectVersion = styled.p`
+    color: ${({ theme }) => theme.colors.text};
     font-size: 1rem;
     margin: 0;
     margin-left: 15px;
@@ -39,6 +40,7 @@ const ProjectVersion = styled.p`
 `;
 
 const ProjectLanguages = styled.p`
+    color: ${({ theme }) => theme.colors.text};
     font-size: .9rem;
     margin: 0;
     margin-top: 10px;
@@ -50,6 +52,7 @@ const ProjectDeveloper = styled.p`
     margin: 0;
     margin-top: 10px;
     opacity: 0.6;
+    color: ${({ theme }) => theme.colors.text};
 `;
 
 const ProjectLink = styled.a`
@@ -57,6 +60,7 @@ const ProjectLink = styled.a`
     margin: 0;
     margin-top: 25px;
     opacity: 0.6;
+    color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const ProjectLogo = styled.img`

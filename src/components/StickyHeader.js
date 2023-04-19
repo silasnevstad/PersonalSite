@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const StickyHeaderContainer = styled.div`
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0em;
+  width: 100%;
+  background-color: #222;
+
+  left: ${({ isMenuOpen }) => (isMenuOpen ? '16%' : '1em')};
 `;
 
 const StickyHeaderText = styled.h1`
@@ -12,8 +17,9 @@ const StickyHeaderText = styled.h1`
   padding: 5px 10px;
 `;
 
-const StickyHeader = () => {
+const StickyHeader = ({ isMenuOpen }) => {
   const [headerText, setHeaderText] = useState('');
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +34,11 @@ const StickyHeader = () => {
         }
       }
 
+      if (newHeaderText === '') {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
       setHeaderText(newHeaderText);
     };
 
@@ -39,8 +50,15 @@ const StickyHeader = () => {
   }, []);
 
   return (
-    <StickyHeaderContainer>
-      <StickyHeaderText>{headerText}</StickyHeaderText>
+    <StickyHeaderContainer isMenuOpen={isMenuOpen}>
+      {show && <>
+        <div class="sticky-div">
+          <h1>Silas Nevstad</h1>
+          <h2 className="headerH2"> Boston, MA | nevstads@gmail.com | <a href="https://www.linkedin.com/in/silas-nevstad-3091a420b/">LinkedIn</a> | <a href="https://github.com/silasnevstad/">Github</a> </h2>
+        </div>
+        <StickyHeaderText>{headerText}</StickyHeaderText>
+      </>}
+      
     </StickyHeaderContainer>
   );
 };

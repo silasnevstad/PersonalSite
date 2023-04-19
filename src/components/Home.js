@@ -2,6 +2,33 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Home.css';
 import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
+import styled from 'styled-components';
+
+const HomeHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;  
+`;
+
+const HomeContactButton = styled.button`
+  margin: 5px 5px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #ffffff3f;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 14%;
+  height: 40px;
+
+  &:hover {
+    background: #222;
+    transform: scale(1.05);
+  }
+
+`;
 
 const useTypewriterEffect = (text, initialDelay = 0) => {
   const [typedText, setTypedText] = useState('');
@@ -37,14 +64,18 @@ const useTypewriterEffect = (text, initialDelay = 0) => {
 };
 
 
-const Home = () => {
+const Home = ({ isMenuOpen, toggleMenu }) => {
     const introText = 
         "Welcome to my website! I'm Silas Nevstad, a student at Northeastern University studying Computer Science. Feel free to explore the different pages on my site and don't hesitate to reach out to me if you have any questions or just want to say hi.";
     const text = useTypewriterEffect(introText, 15);
 
     return (
         <div className="Home">
-            <NavigationMenu />
+            <HomeHeader>
+              <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+
+              {/* <HomeContactButton>Contact</HomeContactButton> */}
+            </HomeHeader>
             <h1 id="typedtext">{text}<span className="cursor">_</span></h1>
             <SocialLinks />
         </div>

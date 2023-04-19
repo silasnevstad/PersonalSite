@@ -1,81 +1,131 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/NavMenu.css'
 import styled from 'styled-components';
+// import '../styles/NavMenu.css';
 
-const NavigationMenu = () => {
-    const NavText = styled.p`
-        font-size: 1rem;
-        margin: 0;
-        opacity: 0.9;
+const MenuButton = styled.button`
+  background: none;
+  border: none;
+  color: #5c86ff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+`;
 
-        &:hover {
-            opacity: 1;
-        }
-    `;
+const NavText = styled.p`
+  font-size: 1rem;
+  padding: 5px 5px;
+  opacity: 0.9;
+  color: ${({ theme }) => theme.colors.text};
+`;
 
-    return (
-        <>
-            <button className="menu-button">
-                Menu
-            </button>
+const NavUl = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
 
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">
-                            <NavText>Home</NavText>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/resume">
-                            <NavText>Resume</NavText>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/projects">
-                            <NavText>Projects</NavText>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/lastChess">
-                            <NavText>My Chess Games</NavText>
-                        </Link>
-                    </li>
-                    <li>
-                        <a href="https://www.senttrac.com">
-                            <NavText>Senttrac</NavText>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://marketplace.visualstudio.com/items?itemName=SilasNevstad.gpthelper">
-                            <NavText>VSCode GPT</NavText>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.humangpt.me">
-                            <NavText>HumanGPT</NavText>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.scramdleb.com">
-                            <NavText>Scramdleb</NavText>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://apps.apple.com/gb/app/chess-clock-by-sn/id1666157309">
-                            <NavText>ChessClock</NavText>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://categoridle.com">
-                            <NavText>Categoridle</NavText>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </>
-    );
+const NavLi = styled.li`
+  &:hover {
+    background: #5c86ff;
+    text-decoration: none;
+  }
+`;
+
+const NavMenuContainer = styled.nav`
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100%;
+  background-color: #333; //#4273ff;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+
+  transform: ${({ isMenuOpen }) => (isMenuOpen ? 'translateX(0)' : 'translateX(-100%)')};
+`;
+
+const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        toggleMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuRef]);
+
+  return (
+    <>
+      <MenuButton onClick={toggleMenu}>
+        Menu
+      </MenuButton>
+
+      <NavMenuContainer isMenuOpen={isMenuOpen} ref={menuRef}>
+        <NavUl>
+          <NavLi>
+            <Link to="/" onClick={toggleMenu}>
+              <NavText>Home</NavText>
+            </Link>
+          </NavLi>
+          <NavLi>
+            <Link to="/resume" onClick={toggleMenu}>
+              <NavText>Resume</NavText>
+            </Link>
+          </NavLi>
+          <NavLi>
+            <Link to="/projects" onClick={toggleMenu}>
+              <NavText>Projects</NavText>
+            </Link>
+          </NavLi>
+          <NavLi>
+            <Link to="/lastChess" onClick={toggleMenu}>
+              <NavText>My Chess Games</NavText>
+            </Link>
+          </NavLi>
+          <NavLi>
+            <a href="https://www.senttrac.com" onClick={toggleMenu}>
+              <NavText>Senttrac</NavText>
+            </a>
+          </NavLi>
+          <NavLi>
+            <a href="https://marketplace.visualstudio.com/items?itemName=SilasNevstad.gpthelper" onClick={toggleMenu}>
+              <NavText>VSCode GPT</NavText>
+            </a>
+          </NavLi>
+          <NavLi>
+            <a href="https://www.humangpt.me" onClick={toggleMenu}>
+              <NavText>HumanGPT</NavText>
+            </a>
+          </NavLi>
+          <NavLi>
+            <a href="https://www.scramdleb.com" onClick={toggleMenu}>
+              <NavText>Scramdleb</NavText>
+            </a>
+          </NavLi>
+          <NavLi>
+            <a href="https://apps.apple.com/gb/app/chess-clock-by-sn/id1666157309" onClick={toggleMenu}>
+              <NavText>ChessClock</NavText>
+            </a>
+          </NavLi>
+          <NavLi>
+            <a href="http://categoridle.com" onClick={toggleMenu}>
+              <NavText>Categoridle</NavText>
+            </a>
+          </NavLi>
+        </NavUl>
+      </NavMenuContainer>
+    </>
+  );
 };
 
 export default NavigationMenu;

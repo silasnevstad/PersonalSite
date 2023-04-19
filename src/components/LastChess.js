@@ -2,10 +2,10 @@ import ChessGame from "./ChessGame";
 import SocialLinks from "./SocialLinks";
 import NavigationMenu from "./NavigationMenu";
 
-const LastChess = () => {
+const LastChess = ({ isMenuOpen, toggleMenu }) => {
     return (
         <div>
-            <NavigationMenu />
+            <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
             <ChessGame />
             <SocialLinks />
         </div>

@@ -1,35 +1,23 @@
-nav {
-    display: none;
+.menu {
+    /* z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #5c86ff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out; */
 }
 
+  
 .menu-button {
     background: none;
     border: none;
-    color: #00FF00;
+    color: #5c86ff;
     cursor: pointer;
     font-size: 1.5rem;
     font-weight: 600;
     border: none;
     cursor: pointer;
-}
-
-.menu-button:hover + nav, nav:hover {
-    display: block;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    margin: 0 0.5rem;
-    margin-bottom: .2em;
-}
-
-nav li:hover {
-    background: #333;
-    text-decoration: none;
-    width: 10%;
 }
