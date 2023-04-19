@@ -1,0 +1,122 @@
+h1 {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+h2 {
+    font-family: "Menlo", monospace;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+a {
+    font-family: "Menlo", monospace;
+    font-size: 14px;
+    color: #4bf84b;
+    text-decoration: none;
+}
+
+p {
+    font-family: "Menlo", monospace;
+    font-size: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    /* margin-left: 0px; */
+}
+
+li {
+    font-family: "Menlo", monospace;
+    list-style: none;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.biggerLi {
+    font-weight: bold;
+}
+
+.specialLi {
+    font-size: 17px;
+}
+
+.bulletPoint {
+    list-style: circle;
+}
+
+.skills-inline {
+    display: inline-block;
+    width: 8em;
+    margin-top: 5px;
+}
+
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+
+.school-name {
+    font-weight: bold;
+}
+
+.school-year {
+    font-size: 14px;
+}
+
+.school-location {
+    font-size: 12px;
+}
+
+.project-language {
+    opacity: 0.5;
+    font-size: 13px;
+}
+
+.python {
+    width: 150px;
+    height: 10px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(204, 255, 204, 0.3);
+    background-image: linear-gradient(to right, green 0%, green 90%, #ccffcc 90%);
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+.python::-webkit-progress-bar {
+    background-color: #939393;
+    border-radius: 30px;
+}
+
+.python::-webkit-progress-value {
+    border-radius: 30px;
+    background: linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.sticky-div {
+    position: sticky;
+    top: 0;
+    padding-top: 1px;
+    z-index: 1; /* The sticky element will have a higher z-index than the scrollable elements */
+    background-color: black;
+}
+
+.scrollable-div {
+    z-index: 0; /* The scrollable elements will have a lower z-index than the sticky element */
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: black;
+    z-index: 1; /* The sticky element will have a higher z-index than the scrollable elements */
+    padding: 10px;
+}
+

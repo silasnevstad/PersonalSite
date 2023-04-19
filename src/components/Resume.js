@@ -1,0 +1,134 @@
+import React from 'react';
+import NavigationMenu from './NavigationMenu';
+import StickyHeader from './StickyHeader';
+import '../styles/Resume.css'
+import SocialLinks from './SocialLinks';
+
+const Resume = () => {
+  return (
+    <div className="Resume">
+      <NavigationMenu />
+      <div class="sticky-div">
+        <h1>Silas Nevstad</h1>
+        <h2 className="headerH2"> Boston, MA | nevstads@gmail.com | <a href="https://www.linkedin.com/in/silas-nevstad-3091a420b/">LinkedIn</a> | <a href="https://github.com/silasnevstad/">Github</a> </h2>
+        <StickyHeader />
+      </div>
+
+      <div className="scrollable-div">
+        <div className="section">
+          <h2><u>Education</u></h2>
+          <ul>
+            <li><span className="school-name">Candidate for Bachelors in Computer Science</span>, <span className="school-location">2021-Present</span></li>
+            <li>Northeastern University, <span className="school-name">Khoury College of Computer Sciences</span>, Boston, MA </li>
+            <li>Relevant Coursework: Algorithms and Data, Computer Systems, Object-Orientated Design, Electrical Engineering and Design, Fundamentals of Computer Science 1 & 2, Fundamentals of Cybersecurity, Programming in C++, Data Models</li>
+            <br />
+            <li><span className="school-name">High School Diploma</span>, <span className="school-location">2017-2021</span></li>
+            <li>Staples High School, Westport, CT</li>
+            <li>GPA: 3.8</li>
+            <li>Relevant Coursework: AP Computer Science, Web Applications, Applied Algorithmic Design, Mobile App Development</li>
+            <li>Activities: Varsity Ice Hockey, Varsity Track</li>
+            <br />
+            <li><span className="school-name">Bedford Middle School</span>, <span className="school-year">Westport, CT</span>, <span className="school-location">2016-2017</span></li>
+            <li><span className="school-name">Kingston Grammar School</span>, <span className="school-year">Kingston, England</span>, <span className="school-location">2014-2016</span></li>
+            <li><span className="school-name">Hall School Wimbledon</span>, <span className="school-year">London, England</span>, <span className="school-location">2007-2014</span></li>
+            <br />
+            <li><span className="school-name">Bedford Middle School</span>, <span className="school-location">2017-2018</span></li>
+            <li> Westport, CT </li>
+            <li>GPA: 3.78</li>
+            <li>Activities: Club Soccer</li>
+            <br />
+            <li><span className="school-name">Kingston Grammar School</span>, <span className="school-location">2015-2017</span></li>
+            <li> Kingston, London </li>
+            <li>A* German GCSE (2015), LAMBDA Certifications (2012-2016)</li>
+            <li>Activities: Field Hockey</li>
+          </ul>
+        </div>
+
+        <br />
+
+        <div className="section">
+          <h2><u>Skills</u></h2>
+          <ul>
+            <li className="skills-inline">Python</li>  <progress value="85" max="100" className="python"></progress> <br />
+            <li className="skills-inline">Java</li> <progress value="68" max="100" className="python"></progress> <br />
+            <li className="skills-inline">Javascript</li> <progress value="68" max="100" className="python"></progress> <br />
+            <li className="skills-inline">Swift</li> <progress value="75" max="100" className="python"></progress> <br />
+            <li className="skills-inline">HTML</li>  <progress value="75" max="100" className="python"></progress> <br />
+            <li className="skills-inline">CSS</li>  <progress value="70" max="100" className="python"></progress> <br />
+            <li className="skills-inline">Dart</li>  <progress value="30" max="100" className="python"></progress> <br />
+            <li className="skills-inline">C++</li>  <progress value="45" max="100" className="python"></progress> <br />
+            <li className="skills-inline">MIPS Assembly</li>  <progress value="45" max="100" className="python"></progress> <br />
+            <li className="skills-inline">German</li>  <progress value="50" max="50" className="python"></progress> <br />
+            <li className="skills-inline">Norwegian</li>  <progress value="50" max="50" className="python"></progress> <br />
+            <li className="skills-inline">English</li>  <progress value="50" max="50" className="python"></progress> <br />
+          </ul>
+        </div>
+
+        <br />
+
+        <div className="section">
+          <h2><u>Work Experience</u></h2>
+          <ul>
+            <li className="biggerLi">Tech Intern</li>
+            <li className="specialLi">The Bites Company, Bridgeport, CT </li>
+            <ul>
+              <li  className="bulletPoint">Managed social media accounts, resulting in a 25% increase in followers and a 15% increase in engagement</li>
+              <li  className="bulletPoint">Created and maintained a comprehensive customer information database, resulting in a 15% increase in
+                marketing and sales efficiency</li>
+            </ul>
+            
+          </ul>
+        </div>
+
+        <br />
+
+        <div className="section">
+          <h2><u>Projects</u></h2>
+          <ul>
+            <li className="biggerLi">AlgoPicks, Personal <span className="project-language">| Swift | Python</span></li>
+            <ul>
+              <li className="bulletPoint">Designed a machine learning algorithm in Python to predict sports game outcomes</li>
+              <li className="bulletPoint">Developed an app in Swift to allow users to track sports bets and make more informed decisions using algorithm-based predictions, improving customer winnings by 10%</li>
+              <li className="bulletPoint">Utilized and configured the Firebase real-time database to store and retrieve over 5,000 data points</li>
+            </ul>
+            <br />
+            <li className="biggerLi">AlgoTrader, Personal <span className="project-language">| Python</span></li>
+            <ul>
+              <li className="bulletPoint">Designed and deployed a machine learning algorithm for automated stock trading on a paper trading account using Python and the Alpaca trading API. Generated an $18k profit from a $100k initial investment during a period where the SPY decreased by 6Á</li>
+              <li className="bulletPoint">Utilized data from the NYSE indices to screen for potential trades and make predictions for buying and selling</li>
+              <li className="bulletPoint">Continuously monitored and optimized algorithm performance to maximize profitability</li>
+            </ul>
+            <br />
+            <li className="biggerLi">ChessClock, Personal <span className="project-language">| Swift </span></li>
+            <ul>
+              <li className="bulletPoint">Developed a chess timer app in Swift in under 12 hours, allowing users to play time-controlled chess over-the-boarT</li>
+              <li className="bulletPoint">Implemented a clean, modern design that fits seamlessly with the latest iOS design guidelines, resulting in a visually appealing and professional-looking app</li>
+            </ul>
+            <br />
+            <li className="biggerLi">VS Code GPT, Personal <span className="project-language">| Javascript</span></li>
+            <ul>
+              <li className="bulletPoint">Developed a VS Code extension that leverages the power of OpenAI's Chat GPT to help explain and debug code, making the process more efficient and effectiv¢</li>
+              <li className="bulletPoint">Integrated the extension with VS Code, allowing users to easily access its features and enhance their coding experience</li>
+            </ul>
+            
+          </ul>
+        </div>
+    
+        <br />
+
+        <div className="section">
+          <h2><u>Additional Information</u></h2>
+          <ul>
+            <li className="bulletPoint"> Related Experience: 2nd Place High School Hackathon Winner (2019) </li>
+            <li className="bulletPoint"> Interests: Chess, Music Production, Playing Piano, Hockey </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <SocialLinks />
+    </div>
+  );
+};
+
+export default Resume;
