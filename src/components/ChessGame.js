@@ -280,7 +280,7 @@ const ChessGame = () => {
                 <Chessboard
                     position={fen}
                     // change width when screen is smaller
-                    width={window.innerWidth < 600 ? window.innerWidth - 120 : 400}
+                    width={window.innerWidth < 600 ? window.innerWidth - 100 : 400}
                     orientation={orientation}
                     onSquareClick={(square) => console.log(square)}
                     lightSquareStyle={{ backgroundColor: '#eeeed2' }}
