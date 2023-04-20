@@ -48,13 +48,25 @@ const NavMenuContainer = styled.nav`
 `;
 
 const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
-  const menuRef = useRef();
+
+  // when user clicks outside of menu when it is open, close the menu
+  const node = useRef();
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (node.current.contains(e.target)) {
+        // inside click
+        // return;
+        toggleMenu();
+        console.log('inside click')
+      }
+      console.log('outside click')
+      // outside click
+      if (isMenuOpen) {
+        
         toggleMenu();
       }
+      return;
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -62,7 +74,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [menuRef]);
+  }, [node]);
 
   return (
     <>
@@ -70,7 +82,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
         Menu
       </MenuButton>
 
-      <NavMenuContainer isMenuOpen={isMenuOpen} ref={menuRef}>
+      <NavMenuContainer isMenuOpen={isMenuOpen} ref={node}>
         <NavUl>
           <NavLi>
             <Link to="/" onClick={toggleMenu}>

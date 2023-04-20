@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import '../styles/ChessButton.css'
 
+
 const ChessOuterContainer = styled.div`
     display: flex;
     flex-direction: column;
