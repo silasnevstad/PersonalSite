@@ -4,6 +4,12 @@ import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
 
+const HomeContainer = styled.div`
+  margin-left: ${({ isMenuOpen }) => isMenuOpen ? '250px' : '0'};
+  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
+  transition: margin-left 0.3s ease-in-out;
+`;
+
 const HomeHeader = styled.div`
   display: flex;
   flex-direction: row;
@@ -71,13 +77,11 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
 
     return (
         <div className="Home">
-            <HomeHeader>
-              <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-
-              {/* <HomeContactButton>Contact</HomeContactButton> */}
-            </HomeHeader>
+          <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          <HomeContainer isMenuOpen={isMenuOpen}>
             <h1 id="typedtext">{text}<span className="cursor">_</span></h1>
-            <SocialLinks />
+          </HomeContainer>
+          <SocialLinks />
         </div>
     );
 };
