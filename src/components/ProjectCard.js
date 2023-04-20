@@ -71,7 +71,7 @@ const ProjectTitle = styled.h2`
     margin: 0;
 
     @media (max-width: 768px) {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 `;
 
@@ -118,8 +118,8 @@ const ProjectLogo = styled.img`
     margin-left: auto; // added to push the image to the right
 
     @media (max-width: 768px) {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
 `;
 
