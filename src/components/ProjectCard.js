@@ -19,7 +19,7 @@ const Bounce = keyframes`
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
     border-radius: 18px;
-    width: 90%;
+    width: calc(screen.width / 2 - 20px)
     height: 70%;
     padding: 15px;
     margin: 10px;
@@ -39,7 +39,7 @@ const Card = styled.div`
     }
 
     @media (max-width: 768px) {
-        width: 85%;
+        width: calc(screen.width - 100px);
         padding: 15px;
         margin: 5px;
     }
@@ -117,8 +117,8 @@ const ProjectLogo = styled.img`
     margin-left: auto; // added to push the image to the right
 
     @media (max-width: 768px) {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 `;
 
