@@ -45,6 +45,10 @@ const NavMenuContainer = styled.nav`
   overflow: hidden;
 
   transform: ${({ isMenuOpen }) => (isMenuOpen ? 'translateX(0)' : 'translateX(-100%)')};
+
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {

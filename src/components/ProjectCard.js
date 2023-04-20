@@ -7,7 +7,7 @@ const Card = styled.div`
     width: 90%;
     height: 70%;
     padding: 15px;
-    margin: 18px;
+    margin: 10px;
     display: flex;
     flex-direction: row; // changed to row from column
     align-items: flex-start; // changed from left
@@ -20,6 +20,12 @@ const Card = styled.div`
         transform: translateY(-5px);
         box-shadow: rgba(50, 50, 50, 0.6) 0px 8px 12px, rgba(150, 150, 150, 0.6) 0px 10px 20px -3px, rgba(80, 80, 80, 0.6) 0px -3px 0px inset;
     }
+
+    @media (max-width: 768px) {
+        width: 85%;
+        padding: 15px;
+        margin: 5px;
+    }
 `;
 
 const ProjectInfo = styled.div`
@@ -30,6 +36,10 @@ const ProjectInfo = styled.div`
 const ProjectTitle = styled.h2`
     font-size: 1.4rem;
     margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 1.2rem;
+    }
 `;
 
 const ProjectVersion = styled.p`
@@ -38,6 +48,10 @@ const ProjectVersion = styled.p`
     margin: 0;
     margin-top: 5px;
     opacity: 0.8;
+
+    @media (max-width: 768px) {
+        font-size: .8rem;
+    }
 `;
 
 const ProjectLanguages = styled.p`
@@ -46,6 +60,10 @@ const ProjectLanguages = styled.p`
     margin: 0;
     margin-top: 8px;
     opacity: 0.5;
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+    }
 `;
 
 const ProjectDeveloper = styled.p`
@@ -54,6 +72,10 @@ const ProjectDeveloper = styled.p`
     margin: 0;
     margin-top: 8px;
     opacity: 0.6;
+
+    @media (max-width: 768px) {
+        font-size: .7rem;
+    }
 `;
 
 const ProjectLogo = styled.img`
@@ -61,6 +83,11 @@ const ProjectLogo = styled.img`
     height: 100px;
     border-radius: 30%;
     margin-left: auto; // added to push the image to the right
+
+    @media (max-width: 768px) {
+        width: 70px;
+        height: 70px;
+    }
 `;
 
 const ProjectCard = ({ project, onClick }) => {

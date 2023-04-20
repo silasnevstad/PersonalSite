@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Home.css';
 import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
@@ -34,6 +33,16 @@ const HomeContactButton = styled.button`
     transform: scale(1.05);
   }
 
+`;
+
+const HomeText = styled.h1`
+  font-size: 1rem;
+  max-width: 70%;
+  margin-left: .5rem;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const useTypewriterEffect = (text, initialDelay = 0) => {
@@ -79,7 +88,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
         <div className="Home">
           <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           <HomeContainer isMenuOpen={isMenuOpen}>
-            <h1 id="typedtext">{text}<span className="cursor">_</span></h1>
+            <HomeText>{text}<span className="cursor">_</span></HomeText>
           </HomeContainer>
           <SocialLinks />
         </div>

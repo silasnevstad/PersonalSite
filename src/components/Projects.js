@@ -5,7 +5,6 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import styled from 'styled-components';
 
-
 const ProjectsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,12 +17,17 @@ const ProjectsContainer = styled.div`
   margin-left: ${({ isMenuOpen }) => isMenuOpen ? '250px' : '0'};
   width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+    width: 100%;
+  }
 `;
 
 const projects = [
-  // Add your projects here, each project should have at least an 'id' and a 'title'
-  { id: '1', title: 'AlgoPicks', languages: 'JavaScript | React | Node.js', logo: 'algoPicksLogo.png', description: 'AlgoPicks is a sports prediction and tracking app that uses machine learning algorithms to predict game outcomes. Utilizing the Firebase real-time database, the app allows users to track their bets in real-time and maintain a historical record of them, providing users with insights into their betting patterns and performance over time. With over 15,000 data points, AlgoPicks is able to predict game outcomes with a 70% accuracy rate in 2021. My goal with AlgoPicks is to create a valuable and reliable tool for both sports enthusiasts and those looking to improve their betting.', developers: 'Silas Nevstad', version: '1.3.0', url: '' },
-  { id: '2', title: 'Senttrac', languages: 'React | Python | Node.js', logo: 'senttracLogo.png', description: 'Senttrac is an innovative analysis tool created to offer real-time insights into the emotions driving online conversations. By leveraging state-of-the-art sentiment analysis models and a cutting-edge Large Language Model (LLM), Senttrac delves into recent tweets, Reddit posts, and news headlines related to your query. Hosted frontend with React using AWS Amplify and backend on Heroku running a Python flask server for API.', developers: 'Silas Nevstad', version: '1.0.1', url: 'https://senttrac.com' },
+  { id: '1', title: 'AlgoPicks', languages: 'Python | Swift', logo: 'algoPicksLogo.png', description: 'AlgoPicks is a sports prediction and tracking app that uses machine learning algorithms to predict game outcomes. Utilizing the Firebase real-time database, the app allows users to track their bets in real-time and maintain a historical record of them, providing users with insights into their betting patterns and performance over time. With over 15,000 data points, AlgoPicks is able to predict game outcomes with a 70% accuracy rate in 2021. My goal with AlgoPicks is to create a valuable and reliable tool for both sports enthusiasts and those looking to improve their betting.', developers: 'Silas Nevstad', version: '1.3.0', url: '' },
+  { id: '2', title: 'Senttrac', languages: 'React | Python', logo: 'senttracLogo.png', description: 'Senttrac is an innovative analysis tool created to offer real-time insights into the emotions driving online conversations. By leveraging state-of-the-art sentiment analysis models and a cutting-edge Large Language Model (LLM), Senttrac delves into recent tweets, Reddit posts, and news headlines related to your query. Hosted frontend with React using AWS Amplify and backend on Heroku running a Python flask server for API.', developers: 'Silas Nevstad', version: '1.0.1', url: 'https://senttrac.com' },
   { id: '3', title: 'HumanGPT', languages: 'React | Python', logo: 'humangptLogo.png', description: 'HumanGPT employs human recognition analysis models in conjunction with ChatGPT to transform text into a more human-like version. Striving for readability and clear communication, the algorithms focus on retaining the text\'s original meaning while ensuring it is perceived as human-generated content. The backend is developed using JavaScript, while the frontend is built with React.', developers: 'Silas Nevstad', version: '1.0.0', url: 'https://humangpt.me' },
   { id: '4', title: 'Sramdleb', languages: 'React | Node.js', logo: 'scramdlebLogo.png', description: 'Scrambled is a word puzzle game where players shift letters to form a secret word within a limited number of moves. The game offers different difficulty levels with varying word lengths and number of moves, making it a fun and challenging game for players of all skill levels.', developers: 'Silas Nevstad', version: '2.0.1', url: 'https://scramdleb.com' },
   { id: '5', title: 'ChessClock', languages: 'Swift', logo: 'chessClockLogo.png', description: 'ChessClock is an app that I developed as a personal project, fueled by the frustration of not having a proper clock when playing chess with friends. I developed it in Swift in under 12 hours, and it enables chess players to play time-controlled games as well as setting custom time controls for each player and keeping track of the time remaining during the game. Its simple interface makes it easy to use for players in all age ranges.', developers: 'Silas Nevstad', version: '1.1.0', url: 'https://apps.apple.com/gb/app/chess-clock-by-sn/id1666157309' },
@@ -54,6 +58,7 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} onClick={() => handleProjectClick(project)} />
         ))}
+        <div style={{ height: '100px' }} />
       </ProjectsContainer>
       {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
     <SocialLinks />
