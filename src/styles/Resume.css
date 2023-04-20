@@ -31,7 +31,6 @@ li {
     font-family: "Menlo", monospace;
     list-style: none;
     font-size: 14px;
-    margin: 10px 0;
 }
 
 .biggerLi {
@@ -44,12 +43,6 @@ li {
 
 .bulletPoint {
     list-style: circle;
-}
-
-.skills-inline {
-    display: inline-block;
-    width: 8em;
-    margin-top: 5px;
 }
 
 #myProgress {
@@ -81,11 +74,11 @@ li {
 }
 
 .python {
-    width: 150px;
-    height: 10px;
+    width: 90%;
+    height: 9px;
     border-radius: 30px;
-    margin-left: 10px;
-    margin-bottom: 3px;
+    /* margin-left: 10px; */
+    margin-bottom: 5px;
 }
 
 .python::-webkit-progress-bar {

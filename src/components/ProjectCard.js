@@ -24,24 +24,21 @@ const Card = styled.div`
     padding: 15px;
     margin: 10px;
     display: flex;
-    flex-direction: row; // changed to row from column
-    align-items: flex-start; // changed from left
+    flex-direction: row;
+    align-items: flex-start;
     text-align: left;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s;
     color: ${({ theme }) => theme.colors.text};
     box-shadow: rgba(50, 50, 50, 0.2) 0px 4px 6px, rgba(150, 150, 150, 0.2) 0px 5px 10px -3px, rgba(80, 80, 80, 0.2) 0px -3px 0px inset;
     border: 1px solid #2f2f2f;
-    animation: ${({ bounce }) => bounce ? Bounce : 'none'} 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 2;
-
+    // animation: ${({ bounce }) => bounce ? Bounce : 'none'} 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 2;
+    animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
+    
     &:hover {
-        transform: translateY(-5px);
         box-shadow: rgba(50, 50, 50, 0.6) 0px 8px 12px, rgba(150, 150, 150, 0.6) 0px 10px 20px -3px, rgba(80, 80, 80, 0.6) 0px -3px 0px inset;
-    }
-
-    @media (max-width: 768px) {
-        width: calc(screen.width - 100px);
-        padding: 15px;
-        margin: 5px;
+        background-color: ${({ theme }) => theme.colors.fourth};
+        transform: translateY(-5px);
     }
 
     @keyframes bounce-in-right {
@@ -57,7 +54,11 @@ const Card = styled.div`
         100% { transform: translateX(0); }
     }
 
-    animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
+    @media (max-width: 768px) {
+        width: calc(screen.width - 100px);
+        padding: 15px;
+        margin: 5px;
+    }
 `;
 
 const ProjectInfo = styled.div`

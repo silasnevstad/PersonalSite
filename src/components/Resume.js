@@ -25,6 +25,51 @@ const Line = styled.hr`
   }
 `;
 
+const SkillsSection = styled.div`
+  margin: 10px 10px;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-row-gap: 7%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 170px;
+  }
+`;
+
+const Skill = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 8em;
+  margin-top: 8px;
+  font-size: 1em;
+
+  @media (max-width: 768px) {
+    width: 50%;
+    font-size: 0.9em;
+  }
+`;
+
+const SkillProgress = styled.progress`
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  &::-webkit-progress-bar {
+    border-radius: 30px;
+  }
+
+  &::-webkit-progress-value {
+      border-radius: 30px;
+      background: linear-gradient(to right, #5C86FF, #5C86FF);
+  }
+`;
+
+
 const Resume = ({ isMenuOpen, toggleMenu }) => {
   return (
     <div className="Resume">
@@ -73,20 +118,40 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
           <div className="section">
             <h2><u>Skills</u></h2>
             <Line />
-            <ul>
-              <li className="skills-inline">Python</li>  <progress value="85" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Java</li> <progress value="68" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Javascript</li> <progress value="68" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Swift</li> <progress value="75" max="100" className="python"></progress> <br />
-              <li className="skills-inline">HTML</li>  <progress value="75" max="100" className="python"></progress> <br />
-              <li className="skills-inline">CSS</li>  <progress value="70" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Dart</li>  <progress value="30" max="100" className="python"></progress> <br />
-              <li className="skills-inline">C++</li>  <progress value="45" max="100" className="python"></progress> <br />
+            <SkillsSection>
+              <Skill className="skills-inline">Python<SkillProgress value="85" max="100"></SkillProgress> </Skill> 
+              <Skill className="skills-inline">React<SkillProgress value="80" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Java<SkillProgress value="68" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Javascript<SkillProgress value="68" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Swift<SkillProgress value="80" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">NodeJS<SkillProgress value="70" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">HTML<SkillProgress value="75" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">CSS<SkillProgress value="78" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">C++<SkillProgress value="66" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Dart<SkillProgress value="45" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Git<SkillProgress value="75" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">MongoDB<SkillProgress value="60" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">MacOS<SkillProgress value="90" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Windows<SkillProgress value="80" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Linux<SkillProgress value="60" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">MIPS Assembly<SkillProgress value="45" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">German<SkillProgress value="96" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Norwegian<SkillProgress value="96" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">English<SkillProgress value="100" max="100"></SkillProgress> </Skill>
+
+
+            </SkillsSection>
+            {/* <ul> */}
+              {/* <li className="skills-inline">Git</li>  <progress value="75" max="100" className="python"></progress> <br />
+              <li className="skills-inline">MongoDB</li>  <progress value="65" max="100" className="python"></progress> <br />
+              <li className="skills-inline">MacOS</li>  <progress value="90" max="100" className="python"></progress> <br />
+              <li className="skills-inline">Windows</li>  <progress value="85" max="100" className="python"></progress> <br />
+              <li className="skills-inline">Linux</li>  <progress value="70" max="100" className="python"></progress> <br />
               <li className="skills-inline">MIPS Assembly</li>  <progress value="45" max="100" className="python"></progress> <br />
-              <li className="skills-inline">German</li>  <progress value="50" max="50" className="python"></progress> <br />
-              <li className="skills-inline">Norwegian</li>  <progress value="50" max="50" className="python"></progress> <br />
-              <li className="skills-inline">English</li>  <progress value="50" max="50" className="python"></progress> <br />
-            </ul>
+              <li className="skills-inline">German</li>  <progress value="47" max="50" className="python"></progress> <br />
+              <li className="skills-inline">Norwegian</li>  <progress value="47" max="50" className="python"></progress> <br />
+              <li className="skills-inline">English</li>  <progress value="50" max="50" className="python"></progress> <br /> */}
+            {/* </ul> */}
           </div>
 
           <br />
