@@ -14,6 +14,8 @@ const ProjectsContainer = styled.div`
   justify-content: left;
   gap: 8px;
 
+  margin-top: 10px;
+
   margin-left: ${({ isMenuOpen }) => isMenuOpen ? '250px' : '0'};
   width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
