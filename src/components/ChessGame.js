@@ -87,6 +87,8 @@ const ChessGameResult = styled.p`
     margin-top: -8px;
     opacity: 0.8;
     align-self: flex-end;
+
+    color: ${({ result }) => result === "win" ? "#9ED15D" : result === "stalemate" ? "#E3C95F" : result === "timevsinsufficient" ? "#E3C95F" : "#CC4E44"};
 `;
 
 const ChessInfoMessage = styled.p`
@@ -118,7 +120,13 @@ const convertTimeControl = (timeControl) => {
     }
 }
 
+const convertResultString = (result) => {
+    if (result === "timevsinsufficient") {
+        return "Time vs Insufficient";
+    }
 
+    return result.charAt(0).toUpperCase() + result.slice(1);
+}
 
 const ChessGame = () => {
     const [game, setGame] = useState(new Chess());
@@ -267,7 +275,7 @@ const ChessGame = () => {
                     <ChessGameDate>{convertDate(date)}</ChessGameDate>
                 </ChessGameHeaderContainer>
                 
-                <ChessGameResult>{result.charAt(0).toUpperCase() + result.slice(1)}</ChessGameResult>
+                <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
                 <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
                 <Chessboard
                     position={fen}

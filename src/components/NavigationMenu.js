@@ -107,13 +107,13 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             </Link>
           </NavLi>
           <NavLi>
-            <Link to="/projects" onClick={toggleMenu}>
-              <NavText>Projects</NavText>
+            <Link to="/resume" onClick={toggleMenu}>
+              <NavText>Resume</NavText>
             </Link>
           </NavLi>
           <NavLi>
-            <Link to="/resume" onClick={toggleMenu}>
-              <NavText>Resume</NavText>
+            <Link to="/projects" onClick={toggleMenu}>
+              <NavText>Projects</NavText>
             </Link>
           </NavLi>
           <NavLi>
