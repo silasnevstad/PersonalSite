@@ -49,6 +49,11 @@ const CloseButton = styled.button`
     transform: scale(1.2);
     background-color: ${({ theme }) => theme.colors.third};
   }
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const ProjectModal = ({ project, onClose }) => {

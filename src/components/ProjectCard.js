@@ -56,7 +56,7 @@ const Card = styled.div`
 
     @media (max-width: 768px) {
         width: calc(screen.width - 100px);
-        padding: 15px;
+        padding: 12px;
         margin: 5px;
     }
 `;
@@ -83,7 +83,7 @@ const ProjectVersion = styled.p`
     opacity: 0.8;
 
     @media (max-width: 768px) {
-        font-size: .8rem;
+        font-size: .7rem;
     }
 `;
 
@@ -92,7 +92,7 @@ const ProjectLanguages = styled.p`
     font-size: 0.8rem;
     margin: 0;
     margin-top: 8px;
-    opacity: 0.5;
+    opacity: 0.6;
 
     @media (max-width: 768px) {
         font-size: 0.7rem;
@@ -104,7 +104,19 @@ const ProjectDeveloper = styled.p`
     font-size: .8rem;
     margin: 0;
     margin-top: 8px;
-    opacity: 0.6;
+    opacity: 0.4;
+
+    @media (max-width: 768px) {
+        font-size: .7rem;
+    }
+`;
+
+const ProjectDate = styled.p`
+    color: ${({ theme }) => theme.colors.secondary};
+    font-size: .8rem;
+    margin: 0;
+    margin-top: 8px;
+    opacity: 0.4;
 
     @media (max-width: 768px) {
         font-size: .7rem;
@@ -116,6 +128,8 @@ const ProjectLogo = styled.img`
     height: 100px;
     border-radius: 30%;
     margin-left: auto; // added to push the image to the right
+    margin-top: auto;
+    margin-bottom: auto;
 
     @media (max-width: 768px) {
         width: 50px;
@@ -130,7 +144,8 @@ const ProjectCard = ({ project, onClick, bounce, index }) => {
           <ProjectTitle>{project.title}</ProjectTitle>
           <ProjectVersion>{project.version}</ProjectVersion>
           <ProjectLanguages>{project.languages}</ProjectLanguages>
-          <ProjectDeveloper>{project.developers}</ProjectDeveloper>
+          {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
+          <ProjectDate>{project.date}</ProjectDate>
         </ProjectInfo>
         {project.logo !== '' && <ProjectLogo src={require('../images/' + project.logo)} alt='Project Logo' />}
       </Card>
