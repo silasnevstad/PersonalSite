@@ -14,6 +14,13 @@ const MenuButton = styled.button`
   cursor: pointer;
 `;
 
+const LeftArrow = styled.div`
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid #222;
+  z-index: 100;
+`;
+
 const NavText = styled.p`
   font-size: 1rem;
   padding: 5px 5px;
@@ -22,11 +29,14 @@ const NavText = styled.p`
 `;
 
 const NavUl = styled.ul`
+  z-index: 1;
   list-style: none;
   padding: 0;
+  margin-top: -40px;
 `;
 
 const NavLi = styled.li`
+  z-index: 1;
   &:hover {
     background: #5c86ff;
     text-decoration: none;
@@ -34,7 +44,7 @@ const NavLi = styled.li`
 `;
 
 const NavMenuContainer = styled.nav`
-  z-index: 100;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
@@ -87,6 +97,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
       </MenuButton>
 
       <NavMenuContainer isMenuOpen={isMenuOpen} ref={node}>
+        <LeftArrow onClick={toggleMenu} />
         <NavUl>
           <NavLi>
             <Link to="/" onClick={toggleMenu}>
@@ -94,13 +105,13 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             </Link>
           </NavLi>
           <NavLi>
-            <Link to="/resume" onClick={toggleMenu}>
-              <NavText>Resume</NavText>
+            <Link to="/projects" onClick={toggleMenu}>
+              <NavText>Projects</NavText>
             </Link>
           </NavLi>
           <NavLi>
-            <Link to="/projects" onClick={toggleMenu}>
-              <NavText>Projects</NavText>
+            <Link to="/resume" onClick={toggleMenu}>
+              <NavText>Resume</NavText>
             </Link>
           </NavLi>
           <NavLi>

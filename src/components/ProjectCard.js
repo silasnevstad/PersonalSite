@@ -1,5 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const Bounce = keyframes`
+    0%, 100% {
+        transform: translateY(0);
+    }
+    15% {
+        transform: translateY(-10px);
+    }
+    30% {
+        transform: translateY(-5px);
+    }
+    45% {
+        transform: translateY(-2px);
+    }
+`;
 
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -14,7 +29,9 @@ const Card = styled.div`
     text-align: left;
     transition: all 0.3s;
     color: ${({ theme }) => theme.colors.text};
-    box-shadow: rgba(50, 50, 50, 0.3) 0px 4px 6px, rgba(150, 150, 150, 0.3) 0px 5px 10px -3px, rgba(80, 80, 80, 0.3) 0px -3px 0px inset;
+    box-shadow: rgba(50, 50, 50, 0.2) 0px 4px 6px, rgba(150, 150, 150, 0.2) 0px 5px 10px -3px, rgba(80, 80, 80, 0.2) 0px -3px 0px inset;
+    border: 1px solid #2f2f2f;
+    animation: ${({ bounce }) => bounce ? Bounce : 'none'} 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 2;
 
     &:hover {
         transform: translateY(-5px);
@@ -26,6 +43,21 @@ const Card = styled.div`
         padding: 15px;
         margin: 5px;
     }
+
+    @keyframes bounce-in-right {
+        0% {
+          opacity: 0;
+          transform: translateX(2000px);
+        }
+        60% {
+          opacity: 1;
+          transform: translateX(-30px);
+        }
+        80% { transform: translateX(10px); }
+        100% { transform: translateX(0); }
+    }
+
+    animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
 `;
 
 const ProjectInfo = styled.div`
@@ -90,9 +122,9 @@ const ProjectLogo = styled.img`
     }
 `;
 
-const ProjectCard = ({ project, onClick }) => {
+const ProjectCard = ({ project, onClick, bounce, index }) => {
   return (
-      <Card onClick={onClick}>
+      <Card onClick={onClick} bounce={bounce} index={index}>
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
           <ProjectVersion>{project.version}</ProjectVersion>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
 import ProjectCard from './ProjectCard';
@@ -36,12 +36,24 @@ const projects = [
   { id: '8', title: 'MiniGPT', languages: 'React Native', logo: '', description: 'ChatGPT app built React native. Key features include saving chat history, model selection and customizable API keys.', developers: 'Silas Nevstad', version: '1.0.0', url: '' },
   { id: '9', title: 'Sentiment Anaylsis Model', languages: 'Python', logo: '', description: 'A machine learning model for sentiment analysis I built in python, trained and tested on a dataset of Twitter tweets (1.6 million). The model uses NLTK (Natural Langauage Toolkit) to preprocess the text data and Scikit-learn to perform hyperparameter tuning using GridSearchCV. The best hyperparameters are then used to train a Support Vector Machine (SVM), which is used to perform sentiment analysis on new tweets.', developers: 'Silas Nevstad', version: '1.0.0', url: '' },
   { id: '10', title: 'Categoridle', languages: 'HTML | Javascript | CSS', logo: '', description: 'Categoridle is a website that allows users to play a game similar to the popular game Wordle. However, Categoridle includes an additional feature where users can select a category for the word they are trying to guess, making the game more challenging and fun. Categories so far include: Athletes, Car Brands, Countries, Companies, Captital Cities, Music, Movies, Normal 5 letter words, and a couple others with more to come.', developers: 'Silas Nevstad', version: '1.2.1', url: 'http://categoridle.com' },
-  { id: '11', title: 'SportSpots', languages: 'HTML | Javascript | CSS', logo: '', description: 'I built this website to assist sports enthusiasts in finding the nearest sports field locations, such as a basketball courts, ice rinks, or soccer fields, based on their current location. By utilizing the Google Maps API, users can easily search for sports fields in their area and get directions to the desired location. In addition to providing location-based information, the website also features a chat function that enables users to connect with other sports enthusiasts in the area. Each sports field has its chat room, where users can share information, organize games, or provide updates about the venues.', developers: 'Silas Nevstad', version: '1.0.0', url: '' },
+  { id: '11',  title: 'SportSpots', languages: 'HTML | Javascript | CSS', logo: '', description: 'I built this website to assist sports enthusiasts in finding the nearest sports field locations, such as a basketball courts, ice rinks, or soccer fields, based on their current location. By utilizing the Google Maps API, users can easily search for sports fields in their area and get directions to the desired location. In addition to providing location-based information, the website also features a chat function that enables users to connect with other sports enthusiasts in the area. Each sports field has its chat room, where users can share information, organize games, or provide updates about the venues.', developers: 'Silas Nevstad', version: '1.0.0', url: '' },
   { id: '12', title: 'Casino', languages: 'React', logo: '', description: 'I built this simple React web application to allow users to practice their casino skills. The website features a simple game that requires users to guess the appropriate moves to increase their score. The game was designed to be interactive and fun, providing users with an engaging way to improve their knowledge and skillset of various casino games.', developers: 'Silas Nevstad', version: '1.0.0', url: '' },
 ];
 
 const Projects = ({ isMenuOpen, toggleMenu }) => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [bounceProjectId, setBounceProjectId] = useState(null);
+
+  useEffect(() => {
+    const bounceInterval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * projects.length);
+      setBounceProjectId(projects[randomIndex].id);
+    }, 4000); // Change interval duration (2000ms = 2 seconds) as needed
+
+    return () => {
+      clearInterval(bounceInterval);
+    };
+  }, []);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -55,8 +67,14 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
     <div>
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <ProjectsContainer isMenuOpen={isMenuOpen}>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} onClick={() => handleProjectClick(project)} />
+        {projects.map((project, index) => (
+          <ProjectCard 
+            key={project.id} 
+            project={project}
+            index={index}
+            onClick={() => handleProjectClick(project)}
+            bounce={project.id === bounceProjectId}
+          />
         ))}
         <div style={{ height: '100px' }} />
       </ProjectsContainer>

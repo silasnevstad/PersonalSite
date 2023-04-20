@@ -7,8 +7,22 @@ import styled from 'styled-components';
 
 const ResumeContainer = styled.div`
   margin-left: ${({ isMenuOpen }) => isMenuOpen ? '15%' : '0'};
-  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(70%)' : '100%'};
+  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(85%)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+  }
+`;
+
+const Line = styled.hr`
+  border: .5px solid #4d4d4d;
+  width: 98.8%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Resume = ({ isMenuOpen, toggleMenu }) => {
@@ -25,6 +39,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
         <div className="scrollable-div">
           <div className="section">
             <h2><u>Education</u></h2>
+            <Line />
             <ul>
               <li><span className="school-name">Candidate for Bachelors in Computer Science</span>, <span className="school-location">2021-Present</span></li>
               <li>Northeastern University, <span className="school-name">Khoury College of Computer Sciences</span>, Boston, MA </li>
@@ -54,8 +69,10 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
           <br />
 
+
           <div className="section">
             <h2><u>Skills</u></h2>
+            <Line />
             <ul>
               <li className="skills-inline">Python</li>  <progress value="85" max="100" className="python"></progress> <br />
               <li className="skills-inline">Java</li> <progress value="68" max="100" className="python"></progress> <br />
@@ -76,6 +93,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
           <div className="section">
             <h2><u>Work Experience</u></h2>
+            <Line />
             <ul>
               <li className="biggerLi">Tech Intern</li>
               <li className="specialLi">The Bites Company, Bridgeport, CT </li>
@@ -92,6 +110,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
           <div className="section">
             <h2><u>Projects</u></h2>
+            <Line />
             <ul>
               <li className="biggerLi">AlgoPicks, Personal <span className="project-language">| Swift | Python</span></li>
               <ul>
@@ -126,6 +145,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
           <div className="section">
             <h2><u>Additional Information</u></h2>
+            <Line />
             <ul>
               <li className="bulletPoint"> Related Experience: 2nd Place High School Hackathon Winner (2019) </li>
               <li className="bulletPoint"> Interests: Chess, Music Production, Playing Piano, Hockey </li>
