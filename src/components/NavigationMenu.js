@@ -136,21 +136,6 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
               <NavText>HumanGPT</NavText>
             </a>
           </NavLi>
-          <NavLi>
-            <a href="https://www.scramdleb.com" onClick={toggleMenu}>
-              <NavText>Scramdleb</NavText>
-            </a>
-          </NavLi>
-          <NavLi>
-            <a href="https://apps.apple.com/gb/app/chess-clock-by-sn/id1666157309" onClick={toggleMenu}>
-              <NavText>ChessClock</NavText>
-            </a>
-          </NavLi>
-          <NavLi>
-            <a href="http://categoridle.com" onClick={toggleMenu}>
-              <NavText>Categoridle</NavText>
-            </a>
-          </NavLi>
         </NavUl>
       </NavMenuContainer>
     </>
