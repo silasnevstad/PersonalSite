@@ -15,10 +15,14 @@ const MenuButton = styled.button`
 `;
 
 const LeftArrow = styled.div`
+  position: absolute;
+  right: 0;
+  width: 20px;
+  height: 30px;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-right: 20px solid #222;
-  z-index: 100;
+  z-index: 200;
 `;
 
 const NavText = styled.p`
@@ -32,11 +36,10 @@ const NavUl = styled.ul`
   z-index: 1;
   list-style: none;
   padding: 0;
-  margin-top: -40px;
 `;
 
 const NavLi = styled.li`
-  z-index: 1;
+  z-index: 10;
   &:hover {
     background: #5c86ff;
     text-decoration: none;
@@ -44,8 +47,8 @@ const NavLi = styled.li`
 `;
 
 const NavMenuContainer = styled.nav`
-  z-index: 10;
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 15%;
@@ -66,29 +69,28 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
   // when user clicks outside of menu when it is open, close the menu
   const node = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (node.current.contains(e.target)) {
-        // inside click
-        // return;
-        toggleMenu();
-        console.log('inside click')
-      }
-      console.log('outside click')
-      // outside click
-      if (isMenuOpen) {
-        
-        toggleMenu();
-      }
-      return;
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (node.current.contains(e.target)) {
+  //       // inside click
+  //       // return;
+  //       toggleMenu();
+  //       console.log('inside click')
+  //     }
+  //     console.log('outside click')
+  //     // outside click
+  //     if (isMenuOpen) {
+  //       toggleMenu();
+  //     }
+  //     return;
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
+  //   document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [node]);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, [node]);
 
   return (
     <>

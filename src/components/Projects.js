@@ -75,19 +75,7 @@ const sortByDate = (a, b) => {
 
 const Projects = ({ isMenuOpen, toggleMenu }) => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [bounceProjectId, setBounceProjectId] = useState(null);
   const projects = projectsData.sort(sortByDate);
-
-  // useEffect(() => {
-  //   const bounceInterval = setInterval(() => {
-  //     const randomIndex = Math.floor(Math.random() * projects.length);
-  //     setBounceProjectId(projects[randomIndex].id);
-  //   }, 4000); // Change interval duration (2000ms = 2 seconds) as needed
-
-  //   return () => {
-  //     clearInterval(bounceInterval);
-  //   };
-  // }, []);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -107,7 +95,6 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
             project={project}
             index={index}
             onClick={() => handleProjectClick(project)}
-            bounce={project.id === bounceProjectId}
           />
         ))}
         <div style={{ height: '100px' }} />

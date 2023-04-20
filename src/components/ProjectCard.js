@@ -137,9 +137,9 @@ const ProjectLogo = styled.img`
     }
 `;
 
-const ProjectCard = ({ project, onClick, bounce, index }) => {
+const ProjectCard = ({ project, onClick, index }) => {
   return (
-      <Card onClick={onClick} bounce={bounce} index={index}>
+      <Card onClick={onClick} index={index}>
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
           <ProjectVersion>{project.version}</ProjectVersion>
