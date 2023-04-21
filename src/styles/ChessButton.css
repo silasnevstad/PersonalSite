@@ -1,7 +1,7 @@
 .chess-button {
     --primary-color: #333;
     --secondary-color: #fff;
-    --hover-color: #5C86FF;
+    --hover-color: #00ff009f;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
     box-sizing: border-box;

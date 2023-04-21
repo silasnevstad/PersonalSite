@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const MenuButton = styled.button`
   background: none;
   border: none;
-  color: #5c86ff;
+  color: ${({ theme }) => theme.colors.secondary};
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 600;
@@ -30,6 +30,10 @@ const NavText = styled.p`
   padding: 5px 5px;
   opacity: 0.9;
   color: ${({ theme }) => theme.colors.text};
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const NavUl = styled.ul`
@@ -41,7 +45,8 @@ const NavUl = styled.ul`
 const NavLi = styled.li`
   z-index: 10;
   &:hover {
-    background: #5c86ff;
+    background: ${({ theme }) => theme.colors.secondaryLight};
+    color: ${({ theme }) => theme.colors.text};
     text-decoration: none;
   }
 `;

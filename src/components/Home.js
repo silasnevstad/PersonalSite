@@ -59,12 +59,12 @@ const useTypewriterEffect = (text, initialDelay = 0) => {
         setTypedText(fullText.substring(0, typedText.length - 1));
       } else {
         // Random typing speed between 50ms to 150ms
-        setTypingDelay(Math.random() * 30);
+        setTypingDelay(Math.random() * 40);
         setTypedText(fullText.substring(0, typedText.length + 1));
       }
 
       if (!isDeleting && typedText === fullText) {
-        setTimeout(() => setIsDeleting(true), 500);
+        setTimeout(() => setIsDeleting(true), 3000);
         setTypingDelay(500);
       } else if (isDeleting && typedText === '') {
         setIsDeleting(false);
