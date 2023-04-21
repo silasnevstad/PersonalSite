@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import Chessboard from "chessboardjsx";
-// import Stockfish from "stockfish.wasm";
 import styled from 'styled-components';
 import axios from "axios";
 import '../styles/ChessButton.css'
-
 
 const ChessOuterContainer = styled.div`
     display: flex;
@@ -33,6 +31,19 @@ const ChessContainer = styled.div`
     @media (max-width: 768px) {
         width: 90%;
     }
+`;
+
+const ChessBoardEvalContainer = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const EvalBar = styled.div`
+    width: 10px;
+    height: 100%;
+    background-color: ${({ result }) => result > 0 ? "green" : "red"};
 `;
 
 const ButtonContainer = styled.div`
@@ -65,6 +76,27 @@ const ChessGameControl = styled.h1`
     font-size: 1.8rem;
     font-weight: 500;
 `;
+
+const ChessGameBulletIcon = styled.img`
+    width: 27px;
+    height: 27px;
+
+    @media (max-width: 768px) {
+        width: 24px;
+        height: 24px;
+    }
+`;
+
+const ChessGameBlitzIcon = styled.img`
+    width: 15px;
+    height: 30px;
+
+    @media (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+    }
+`;
+
 
 const ChessGameTimeControl = styled.p`
     font-family: 'Roboto', sans-serif;
@@ -269,6 +301,15 @@ const ChessGame = () => {
             <ChessContainer>
                 <ChessGameHeaderContainer>
                     <ChessGameHeaderLeft>
+                        {gameType === "bullet" ? (
+                            <ChessGameBulletIcon src={require("../images/bulletIcon.png")} alt="time control icon" />
+                        ) : (
+                            gameType === "blitz" ? (
+                                <ChessGameBlitzIcon src={require("../images/blitzIcon.png")} alt="time control icon" />
+                            ) : (
+                                <></>
+                            )
+                        )}
                         <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
                         <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
                     </ChessGameHeaderLeft>
@@ -277,16 +318,19 @@ const ChessGame = () => {
                 
                 <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
                 <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
-                <Chessboard
-                    position={fen}
-                    // change width when screen is smaller
-                    width={window.innerWidth < 600 ? window.innerWidth - 100 : 400}
-                    orientation={orientation}
-                    onSquareClick={(square) => console.log(square)}
-                    lightSquareStyle={{ backgroundColor: '#eeeed2' }}
-                    darkSquareStyle={{ backgroundColor: '#769656' }}
-                    dropOffBoard={'snapback'}
-                />
+                <ChessBoardEvalContainer>
+                    <Chessboard
+                        position={fen}
+                        // change width when screen is smaller
+                        width={window.innerWidth < 600 ? window.innerWidth - 100 : 400}
+                        orientation={orientation}
+                        onSquareClick={(square) => console.log(square)}
+                        lightSquareStyle={{ backgroundColor: '#eeeed2' }}
+                        darkSquareStyle={{ backgroundColor: '#769656' }}
+                        dropOffBoard={'snapback'}
+                    />
+                </ChessBoardEvalContainer>
+                
                 <h2 style={{alignSelf: 'flex-end'}}>Me ({myRating})</h2>
                 <ButtonContainer>
                     <button onClick={() => onPlayMove(false)} className="chess-button">
