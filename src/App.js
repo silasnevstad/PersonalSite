@@ -8,6 +8,7 @@ import Resume from './components/Resume';
 import Projects from './components/Projects';
 import LastChess from './components/LastChess';
 import MiniGPTPrivacy from './components/MiniGPTPrivacy';
+import ChessPrivacy from './components/ChessPrivacy';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/projects" element={<Projects isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/lastChess" element={<LastChess isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/minigpt" element={<MiniGPTPrivacy />} />
+          <Route path="/chessapp" element={<ChessPrivacy />} />
         </Routes>
       </Router>
     </ThemeProvider>
