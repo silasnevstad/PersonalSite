@@ -92,11 +92,20 @@ const ChessGameBlitzIcon = styled.img`
     height: 30px;
 
     @media (max-width: 768px) {
-        width: 30px;
-        height: 30px;
+        width: 14px;
+        height: 28px;
     }
 `;
 
+const ChessGameRapidIcon = styled.img`
+    width: 27px;
+    height: 27px;
+
+    @media (max-width: 768px) {
+        width: 24px;
+        height: 24px;
+    }
+`;
 
 const ChessGameTimeControl = styled.p`
     font-family: 'Roboto', sans-serif;
@@ -286,6 +295,18 @@ const ChessGame = () => {
         }
     };
 
+    const getChessIcon = (control) => {
+        if (control === "bullet") {
+            return <ChessGameBulletIcon src={require("../images/bulletIcon.png")} alt="time control icon" />;
+        } else if (control === "blitz") {
+            return <ChessGameBlitzIcon src={require("../images/blitzIcon.png")} alt="time control icon" />;
+        } else if (control === "rapid") {
+            return <ChessGameRapidIcon src={require("../images/rapidIcon.png")} alt="time control icon" />;
+        }
+        return <></>;
+    };
+
+
     // handle keydown event
     useEffect(() => {
         document.addEventListener("keydown", handleKeyDown);
@@ -301,15 +322,7 @@ const ChessGame = () => {
             <ChessContainer>
                 <ChessGameHeaderContainer>
                     <ChessGameHeaderLeft>
-                        {gameType === "bullet" ? (
-                            <ChessGameBulletIcon src={require("../images/bulletIcon.png")} alt="time control icon" />
-                        ) : (
-                            gameType === "blitz" ? (
-                                <ChessGameBlitzIcon src={require("../images/blitzIcon.png")} alt="time control icon" />
-                            ) : (
-                                <></>
-                            )
-                        )}
+                        {getChessIcon(gameType)}
                         <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
                         <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
                     </ChessGameHeaderLeft>
