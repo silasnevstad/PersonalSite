@@ -63,13 +63,6 @@ const ProjectLink = styled.a`
     color: ${({ theme }) => theme.colors.secondary};
 `;
 
-const ProjectLogo = styled.img`
-    width: 75px;
-    height: 75px;
-    border-radius: 30%;
-    margin-left: auto;
-`;
-
 const ProjectCardLarge = ({ project }) => {
 
     return (

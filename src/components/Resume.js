@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NavigationMenu from './NavigationMenu';
 import StickyHeader from './StickyHeader';
 import '../styles/Resume.css'

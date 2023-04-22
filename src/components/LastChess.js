@@ -1,5 +1,4 @@
 import ChessGame from "./ChessGame";
-import SocialLinks from "./SocialLinks";
 import NavigationMenu from "./NavigationMenu";
 import styled from "styled-components";
 
@@ -21,7 +20,6 @@ const LastChess = ({ isMenuOpen, toggleMenu }) => {
             <ChessResizeContainer isMenuOpen={isMenuOpen}>
                 <ChessGame isMenuOpen={isMenuOpen} />
             </ChessResizeContainer>
-            {/* <SocialLinks /> */}
         </div>
     );
 };

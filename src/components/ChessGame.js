@@ -40,12 +40,6 @@ const ChessBoardEvalContainer = styled.div`
     align-items: center;
 `;
 
-const EvalBar = styled.div`
-    width: 10px;
-    height: 100%;
-    background-color: ${({ result }) => result > 0 ? "green" : "red"};
-`;
-
 const ButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -216,7 +210,6 @@ const ChessGame = ({ isMenuOpen }) => {
 
     useEffect(() => {
         getLastPlayedGame();
-        // initStockfish();
     }, []);
       
 
@@ -304,7 +297,6 @@ const ChessGame = ({ isMenuOpen }) => {
         } else {
             if (currentMove > 0) {
                 setCurrentMove(currentMove - 1);
-                const move = history[currentMove - 1];
                 game.undo();
                 setFen(game.fen());
             }

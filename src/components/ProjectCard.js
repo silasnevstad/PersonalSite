@@ -1,20 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-
-const Bounce = keyframes`
-    0%, 100% {
-        transform: translateY(0);
-    }
-    15% {
-        transform: translateY(-10px);
-    }
-    30% {
-        transform: translateY(-5px);
-    }
-    45% {
-        transform: translateY(-2px);
-    }
-`;
+import styled from 'styled-components';
 
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -94,18 +79,6 @@ const ProjectLanguages = styled.p`
 
     @media (max-width: 768px) {
         font-size: 0.7rem;
-    }
-`;
-
-const ProjectDeveloper = styled.p`
-    color: ${({ theme }) => theme.colors.secondary};
-    font-size: .8rem;
-    margin: 0;
-    margin-top: 8px;
-    opacity: 0.4;
-
-    @media (max-width: 768px) {
-        font-size: .7rem;
     }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NavigationMenu from './NavigationMenu';
 import SocialLinks from './SocialLinks';
 import ProjectCard from './ProjectCard';

@@ -9,32 +9,6 @@ const HomeContainer = styled.div`
   transition: margin-left 0.3s ease-in-out;
 `;
 
-const HomeHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;  
-`;
-
-const HomeContactButton = styled.button`
-  margin: 5px 5px;
-  background: transparent;
-  color: #fff;
-  border: 1px solid #ffffff3f;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 10px;
-  width: 14%;
-  height: 40px;
-
-  &:hover {
-    background: #222;
-    transform: scale(1.05);
-  }
-
-`;
-
 const HomeText = styled.h1`
   font-size: 1rem;
   max-width: 70%;
