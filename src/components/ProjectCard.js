@@ -32,13 +32,11 @@ const Card = styled.div`
     color: ${({ theme }) => theme.colors.text};
     // box-shadow: rgba(50, 50, 50, 0.2) 0px 4px 6px, rgba(150, 150, 150, 0.2) 0px 5px 10px -3px, rgba(80, 80, 80, 0.2) 0px -3px 0px inset;
     border: 1px solid #2f2f2f;
-    // animation: ${({ bounce }) => bounce ? Bounce : 'none'} 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 2;
     animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
     
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 12px, rgba(0, 0, 0, 0.3) 0px 10px 20px -3px, rgba(80, 80, 80, 0.3) 0px -3px 0px inset;
         background-color: ${({ theme }) => theme.colors.fifth};
-        transform: translateY(-5px);
     }
 
     @keyframes bounce-in-right {
@@ -124,8 +122,8 @@ const ProjectDate = styled.p`
 `;
 
 const ProjectLogo = styled.img`
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 30%;
     margin-left: auto; // added to push the image to the right
     margin-top: auto;

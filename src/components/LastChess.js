@@ -19,7 +19,7 @@ const LastChess = ({ isMenuOpen, toggleMenu }) => {
         <div>
             <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
             <ChessResizeContainer isMenuOpen={isMenuOpen}>
-                <ChessGame />
+                <ChessGame isMenuOpen={isMenuOpen} />
             </ChessResizeContainer>
             {/* <SocialLinks /> */}
         </div>

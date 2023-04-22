@@ -19,7 +19,7 @@ const ChessContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 28%;
+    width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(28% + 70px)' : '28%'};
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
     border-radius: 10px;
@@ -68,6 +68,14 @@ const ChessGameHeaderLeft = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+
+const ChessGameHeaderRight = styled.div`
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
 `;
 
 
@@ -121,11 +129,17 @@ const ChessGameDate = styled.p`
     opacity: 0.8;
 `;
 
+const ChessGameTime = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.8;
+`;
+
 const ChessGameResult = styled.p`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     margin: 0;
-    margin-top: -8px;
     opacity: 0.8;
     align-self: flex-end;
 
@@ -149,6 +163,18 @@ const convertDate = (date) => {
     return day + " " + monthString + " " + year;
 }
 
+const unixTimeToString = (unixTime) => {
+    const date = new Date(unixTime * 1000);
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+    
+    // convert hours to 12 hour format
+    const hours12 = hours % 12 || 12;
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    
+    return hours12 + ':' + minutes.substr(-2) + ampm;
+}
+
 const convertTimeControl = (timeControl) => {
     const timeArr = timeControl.split("+");
     const timeInit = timeArr[0] / 60;
@@ -169,11 +195,10 @@ const convertResultString = (result) => {
     return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
-const ChessGame = () => {
+const ChessGame = ({ isMenuOpen }) => {
     const [game, setGame] = useState(new Chess());
     const [games, setGames] = useState([]);
     const [gameIndex, setGameIndex] = useState(-1);
-    const [stockfishEngine, setStockfishEngine] = useState(null);
     const [fen, setFen] = useState("start");
     const [history, setHistory] = useState([]);
     const [currentMove, setCurrentMove] = useState(0);
@@ -186,6 +211,7 @@ const ChessGame = () => {
     const [opponent, setOpponent] = useState("");
     const [orientation, setOrientation] = useState("white");
     const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
     const [result, setResult] = useState("");
 
     useEffect(() => {
@@ -203,7 +229,8 @@ const ChessGame = () => {
         const dateArr = date.split('"');
         date = dateArr[1];
         const res = game.white.username === myUsername ? game.white.result : game.black.result;
-        const time = convertTimeControl(game.time_control);
+        const time_control = convertTimeControl(game.time_control);
+        const time = unixTimeToString(game.end_time);
 
 
 
@@ -214,12 +241,13 @@ const ChessGame = () => {
         setFen(fen);
         setOpponent(opp);
         setGameType(game.time_class);
-        setTimeControl(time);
+        setTimeControl(time_control);
         setMyRating(game.white.username === myUsername ? game.white.rating : game.black.rating);
         setOpponentRating(game.white.username === myUsername ? game.black.rating : game.white.rating);
         setOrientation(game.white.username === myUsername ? "white" : "black");
         setCurrentMove(newGame.history().length);
         setDate(date);
+        setTime(time);
         setResult(res);
     }
 
@@ -233,8 +261,6 @@ const ChessGame = () => {
         setGames(games);
         setGameIndex(games.length - 1);
         const lastGame = games[games.length - 1];
-        
-        console.log('lastGame', gamesResponse)
     
         if (lastGame) {
             loadGame(lastGame);
@@ -319,14 +345,17 @@ const ChessGame = () => {
         <ChessOuterContainer>
             {game ? (
 
-            <ChessContainer>
+            <ChessContainer isMenuOpen={isMenuOpen}>
                 <ChessGameHeaderContainer>
                     <ChessGameHeaderLeft>
                         {getChessIcon(gameType)}
                         <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
                         <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
                     </ChessGameHeaderLeft>
-                    <ChessGameDate>{convertDate(date)}</ChessGameDate>
+                    <ChessGameHeaderRight>
+                        <ChessGameDate>{convertDate(date)}</ChessGameDate>
+                        <ChessGameTime>{time}</ChessGameTime>
+                    </ChessGameHeaderRight>
                 </ChessGameHeaderContainer>
                 
                 <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
@@ -337,7 +366,6 @@ const ChessGame = () => {
                         // change width when screen is smaller
                         width={window.innerWidth < 600 ? window.innerWidth - 100 : 400}
                         orientation={orientation}
-                        onSquareClick={(square) => console.log(square)}
                         lightSquareStyle={{ backgroundColor: '#eeeed2' }}
                         darkSquareStyle={{ backgroundColor: '#769656' }}
                         dropOffBoard={'snapback'}
