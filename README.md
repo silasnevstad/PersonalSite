@@ -1,4 +1,4 @@
-# SilasN.com (Pending [Go here for now](`https://main.dnj0hkvsbduic.amplifyapp.com`)]
+# SilasN.com (Pending [Go here for now](`https://main.dnj0hkvsbduic.amplifyapp.com`))
 
 A simple personal website I built for myself, using React.
 
