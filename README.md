@@ -3,8 +3,7 @@
 A simple personal website I built for myself, using React.
 
 ## Overview
-- Home Page
-Simply shows a welcome message, and my social links.
+- Home Page - Simply shows a welcome message, and my social links.
 
 - Resume
 A page for my resume
