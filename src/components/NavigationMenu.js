@@ -4,14 +4,90 @@ import styled from 'styled-components';
 // import '../styles/NavMenu.css';
 
 const MenuButton = styled.button`
-  background: none;
-  border: none;
   color: ${({ theme }) => theme.colors.secondary};
-  cursor: pointer;
+  position: relative;
+  height: 45px;
+  padding: 0 25px;
+  margin-left: 5px;
+  border: 2px solid #111;
+  background: ${({ theme }) => theme.colors.background};
+  user-select: none;
+  white-space: nowrap;
+  transition: all .05s linear;
+  font-family: inherit;
+
+  &:before, &:after {
+    content: "";
+    position: absolute; 
+    background: ${({ theme }) => theme.colors.background};
+    transition: all .2s linear;
+  }
+
+  &:before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+  }
+
+  &:after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover:before {
+    height: calc(100% - 32px);
+    top: 16px;
+  }
+
+  &:hover:after {
+    width: calc(100% - 32px);
+    left: 16px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    height: 40px;
+    font-size: 0.8rem;
+
+    &:before {
+      height: calc(100% - 12px);
+      top: 6px;
+    }
+
+    &:after {
+      width: calc(100% - 12px);
+      left: 6px;
+    }
+
+    &:hover:before {
+      height: calc(100% - 24px);
+      top: 12px;
+    }
+
+    &:hover:after {
+      width: calc(100% - 24px);
+      left: 12px;
+    }
+  }
+
+`;
+
+const MenuButtonSpan = styled.span`
   font-size: 1.5rem;
+  z-index: 3;
+  position: relative;
   font-weight: 600;
-  border: none;
-  cursor: pointer;
 `;
 
 const LeftArrow = styled.div`
@@ -23,6 +99,14 @@ const LeftArrow = styled.div`
   border-bottom: 20px solid transparent;
   border-right: 20px solid #222;
   z-index: 200;
+
+  @media (max-width: 768px) {
+    width: 15px;
+    height: 20px;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid #222;
+  }
 `;
 
 const NavText = styled.p`
@@ -100,7 +184,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
   return (
     <>
       <MenuButton onClick={toggleMenu}>
-        Menu
+        <MenuButtonSpan> Menu </MenuButtonSpan>
       </MenuButton>
 
       <NavMenuContainer isMenuOpen={isMenuOpen} ref={node}>

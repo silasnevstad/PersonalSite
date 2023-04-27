@@ -3,7 +3,7 @@ import { Chess } from "chess.js";
 import Chessboard from "chessboardjsx";
 import styled from 'styled-components';
 import axios from "axios";
-import '../styles/ChessButton.css'
+import '../styles/ChessButton.css';
 
 const ChessOuterContainer = styled.div`
     display: flex;
@@ -19,7 +19,7 @@ const ChessContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(28% + 70px)' : '28%'};
+    width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(29% + 70px)' : '28.5%'};
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
     border-radius: 10px;
@@ -27,16 +27,31 @@ const ChessContainer = styled.div`
     @media (max-width: 1400px) {
         width: 40%;
     }
-
+    
     @media (max-width: 768px) {
         width: 90%;
     }
+
 `;
 
-const ChessBoardEvalContainer = styled.div`
+const ChessBoardView = styled.div`
+    width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: top;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+`;
+
+const ChessBoardContainer = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 `;
 
@@ -140,6 +155,36 @@ const ChessGameResult = styled.p`
     color: ${({ result }) => result === "win" ? "#9ED15D" : result === "stalemate" ? "#E3C95F" : result === "timevsinsufficient" ? "#E3C95F" : "#CC4E44"};
 `;
 
+const ChessGameWinRate = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-top: -30px;
+    margin-left: 10px;
+    text-align: left;
+
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+`;
+
+const ChessGameWinRateColor = styled.span`
+    color: ${({ winRate }) => winRate >= 50 ? "#9ED15D" : "#CC4E44"};
+`;
+
+const ChessGameWinRateInfo = styled.p`
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    margin: 0;
+    opacity: 0.6;
+    align-self: flex-end;
+    text-align: left;
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+    }
+`;
+
 const ChessInfoMessage = styled.p`
     font-family: 'Roboto', sans-serif;
     font-size: .8rem;
@@ -147,6 +192,8 @@ const ChessInfoMessage = styled.p`
     margin-top: 15px;
     opacity: 0.6;
 `;
+
+const chessUsername = "Sevstad";
 
 //convert string yyyy.mm.dd to date string dd, month yyyy
 const convertDate = (date) => {
@@ -189,6 +236,44 @@ const convertResultString = (result) => {
     return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
+const determineWinOrLoss = (game) => {
+    // determine which user is me
+    const white = game.white.username;
+    const black = game.black.username;
+    const me = white === chessUsername ? white : black;
+
+    const result = me === white ? game.white.result : game.black.result;
+    
+    if (result === "win") {
+        return "win";
+    } else if (result === "loss" || result === "resigned" || result === "timeout" || result === "abandoned" || result === "checkmated") {
+        return "loss";
+    }
+
+    return "draw";
+} 
+
+const calculateWinRate = (games) => {
+    let wins = 0;
+    let losses = 0;
+    let draws = 0;
+    
+    games.forEach(game => {
+        const result = determineWinOrLoss(game);
+        if (result === "win") {
+            wins++;
+        } else if (result === "loss") {
+            losses++;
+        } else {
+            draws++;
+        }
+    });
+
+    const totalGames = wins + losses + draws;
+    const winRate = (wins / totalGames) * 100;
+    return winRate.toFixed(1);
+}
+
 const ChessGame = ({ isMenuOpen }) => {
     const [game, setGame] = useState(new Chess());
     const [games, setGames] = useState([]);
@@ -197,7 +282,6 @@ const ChessGame = ({ isMenuOpen }) => {
     const [history, setHistory] = useState([]);
     const [currentMove, setCurrentMove] = useState(0);
     const [reverse, setReverse] = useState(true);
-    const myUsername = "Sevstad";
     const [gameType, setGameType] = useState("bullet");
     const [timeControl, setTimeControl] = useState("1+0");
     const [myRating, setMyRating] = useState(0);
@@ -207,6 +291,8 @@ const ChessGame = ({ isMenuOpen }) => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [result, setResult] = useState("");
+    const [winRate, setWinRate] = useState(0);
+    const [numberOfGames, setNumberOfGames] = useState(0);
 
     useEffect(() => {
         getLastPlayedGame();
@@ -216,16 +302,14 @@ const ChessGame = ({ isMenuOpen }) => {
     const loadGame = (game) => {
         const pgn = game.pgn;
         const fen = game.fen;
-        const opp = game.white.username === myUsername ? game.black.username : game.white.username;
+        const opp = game.white.username === chessUsername ? game.black.username : game.white.username;
         const newGame = new Chess();
         let date = pgn.split("[Date ")[1].split("]")[0];
         const dateArr = date.split('"');
         date = dateArr[1];
-        const res = game.white.username === myUsername ? game.white.result : game.black.result;
+        const res = game.white.username === chessUsername ? game.white.result : game.black.result;
         const time_control = convertTimeControl(game.time_control);
         const time = unixTimeToString(game.end_time);
-
-
 
         newGame.loadPgn(pgn);
 
@@ -235,9 +319,9 @@ const ChessGame = ({ isMenuOpen }) => {
         setOpponent(opp);
         setGameType(game.time_class);
         setTimeControl(time_control);
-        setMyRating(game.white.username === myUsername ? game.white.rating : game.black.rating);
-        setOpponentRating(game.white.username === myUsername ? game.black.rating : game.white.rating);
-        setOrientation(game.white.username === myUsername ? "white" : "black");
+        setMyRating(game.white.username === chessUsername ? game.white.rating : game.black.rating);
+        setOpponentRating(game.white.username === chessUsername ? game.black.rating : game.white.rating);
+        setOrientation(game.white.username === chessUsername ? "white" : "black");
         setCurrentMove(newGame.history().length);
         setDate(date);
         setTime(time);
@@ -246,7 +330,7 @@ const ChessGame = ({ isMenuOpen }) => {
 
     const getLastPlayedGame = async () => {
         const response = await axios.get(
-            `https://api.chess.com/pub/player/${myUsername}/games/archives`
+            `https://api.chess.com/pub/player/${chessUsername}/games/archives`
         );
         const archivesUrl = response.data.archives.pop();
         const gamesResponse = await axios.get(archivesUrl);
@@ -254,9 +338,13 @@ const ChessGame = ({ isMenuOpen }) => {
         setGames(games);
         setGameIndex(games.length - 1);
         const lastGame = games[games.length - 1];
+
+        console.log(games);
     
         if (lastGame) {
             loadGame(lastGame);
+            setWinRate(calculateWinRate(games));
+            setNumberOfGames(games.length);
         }
     };
 
@@ -351,24 +439,31 @@ const ChessGame = ({ isMenuOpen }) => {
                 </ChessGameHeaderContainer>
                 
                 <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
-                <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
-                <ChessBoardEvalContainer>
-                    <Chessboard
-                        position={fen}
-                        // change width when screen is smaller
-                        width={window.innerWidth < 600 ? window.innerWidth - 100 : 400}
-                        orientation={orientation}
-                        lightSquareStyle={{ backgroundColor: '#eeeed2' }}
-                        darkSquareStyle={{ backgroundColor: '#769656' }}
-                        dropOffBoard={'snapback'}
-                    />
-                </ChessBoardEvalContainer>
                 
-                <h2 style={{alignSelf: 'flex-end'}}>Me ({myRating})</h2>
+                <ChessBoardView>
+                    <ChessBoardContainer>
+                        <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
+                        <Chessboard
+                            position={fen}
+                            // change width when screen is smaller
+                            width={window.innerWidth < 800 ? window.innerWidth * 0.55 : window.innerWidth * 0.27}
+                            orientation={orientation}
+                            lightSquareStyle={{ backgroundColor: '#eeeed2' }}
+                            darkSquareStyle={{ backgroundColor: '#769656' }}
+                            dropOffBoard={'snapback'}
+                        />
+                        <h2 style={{alignSelf: 'flex-end'}}>Me ({myRating})</h2>
+                    </ChessBoardContainer>
+                    <ChessGameWinRate winRate={winRate}>
+                        <ChessGameWinRateColor winRate={winRate}>{winRate}%</ChessGameWinRateColor> <ChessGameWinRateInfo>win rate over {numberOfGames} games</ChessGameWinRateInfo>
+                    </ChessGameWinRate>
+                </ChessBoardView>
+                
+
                 <ButtonContainer>
                     <button onClick={() => onPlayMove(false)} className="chess-button">
-                        <div class="arrow-wrapper">
-                            <div class="arrow left"></div>
+                        <div className="arrow-wrapper">
+                            <div className="arrow left"></div>
                         </div>
                         Previous
                     </button>
@@ -377,8 +472,8 @@ const ChessGame = ({ isMenuOpen }) => {
                     </button>
                     <button onClick={() => onPlayMove(true)} className="chess-button">
                         Next
-                        <div class="arrow-wrapper">
-                            <div class="arrow"></div>
+                        <div className="arrow-wrapper">
+                            <div className="arrow"></div>
                         </div>
                     </button>
                 </ButtonContainer>
