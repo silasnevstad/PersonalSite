@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavigationMenu from './NavigationMenu';
+import NavigationHeader from './NavigationHeader';
 import SocialLinks from './SocialLinks';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
@@ -14,16 +15,14 @@ const ProjectsContainer = styled.div`
   justify-content: left;
   gap: 8px;
 
-  margin-top: 10px;
-
-  margin-left: ${({ isMenuOpen }) => isMenuOpen ? '250px' : '0'};
-  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
+  margin-top: ${({ isMenuOpen }) => isMenuOpen ? '10em' : '5em'};
   transition: margin-left 0.3s ease-in-out;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     margin-left: 0;
     width: 100%;
+    margin-top: 3em;
   }
 `;
 
@@ -90,6 +89,7 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
   return (
     <div>
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <ProjectsContainer isMenuOpen={isMenuOpen}>
         {projects.map((project, index) => (
           <ProjectCard 

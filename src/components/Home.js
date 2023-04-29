@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import NavigationMenu from './NavigationMenu';
+import NavigationHeader from './NavigationHeader';
 import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
 
 const HomeContainer = styled.div`
-  margin-left: ${({ isMenuOpen }) => isMenuOpen ? '250px' : '0'};
-  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
+  margin-top: ${({ isMenuOpen }) => isMenuOpen ? '10em' : '6em'};
+  // width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    margin-top: 4em;
+  }
 `;
 
 const HomeText = styled.h1`
@@ -61,6 +66,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
     return (
         <div className="Home">
           <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           <HomeContainer isMenuOpen={isMenuOpen}>
             <HomeText>{text}<span className="cursor">_</span></HomeText>
           </HomeContainer>

@@ -71,6 +71,7 @@ li {
 .project-language {
     opacity: 0.5;
     font-size: 13px;
+    z-index: -1;
 }
 
 .python {
@@ -94,7 +95,7 @@ li {
     /* position: sticky; */
     /* top: 0; */
     /* padding-top: 1px; */
-    z-index: 1; /* The sticky element will have a higher z-index than the scrollable elements */
+    z-index: 999; /* The sticky element will have a higher z-index than the scrollable elements */
     background-color: #222;
 }
 

@@ -19,7 +19,8 @@ const ChessContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(29% + 70px)' : '28.5%'};
+    // width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(29% + 70px)' : '28.5%'};
+    width: 29%;
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     padding: 20px;
     border-radius: 10px;

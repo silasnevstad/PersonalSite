@@ -1,18 +1,20 @@
 import React from 'react';
 import NavigationMenu from './NavigationMenu';
+import NavigationHeader from './NavigationHeader';
 import StickyHeader from './StickyHeader';
 import '../styles/Resume.css'
 import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
 
 const ResumeContainer = styled.div`
-  margin-left: ${({ isMenuOpen }) => isMenuOpen ? '15%' : '0'};
+  margin-top: 6em;
   width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(85%)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
 
   @media (max-width: 768px) {
     margin-left: 0;
     width: 100%;
+    margin-top: 3em;
   }
 `;
 
@@ -74,6 +76,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
   return (
     <div className="Resume">
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <ResumeContainer isMenuOpen={isMenuOpen}>
         <div class="sticky-div">
           <h1>Silas Nevstad</h1>
@@ -218,6 +221,8 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
           </div>
 
         </div>
+
+        <div style={{height: "10vh"}}></div>
       </ResumeContainer>
 
       <SocialLinks />
