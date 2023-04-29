@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const StickyHeaderContainer = styled.div`
   position: fixed;
-  top: 0em;
+  top: 1em;
   width: 100%;
   background-color: #222;
 
-  left: ${({ isMenuOpen }) => (isMenuOpen ? '16%' : '1em')};
+  left: 1em;
 `;
 
 const StickyHeaderText = styled.h1`

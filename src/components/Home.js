@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
 
 const HomeContainer = styled.div`
-  margin-top: ${({ isMenuOpen }) => isMenuOpen ? '10em' : '6em'};
+  margin-top: 5em;
   // width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
 

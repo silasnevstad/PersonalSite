@@ -149,7 +149,9 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
     return (
         <NavHeader>
             <NavHeaderLeft>
-                <NavTitle>Silas Nevstad</NavTitle>
+                <Link to="/" onClick={toggleMenu}>
+                    <NavTitle>Silas Nevstad</NavTitle>
+                </Link>
             </NavHeaderLeft>
             <NavHeaderRight>
                 <Link to="/" onClick={toggleMenu}>
