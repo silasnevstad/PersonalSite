@@ -141,7 +141,7 @@ const NavText = styled.p`
 
   &:hover {
     opacity: 1;
-    color: #4273fffa;
+    color: #33ff33;
   }
 `;
 
