@@ -19,6 +19,26 @@ const CardLarge = styled.div`
     }
 `;
 
+const CardLargeHeader = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const CardLargeHeaderInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+`;
+
+const ProjectLogo = styled.img`
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+    margin-right: 15px;
+`;
+
 const ProjectTitle = styled.h2`
     color: ${({ theme }) => theme.colors.secondary};
     font-size: 1.6rem;
@@ -106,40 +126,28 @@ const ProjectLink = styled.a`
     }
 `;
 
-// const ProjectLinkSVG = styled.svg`
-//     transform: translateX(10px);
-//     transition: all 0.3s ease;
-
-//     &:active {
-//         transform: scale(0.9);
-//     }
-
-//     &:hover {
-//         transform: translateX(15px);
-//     }
-// `;
-
 const ProjectCardLarge = ({ project }) => {
 
     return (
         <CardLarge>
-            <span style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                {/* <ProjectVersion>{project.version}</ProjectVersion> */}
-            </span>
-            
-            <ProjectLanguages>{project.languages}</ProjectLanguages>
-            <ProjectDeveloper>{project.developers}</ProjectDeveloper>
+            <CardLargeHeader>
+                {project.logo && <ProjectLogo src={require('../images/' + project.logo)} />}
+                <CardLargeHeaderInfo>
+                    <span style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <ProjectTitle>{project.title}</ProjectTitle>
+                        {/* <ProjectVersion>{project.version}</ProjectVersion> */}
+                    </span>
+                    
+                    <ProjectLanguages>{project.languages}</ProjectLanguages>
+                    <ProjectDeveloper>{project.developers}</ProjectDeveloper>
+                </CardLargeHeaderInfo>
+            </CardLargeHeader>
+
             <ProjectDescription>{project.description}</ProjectDescription>
-
-
             <ProjectFooter>
                 {project.url !== '' && 
                 <ProjectLink href={project.url}>
                     View Project
-                    {/* <ProjectLinkSVG viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                        <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
-                    </ProjectLinkSVG> */}
                 </ProjectLink>}
                 <ProjectFooterRequests>{formatRequests(project)}</ProjectFooterRequests>
             </ProjectFooter>
