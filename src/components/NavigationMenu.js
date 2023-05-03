@@ -1,90 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { keyframes } from 'styled-components';
-
-// const MenuButton = styled.button`
-//   color: ${({ theme }) => theme.colors.secondary};
-//   position: fixed;
-//   top: 1em;
-//   right: 1em;
-
-//   height: 45px;
-//   padding: 0 25px;
-//   margin-left: 5px;
-//   border: 2px solid #111;
-//   background: ${({ theme }) => theme.colors.background};
-//   user-select: none;
-//   white-space: nowrap;
-//   transition: all .05s linear;
-//   font-family: inherit;
-
-//   &:before, &:after {
-//     content: "";
-//     position: absolute; 
-//     background: ${({ theme }) => theme.colors.background};
-//     transition: all .2s linear;
-//   }
-
-//   &:before {
-//     width: calc(100% + 6px);
-//     height: calc(100% - 16px);
-//     top: 8px;
-//     left: -3px;
-//   }
-
-//   &:after {
-//     width: calc(100% - 16px);
-//     height: calc(100% + 6px);
-//     top: -3px;
-//     left: 8px;
-//   }
-
-//   &:hover {
-//     cursor: pointer;
-//   }
-
-//   &:hover:before {
-//     height: calc(100% - 32px);
-//     top: 16px;
-//   }
-
-//   &:hover:after {
-//     width: calc(100% - 32px);
-//     left: 16px;
-//   }
-
-//   &:active {
-//     transform: scale(0.95);
-//   }
-
-//   @media (max-width: 768px) {
-//     padding: 0 20px;
-//     height: 40px;
-//     font-size: 0.8rem;
-
-//     &:before {
-//       height: calc(100% - 12px);
-//       top: 6px;
-//     }
-
-//     &:after {
-//       width: calc(100% - 12px);
-//       left: 6px;
-//     }
-
-//     &:hover:before {
-//       height: calc(100% - 24px);
-//       top: 12px;
-//     }
-
-//     &:hover:after {
-//       width: calc(100% - 24px);
-//       left: 12px;
-//     }
-//   }
-
-// `;
+import styled, { css, keyframes } from 'styled-components';
 
 const MenuButton = styled.button`
   color: ${({ theme }) => theme.colors.background};
@@ -121,13 +37,6 @@ const MenuButtonImg = styled.img`
   tintColor: ${({ theme }) => theme.colors.background};
 `;
 
-const MenuButtonSpan = styled.span`
-  font-size: 1.5rem;
-  z-index: 3;
-  position: relative;
-  font-weight: 600;
-`;
-
 const NavText = styled.p`
   font-size: 1rem;
   padding: 5px 5px;
@@ -136,7 +45,16 @@ const NavText = styled.p`
 
   &:hover {
     opacity: 1;
-    color: #4273fffa;
+    color: #33ff33;
+  }
+`;
+
+const floodAnimation = keyframes`
+  0% {
+    clip-path: circle(0% at 100% 0%);
+  }
+  100% {
+    clip-path: circle(150% at 100% 0%);
   }
 `;
 
@@ -146,9 +64,8 @@ const NavMenuContainer = styled.nav`
   left: 0;
   top: 0;
   width: 100%;
-  height: auto; /* change height to auto for the dropdown */
+  height: 100%;
   background-color: #333; //#4273ff;
-  transition: transform 0.3s ease-in-out;
   overflow: hidden;
 
   display: flex;
@@ -156,10 +73,11 @@ const NavMenuContainer = styled.nav`
   justify-content: center;
   align-items: center;
 
-  transform: ${({ isMenuOpen }) => (isMenuOpen ? 'translateY(0)' : 'translateY(-100%)')};
+  clip-path: ${({ isMenuOpen }) => (isMenuOpen ? 'circle(150% at 100% 0%)' : 'circle(0% at 100% 0%)')};
+  animation: ${({ isMenuOpen }) => isMenuOpen && css`${floodAnimation} 0.5s ease-in-out forwards`};
 
   @media (max-width: 768px) {
-    height: 40%;
+    height: 33%;
     align-items: flex-start;
   }
 
@@ -263,16 +181,16 @@ const NavMenuFooterItemAnchor = styled.a`
 const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
   const node = useRef();
 
-  const handleClickOutside = (e) => {
-    if (node.current.contains(e.target)) {
-      // Inside the menu, do nothing
-      return;
-    }
-    // Outside the menu, close it
-    toggleMenu();
-  };
-
   useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (node.current.contains(e.target)) {
+        // Inside the menu, do nothing
+        return;
+      }
+      // Outside the menu, close it
+      toggleMenu();
+    };
+
     if (isMenuOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -282,7 +200,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, toggleMenu]);
 
   return (
     <>
@@ -299,10 +217,10 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             <NavText>Resume</NavText>
           </Link>
           <Link to="/projects" onClick={toggleMenu}>
-          <NavText>Projects</NavText>
+            <NavText>Projects</NavText>
           </Link>
           <Link to="/lastChess" onClick={toggleMenu}>
-          < NavText>My Chess</NavText>
+            <NavText>Chess</NavText>
           </Link>
         </NavMenuContainerLower>
         <NavMenuContainerFooter>

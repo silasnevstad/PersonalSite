@@ -86,7 +86,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
         <div className="scrollable-div">
           <div className="section">
-            <h2><u>Education</u></h2>
+            <h2>Education</h2>
             <Line />
             <ul>
               <li><span className="school-name">Candidate for Bachelors in Computer Science</span>, <span className="school-location">2021-Present</span></li>
@@ -119,7 +119,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
 
           <div className="section">
-            <h2><u>Skills</u></h2>
+            <h2>Skills</h2>
             <Line />
             <SkillsSection>
               <Skill className="skills-inline">Python<SkillProgress value="85" max="100"></SkillProgress> </Skill> 
@@ -160,7 +160,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
           <br />
 
           <div className="section">
-            <h2><u>Work Experience</u></h2>
+            <h2>Work Experience</h2>
             <Line />
             <ul>
               <li className="biggerLi">Tech Intern</li>
@@ -177,7 +177,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
           <br />
 
           <div className="section">
-            <h2><u>Projects</u></h2>
+            <h2>Projects</h2>
             <Line />
             <ul>
               <li className="biggerLi">AlgoPicks, Personal <span className="project-language">| Swift | Python</span></li>
@@ -212,7 +212,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
           <br />
 
           <div className="section">
-            <h2><u>Additional Information</u></h2>
+            <h2>Additional Information</h2>
             <Line />
             <ul>
               <li className="bulletPoint"> Related Experience: 2nd Place High School Hackathon Winner (2019) </li>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { formatRequests } from './Utils';
 
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -38,7 +39,7 @@ const Card = styled.div`
     }
 
     @media (max-width: 768px) {
-        width: calc(screen.width - 100px);
+        width: calc(screen.width - 150px);
         padding: 12px;
         margin: 5px;
     }
@@ -103,8 +104,9 @@ const ProjectLogo = styled.img`
     margin-bottom: auto;
 
     @media (max-width: 768px) {
-        width: 50px;
-        height: 50px;
+        margin-top: 0;
+        width: 25px;
+        height: 25px;
     }
 `;
 
@@ -113,10 +115,11 @@ const ProjectCard = ({ project, onClick, index }) => {
       <Card onClick={onClick} index={index}>
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
-          <ProjectVersion>{project.version}</ProjectVersion>
+          <ProjectVersion>{formatRequests(project)}</ProjectVersion>
           <ProjectLanguages>{project.languages}</ProjectLanguages>
           {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
           <ProjectDate>{project.date}</ProjectDate>
+          {/* <ProjectClicks>{formatRequests(project.requests)}</ProjectClicks> */}
         </ProjectInfo>
         {project.logo !== '' && <ProjectLogo src={require('../images/' + project.logo)} alt='Project Logo' />}
       </Card>

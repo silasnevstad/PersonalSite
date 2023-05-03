@@ -3,11 +3,14 @@ import styled from 'styled-components';
 
 const StickyHeaderContainer = styled.div`
   position: fixed;
-  top: 1em;
+  top: 4em;
   width: 100%;
   background-color: #222;
-
   left: 1em;
+
+  @media (max-width: 768px) {
+    top: 0em;
+  }
 `;
 
 const StickyHeaderText = styled.h1`
@@ -29,7 +32,9 @@ const StickyHeader = ({ isMenuOpen }) => {
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i];
         const rect = section.getBoundingClientRect();
-        if (rect.top < 130) {
+        // cutoff is 130 if screen is mobile, 170 if not
+        const cutoff = window.innerWidth < 768 ? 130 : 175;
+        if (rect.top < cutoff) {
           newHeaderText = section.querySelector('h2').textContent;
         }
       }

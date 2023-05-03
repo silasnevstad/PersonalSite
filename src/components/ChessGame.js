@@ -32,7 +32,6 @@ const ChessContainer = styled.div`
     @media (max-width: 768px) {
         width: 90%;
     }
-
 `;
 
 const ChessBoardView = styled.div`
@@ -54,6 +53,11 @@ const ChessBoardContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -162,11 +166,7 @@ const ChessGameWinRate = styled.p`
     margin-top: -30px;
     margin-left: 10px;
     text-align: left;
-
-    @media (max-width: 768px) {
-        font-size: 0.9rem;
-        text-align: left;
-    }
+    align-self: flex-start;
 `;
 
 const ChessGameWinRateColor = styled.span`
@@ -180,10 +180,6 @@ const ChessGameWinRateInfo = styled.p`
     opacity: 0.6;
     align-self: flex-end;
     text-align: left;
-
-    @media (max-width: 768px) {
-        font-size: 0.7rem;
-    }
 `;
 
 const ChessInfoMessage = styled.p`
@@ -294,10 +290,6 @@ const ChessGame = ({ isMenuOpen }) => {
     const [result, setResult] = useState("");
     const [winRate, setWinRate] = useState(0);
     const [numberOfGames, setNumberOfGames] = useState(0);
-
-    useEffect(() => {
-        getLastPlayedGame();
-    }, []);
       
 
     const loadGame = (game) => {
@@ -422,6 +414,8 @@ const ChessGame = ({ isMenuOpen }) => {
         };
     });
 
+    useEffect(() => { getLastPlayedGame(); }, []);
+
     return (
         <ChessOuterContainer>
             {game ? (
@@ -447,7 +441,7 @@ const ChessGame = ({ isMenuOpen }) => {
                         <Chessboard
                             position={fen}
                             // change width when screen is smaller
-                            width={window.innerWidth < 800 ? window.innerWidth * 0.55 : window.innerWidth * 0.27}
+                            width={window.innerWidth < 800 ? window.innerWidth * 0.80 : window.innerWidth < 1400 ? window.innerWidth * 0.35 : window.innerWidth * 0.27}
                             orientation={orientation}
                             lightSquareStyle={{ backgroundColor: '#eeeed2' }}
                             darkSquareStyle={{ backgroundColor: '#769656' }}

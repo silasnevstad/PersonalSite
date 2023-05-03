@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { formatRequests } from './Utils';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
@@ -55,12 +56,27 @@ const ProjectDeveloper = styled.p`
     color: ${({ theme }) => theme.colors.text};
 `;
 
-const ProjectLink = styled.button`
+const ProjectFooter = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const ProjectFooterRequests = styled.p`
+    font-size: .9rem;
+    margin: 0;
+    margin-top: 10px;
+    opacity: 0.6;
+    color: ${({ theme }) => theme.colors.text};
+`;
+
+const ProjectLink = styled.a`
     width: 10em;
     text-align: left;
     border: none;
     background: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0;
     margin-top: 25px;
     opacity: 0.6;
@@ -74,12 +90,12 @@ const ProjectLink = styled.button`
     &:after {
         content: "";
         position: absolute;
-        width: 100%;
+        width: 70%;
         transform: scaleX(0);
         height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #000000;
+        bottom: 10px;
+        left: 5px;
+        background-color: #0000006a;
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
     }
@@ -88,24 +104,20 @@ const ProjectLink = styled.button`
         transform: scaleX(1);
         transform-origin: bottom left;
     }
-
-    &:hover svg {
-        transform: translateX(15px);
-    }
 `;
 
-const ProjectLinkSVG = styled.svg`
-    transform: translateX(10px);
-    transition: all 0.3s ease;
+// const ProjectLinkSVG = styled.svg`
+//     transform: translateX(10px);
+//     transition: all 0.3s ease;
 
-    &:active {
-        transform: scale(0.9);
-    }
+//     &:active {
+//         transform: scale(0.9);
+//     }
 
-    &:hover {
-        transform: translateX(15px);
-    }
-`;
+//     &:hover {
+//         transform: translateX(15px);
+//     }
+// `;
 
 const ProjectCardLarge = ({ project }) => {
 
@@ -113,21 +125,24 @@ const ProjectCardLarge = ({ project }) => {
         <CardLarge>
             <span style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectVersion>{project.version}</ProjectVersion>
+                {/* <ProjectVersion>{project.version}</ProjectVersion> */}
             </span>
             
             <ProjectLanguages>{project.languages}</ProjectLanguages>
             <ProjectDeveloper>{project.developers}</ProjectDeveloper>
             <ProjectDescription>{project.description}</ProjectDescription>
 
-            {project.url !== '' && 
-            <ProjectLink href={project.url} target="_blank">
-                View Project
-                <ProjectLinkSVG viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
-                </ProjectLinkSVG>
-            </ProjectLink>}
-            {/* You can add more project details here, like an image or technologies used */}
+
+            <ProjectFooter>
+                {project.url !== '' && 
+                <ProjectLink href={project.url}>
+                    View Project
+                    {/* <ProjectLinkSVG viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                        <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                    </ProjectLinkSVG> */}
+                </ProjectLink>}
+                <ProjectFooterRequests>{formatRequests(project)}</ProjectFooterRequests>
+            </ProjectFooter>
         </CardLarge>
     );
 };

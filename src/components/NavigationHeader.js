@@ -42,7 +42,7 @@ const NavHeaderRight = styled.div`
 
 const DropdownMenu = styled.div`
     position: absolute;
-    top: 40px;
+    top: 60px;
     right: 0;
     width: 200px;
     display: none;
@@ -164,7 +164,7 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                     <NavText>Projects</NavText>
                 </Link>
                 <Link to="/lastChess" onClick={toggleMenu}>
-                    <NavText>My Chess</NavText>
+                    <NavText>Chess</NavText>
                 </Link>
                 <NavHeaderRightItem> 
                     <PinImg src={require('../images/pin.png')} alt="Pin" />
