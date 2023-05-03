@@ -244,8 +244,8 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
           </NavMenuFooterItem>
           <NavMenuFooterItem>
             <PinImg src={require('../images/pin.png')} alt="Pin" />
-            <NavMenuFooterItemAnchor href="https://main.d12ysqixsbwlv9.amplifyapp.com" onClick={toggleMenu}>
-              <NavText>Typer</NavText>
+            <NavMenuFooterItemAnchor href="https://www.typin.me" onClick={toggleMenu}>
+              <NavText>Typin</NavText>
             </NavMenuFooterItemAnchor>
           </NavMenuFooterItem>
         </NavMenuContainerFooter>

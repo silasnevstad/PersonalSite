@@ -179,8 +179,8 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                         <DropdownMenuLink href="https://www.humangpt.me" onClick={toggleMenu}>
                             <NavText>HumanGPT</NavText>
                         </DropdownMenuLink>
-                        <DropdownMenuLink href="https://main.d12ysqixsbwlv9.amplifyapp.com" onClick={toggleMenu}>
-                            <NavText>Typer</NavText>
+                        <DropdownMenuLink href="https://www.typin.me" onClick={toggleMenu}>
+                            <NavText>Typin</NavText>
                         </DropdownMenuLink>
                     </DropdownMenu>
                 </NavHeaderRightItem>
