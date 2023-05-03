@@ -324,6 +324,12 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
               <NavText>HumanGPT</NavText>
             </NavMenuFooterItemAnchor>
           </NavMenuFooterItem>
+          <NavMenuFooterItem>
+            <PinImg src={require('../images/pin.png')} alt="Pin" />
+            <NavMenuFooterItemAnchor href="https://main.d12ysqixsbwlv9.amplifyapp.com" onClick={toggleMenu}>
+              <NavText>Typer</NavText>
+            </NavMenuFooterItemAnchor>
+          </NavMenuFooterItem>
         </NavMenuContainerFooter>
       </NavMenuContainer>
     </>
