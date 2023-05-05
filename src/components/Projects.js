@@ -5,6 +5,60 @@ import SocialLinks from './SocialLinks';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import styled from 'styled-components';
+import downArrow from '../images/arrow-down.svg';
+
+const OuterProjectsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SortProjectsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 1em;
+  margin-top: 5em;
+  gap: .2em;
+  position: relative;
+
+  @media (max-width: 768px) {
+    margin-top: 3em;
+  }
+`;
+
+const SortByItem = styled.div`
+  font-size: 1em;
+  color: ${({ isActive }) => isActive ? '#eee' : '#ccc'};
+  cursor: pointer;
+  padding: 0.5em 1em;
+  padding-left: 2em;
+  border-radius: 0.5em;
+  background-color: ${({ isActive }) => isActive ? '#333' : 'transparent'};
+
+  &:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9em;
+    padding-left: 2em;
+  }
+`;
+
+const SortByArrow = styled.img`
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  bottom: .7em;
+  right: ${({ rightPosition }) => rightPosition || '0'}em;
+
+  @media (max-width: 768px) {
+    width: 0.9em;
+    height: 0.9em;
+    bottom: .6em;
+  }
+`;
 
 const ProjectsContainer = styled.div`
   display: grid;
@@ -14,13 +68,13 @@ const ProjectsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: left;
   gap: 8px;
-  margin-top: 5em;
   transition: margin-left 0.3s ease-in-out;
+  z-index: 1;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     margin-left: 0;
-    margin-top: 3em;
+    margin-top: 1em;
   }
 `;
 
@@ -74,7 +128,21 @@ const sortByDate = (a, b) => {
 
 const Projects = ({ isMenuOpen, toggleMenu }) => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const projects = projectsData.sort(sortByDate);
+  const [sortBy, setSortBy] = useState('date');
+
+  const handleSortChange = (newSortBy) => {
+    setSortBy(newSortBy);
+  };
+
+  const sortProjects = (a, b) => {
+    if (sortBy === 'date') {
+      return sortByDate(a, b);
+    } else if (sortBy === 'popularity') {
+      return b.requests - a.requests;
+    }
+  };
+
+  const projects = projectsData.sort(sortProjects);
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);
@@ -88,16 +156,33 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
     <div>
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-      <ProjectsContainer isMenuOpen={isMenuOpen}>
-        {projects.map((project, index) => (
-          <ProjectCard 
-            key={project.id} 
-            project={project}
-            index={index}
-            onClick={() => handleProjectClick(project)}
-          />
-        ))}
-      </ProjectsContainer>
+      <OuterProjectsContainer isMenuOpen={isMenuOpen}>
+        <SortProjectsContainer>
+          <SortByItem
+            isActive={sortBy === 'date'}
+            onClick={() => handleSortChange('date')}
+          >
+            Most Recent
+          </SortByItem>
+          <SortByArrow src={downArrow} rightPosition={sortBy === 'date' ? window.innerWidth < 768 ? '16.5' : '18.4' : window.innerWidth < 768 ? '7.7' : '8.7'} />
+          <SortByItem
+            isActive={sortBy === 'popularity'}
+            onClick={() => handleSortChange('popularity')}
+          >
+            Most Popular
+          </SortByItem>
+        </SortProjectsContainer>
+        <ProjectsContainer isMenuOpen={isMenuOpen}>
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project}
+              index={index}
+              onClick={() => handleProjectClick(project)}
+            />
+          ))}
+        </ProjectsContainer>
+      </OuterProjectsContainer>
       {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
     <SocialLinks />
     </div>  

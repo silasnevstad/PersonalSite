@@ -19,6 +19,8 @@ const MenuButton = styled.button`
   transition: all .05s linear;
   font-family: inherit;
 
+  z-index: 100;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.05);

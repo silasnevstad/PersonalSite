@@ -8,6 +8,8 @@ const SocialLinksContainer = styled.div`
   right: 20px;
   display: flex;
   gap: 10px;
+
+  z-index: 100;
 `;
 
 const SocialLink = styled.a`
