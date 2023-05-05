@@ -52,13 +52,13 @@ const ProjectDescription = styled.p`
     opacity: 0.8;
 `;
 
-const ProjectVersion = styled.p`
-    color: ${({ theme }) => theme.colors.text};
-    font-size: 1rem;
-    margin: 0;
-    margin-left: 15px;
-    opacity: 0.8;
-`;
+// const ProjectVersion = styled.p`
+//     color: ${({ theme }) => theme.colors.text};
+//     font-size: 1rem;
+//     margin: 0;
+//     margin-left: 15px;
+//     opacity: 0.8;
+// `;
 
 const ProjectLanguages = styled.p`
     color: ${({ theme }) => theme.colors.text};

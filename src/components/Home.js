@@ -24,6 +24,26 @@ const HomeText = styled.h1`
   }
 `;
 
+const FooterText = styled.p`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  align-self: center;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 0.5rem;
+  }
+`;
+
+
 const useTypewriterEffect = (text, initialDelay = 0) => {
   const [typedText, setTypedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -70,6 +90,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           <HomeContainer isMenuOpen={isMenuOpen}>
             <HomeText>{text}<span className="cursor">_</span></HomeText>
           </HomeContainer>
+          <FooterText>2.3k requests © 2021 Silas Nevstad</FooterText>
           <SocialLinks />
         </div>
     );
