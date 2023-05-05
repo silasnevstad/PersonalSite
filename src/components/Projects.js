@@ -129,9 +129,11 @@ const sortByDate = (a, b) => {
 const Projects = ({ isMenuOpen, toggleMenu }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [sortBy, setSortBy] = useState('date');
+  const [sortKey, setSortKey] = useState(0); // to retrigger sort animation
 
   const handleSortChange = (newSortBy) => {
     setSortBy(newSortBy);
+    setSortKey(sortKey + 1);
   };
 
   const sortProjects = (a, b) => {
@@ -175,7 +177,7 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
         <ProjectsContainer isMenuOpen={isMenuOpen}>
           {projects.map((project, index) => (
             <ProjectCard 
-              key={project.id} 
+              key={`${project.id}-${sortKey}`}
               project={project}
               index={index}
               onClick={() => handleProjectClick(project)}
