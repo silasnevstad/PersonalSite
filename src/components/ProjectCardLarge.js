@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
+import { FaGithub } from 'react-icons/fa';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
@@ -81,6 +82,15 @@ const ProjectFooter = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    
+    margin-top: 15px;
+`;
+
+const ProjectFooterLeft = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `;
 
 const ProjectFooterRequests = styled.p`
@@ -92,8 +102,8 @@ const ProjectFooterRequests = styled.p`
 `;
 
 const ProjectLink = styled.a`
-    width: 10em;
-    text-align: left;
+    width: 4em;
+    // text-align: left;
     border: none;
     background: none;
     font-size: 1rem;
@@ -114,7 +124,7 @@ const ProjectLink = styled.a`
         transform: scaleX(0);
         height: 2px;
         bottom: 10px;
-        left: 5px;
+        left: 0px;
         background-color: #0000006a;
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
@@ -126,8 +136,41 @@ const ProjectLink = styled.a`
     }
 `;
 
-const ProjectCardLarge = ({ project }) => {
+const GithubLink = styled.a`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #fff;
+  transition: all 0.3s;
+  opacity: 0.9;
+  background-color: #333333;
+  margin-right: 15px;
 
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(100% + 0px);
+    height: calc(100% + 0px);
+    border-radius: 50%;
+    transition: all 0.3s;
+    border: 1px solid #333333;
+  }
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+
+    &::before {
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const ProjectCardLarge = ({ project }) => {
     return (
         <CardLarge>
             <CardLargeHeader>
@@ -145,10 +188,14 @@ const ProjectCardLarge = ({ project }) => {
 
             <ProjectDescription>{project.description}</ProjectDescription>
             <ProjectFooter>
-                {project.url !== '' && 
-                <ProjectLink href={project.url}>
-                    View Project
-                </ProjectLink>}
+                <ProjectFooterLeft>
+                    {/* {project.github !== '' && <GithubLink href={'https://github.com/silasnevstad/' + project.github}><FaGithub size={30} /></GithubLink>} */}
+                    {project.url !== '' && 
+                    <ProjectLink href={project.url}>
+                        Visit
+                    </ProjectLink>}
+                </ProjectFooterLeft>
+                    
                 <ProjectFooterRequests>{formatRequests(project)}</ProjectFooterRequests>
             </ProjectFooter>
         </CardLarge>
