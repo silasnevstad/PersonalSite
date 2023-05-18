@@ -189,7 +189,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
               <br />
               <li className="biggerLi">AlgoTrader, Personal <span className="project-language">| Python</span></li>
               <ul>
-                <li className="bulletPoint">Designed and deployed a machine learning algorithm for automated stock trading on a paper trading account using Python and the Alpaca trading API. Generated an $18k profit from a $100k initial investment during a period where the SPY decreased by 6Á</li>
+                <li className="bulletPoint">Designed and deployed a machine learning algorithm for automated stock trading on a paper trading account using Python and the Alpaca trading API. Generated an $18k profit from a $100k initial investment during a period where the SPY decreased by 6%</li>
                 <li className="bulletPoint">Utilized data from the NYSE indices to screen for potential trades and make predictions for buying and selling</li>
                 <li className="bulletPoint">Continuously monitored and optimized algorithm performance to maximize profitability</li>
               </ul>
