@@ -110,6 +110,15 @@ const ProjectLogo = styled.img`
     }
 `;
 
+const convertDateString = (dateString) => {
+    // date can either be 1 May 2023 or May 2023, remove the day if it exists
+    const date = dateString.split(' ');
+    if (date.length === 3) {
+        date.shift();
+    }
+    return date.join(' ');
+};
+
 const ProjectCard = ({ project, onClick, index }) => {
   return (
       <Card onClick={onClick} index={index}>
@@ -118,7 +127,7 @@ const ProjectCard = ({ project, onClick, index }) => {
           <ProjectVersion>{formatRequests(project)}</ProjectVersion>
           <ProjectLanguages>{project.languages}</ProjectLanguages>
           {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
-          <ProjectDate>{project.date}</ProjectDate>
+          <ProjectDate>{convertDateString(project.date)}</ProjectDate>
           {/* <ProjectClicks>{formatRequests(project.requests)}</ProjectClicks> */}
         </ProjectInfo>
         {project.logo !== '' && <ProjectLogo src={require('../images/' + project.logo)} alt='Project Logo' />}
