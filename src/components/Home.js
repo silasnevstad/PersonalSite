@@ -90,7 +90,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           <HomeContainer isMenuOpen={isMenuOpen}>
             <HomeText>{text}<span className="cursor">_</span></HomeText>
           </HomeContainer>
-          <FooterText>5.2k requests © 2021 Silas Nevstad</FooterText>
+          <FooterText>5.3k requests © 2021 Silas Nevstad</FooterText>
           <SocialLinks />
         </div>
     );
