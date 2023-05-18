@@ -44,7 +44,7 @@ const DropdownMenu = styled.div`
     position: absolute;
     top: 60px;
     right: 0;
-    width: 200px;
+    width: 180px;
     display: none;
     flex-direction: column;
     background-color: #333;
@@ -53,9 +53,9 @@ const DropdownMenu = styled.div`
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     a {
-        text-decoration: none;
-        color: ${({ theme }) => theme.colors.text};
-        padding: 0.5em 1em;
+      text-decoration: none;
+      color: ${({ theme }) => theme.colors.text};
+      padding: 0.3em .8em;
 
     &:hover {
         background-color: #222;
@@ -170,6 +170,9 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                     <PinImg src={require('../images/pin.png')} alt="Pin" />
                     <NavText>Pinned</NavText>
                     <DropdownMenu>
+                    <DropdownMenuLink href="https://www.buddyai.me" onClick={toggleMenu}>
+                            <NavText>BuddyAI</NavText>
+                        </DropdownMenuLink>
                         <DropdownMenuLink href="https://www.senttrac.com" onClick={toggleMenu}>
                             <NavText>Senttrac</NavText>
                         </DropdownMenuLink>
@@ -178,9 +181,6 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                         </DropdownMenuLink>
                         <DropdownMenuLink href="https://www.humangpt.me" onClick={toggleMenu}>
                             <NavText>HumanGPT</NavText>
-                        </DropdownMenuLink>
-                        <DropdownMenuLink href="https://www.typin.me" onClick={toggleMenu}>
-                            <NavText>Typin</NavText>
                         </DropdownMenuLink>
                     </DropdownMenu>
                 </NavHeaderRightItem>

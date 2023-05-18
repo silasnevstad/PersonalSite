@@ -228,6 +228,12 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
         <NavMenuContainerFooter>
           <NavMenuFooterItem>
             <PinImg src={require('../images/pin.png')} alt="Pin" />
+            <NavMenuFooterItemAnchor href="https://www.buddyai.me" onClick={toggleMenu}>
+              <NavText>BuddyAI</NavText>
+            </NavMenuFooterItemAnchor>
+          </NavMenuFooterItem>
+          <NavMenuFooterItem>
+            <PinImg src={require('../images/pin.png')} alt="Pin" />
             <NavMenuFooterItemAnchor href="https://www.senttrac.com" onClick={toggleMenu}>
               <NavText>Senttrac</NavText>
             </NavMenuFooterItemAnchor>
@@ -242,12 +248,6 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             <PinImg src={require('../images/pin.png')} alt="Pin" />
             <NavMenuFooterItemAnchor href="https://www.humangpt.me" onClick={toggleMenu}>
               <NavText>HumanGPT</NavText>
-            </NavMenuFooterItemAnchor>
-          </NavMenuFooterItem>
-          <NavMenuFooterItem>
-            <PinImg src={require('../images/pin.png')} alt="Pin" />
-            <NavMenuFooterItemAnchor href="https://www.typin.me" onClick={toggleMenu}>
-              <NavText>Typin</NavText>
             </NavMenuFooterItemAnchor>
           </NavMenuFooterItem>
         </NavMenuContainerFooter>
