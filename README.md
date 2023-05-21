@@ -1,5 +1,5 @@
 # SilasN.com
-[Visit here for now](https://silasn.com)
+[Visit](https://silasn.com)
 
 A simple personal website I built for myself, using React.
 
