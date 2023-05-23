@@ -3,7 +3,7 @@ import { Chess } from "chess.js";
 import Chessboard from "chessboardjsx";
 import styled from 'styled-components';
 import axios from "axios";
-import '../styles/ChessButton.css';
+import '../styles/Buttons.css';
 
 const ChessOuterContainer = styled.div`
     display: flex;
@@ -456,16 +456,16 @@ const ChessGame = ({ isMenuOpen }) => {
                 
 
                 <ButtonContainer>
-                    <button onClick={() => onPlayMove(false)} className="chess-button">
+                    <button onClick={() => onPlayMove(false)} className="button">
                         <div className="arrow-wrapper">
                             <div className="arrow left"></div>
                         </div>
                         Previous
                     </button>
-                    <button onClick={() => onReset()} className="chess-button">
+                    <button onClick={() => onReset()} className="button">
                         Reset
                     </button>
-                    <button onClick={() => onPlayMove(true)} className="chess-button">
+                    <button onClick={() => onPlayMove(true)} className="button">
                         Next
                         <div className="arrow-wrapper">
                             <div className="arrow"></div>
@@ -473,13 +473,13 @@ const ChessGame = ({ isMenuOpen }) => {
                     </button>
                 </ButtonContainer>
                 <ButtonContainer style={{marginTop: '20px', gap: '40px'}}>
-                    <button onClick={() => onLastGame()} className="chess-button">
+                    <button onClick={() => onLastGame()} className="button">
                         {/* <div class="arrow-wrapper"> */}
                             {/* <div class="arrow left"></div> */}
                         {/* </div> */}
                         Last Game
                     </button>
-                    <button onClick={() => onNextGame()} className="chess-button">
+                    <button onClick={() => onNextGame()} className="button">
                         Next Game
                         {/* <div class="arrow-wrapper"> */}
                             {/* <div class="arrow"></div> */}

@@ -1,7 +1,7 @@
-.chess-button {
+.button {
     --primary-color: #333;
     --secondary-color: #fff;
-    --hover-color: #00ff009f;
+    --hover-color: #00eb009f;
     --arrow-width: 10px;
     --arrow-stroke: 2px;
     box-sizing: border-box;
@@ -18,14 +18,18 @@
     font-family: 'Roboto', sans-serif;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
+
+.cancel {
+    --hover-color: #eb00009f;
+}
   
-.chess-button .arrow-wrapper {
+.button .arrow-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
   
-.chess-button .arrow {
+.button .arrow {
     margin-top: 1px;
     width: var(--arrow-width);
     background: var(--primary-color);
@@ -34,10 +38,11 @@
     transition: 0.2s;
 }
 
-.chess-button .arrow.left {
+.button .arrow.left {
     transform: rotate(180deg);
 }
-.chess-button .arrow::before {
+
+.button .arrow::before {
     content: "";
     box-sizing: border-box;
     position: absolute;
@@ -50,15 +55,15 @@
     padding: 3px;
     transform: rotate(-45deg);
 }
-  
 
-.chess-button:hover {
+.button:hover {
     background-color: var(--hover-color);
 }
-.chess-button:hover .arrow {
+
+.button:hover .arrow {
     background: var(--secondary-color);
 }
 
-.chess-button:hover .arrow:before {
+.button:hover .arrow:before {
     right: 0;
 }

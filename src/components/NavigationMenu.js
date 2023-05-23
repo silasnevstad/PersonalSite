@@ -79,7 +79,7 @@ const NavMenuContainer = styled.nav`
   animation: ${({ isMenuOpen }) => isMenuOpen && css`${floodAnimation} 0.5s ease-in-out forwards`};
 
   @media (max-width: 768px) {
-    height: 33%;
+    height: 37%;
     align-items: flex-start;
   }
 
@@ -219,10 +219,13 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             <NavText>Resume</NavText>
           </Link>
           <Link to="/projects" onClick={toggleMenu}>
-            <NavText>Projects</NavText>
+            <NavText>Portfolio</NavText>
           </Link>
           <Link to="/lastChess" onClick={toggleMenu}>
             <NavText>Chess</NavText>
+          </Link>
+          <Link to="/contact" onClick={toggleMenu}>
+            <NavText>Contact</NavText>
           </Link>
         </NavMenuContainerLower>
         <NavMenuContainerFooter>

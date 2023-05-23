@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Resume from './components/Resume';
 import Projects from './components/Projects';
 import LastChess from './components/LastChess';
+import Contact from './components/Contact';
 import MiniGPTPrivacy from './components/MiniGPTPrivacy';
 import ChessPrivacy from './components/ChessPrivacy';
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/resume" element={<Resume isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/projects" element={<Projects isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/lastChess" element={<LastChess isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
+          <Route path="/contact" element={<Contact isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/minigpt" element={<MiniGPTPrivacy />} />
           <Route path="/chessapp" element={<ChessPrivacy />} />
         </Routes>

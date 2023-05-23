@@ -161,10 +161,13 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                     <NavText>Resume</NavText>
                 </Link>
                 <Link to="/projects" onClick={toggleMenu}>
-                    <NavText>Projects</NavText>
+                    <NavText>Portfolio</NavText>
                 </Link>
                 <Link to="/lastChess" onClick={toggleMenu}>
                     <NavText>Chess</NavText>
+                </Link>
+                <Link to="/contact" onClick={toggleMenu}>
+                    <NavText>Contact</NavText>
                 </Link>
                 <NavHeaderRightItem> 
                     <PinImg src={require('../images/pin.png')} alt="Pin" />
