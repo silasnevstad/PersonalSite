@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Chess } from "chess.js";
 import Chessboard from "chessboardjsx";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import * as d3 from 'd3';
 import styled from 'styled-components';
 import axios from "axios";
 import '../styles/Buttons.css';
 
 const ChessOuterContainer = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 const ChessContainer = styled.div`
@@ -19,9 +27,8 @@ const ChessContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-    // width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(29% + 70px)' : '28.5%'};
     width: 29%;
-    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    margin-left: 150px;
     padding: 20px;
     border-radius: 10px;
 
@@ -190,6 +197,20 @@ const ChessInfoMessage = styled.p`
     opacity: 0.6;
 `;
 
+const LineChartContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    margin-left: -20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100%;
+        margin-left: -30px;
+    }
+`;
+
 const chessUsername = "Sevstad";
 
 //convert string yyyy.mm.dd to date string dd, month yyyy
@@ -271,6 +292,26 @@ const calculateWinRate = (games) => {
     return winRate.toFixed(1);
 }
 
+const getChartData = (games) => {
+    let wins = 0;
+    let losses = 0;
+    let chartData = [];
+
+    games.forEach(game => {
+        const result = determineWinOrLoss(game);
+
+        if (result === "win") {
+            wins++;
+        } else if (result === "loss") {
+            losses++;
+        }
+
+        chartData.push({ gamesPlayed: chartData.length + 1, wins, losses });
+    });
+
+    return chartData;
+}
+
 const ChessGame = ({ isMenuOpen }) => {
     const [game, setGame] = useState(new Chess());
     const [games, setGames] = useState([]);
@@ -331,8 +372,6 @@ const ChessGame = ({ isMenuOpen }) => {
         setGames(games);
         setGameIndex(games.length - 1);
         const lastGame = games[games.length - 1];
-
-        console.log(games);
     
         if (lastGame) {
             loadGame(lastGame);
@@ -372,7 +411,7 @@ const ChessGame = ({ isMenuOpen }) => {
                     setFen(game.fen());
                     setCurrentMove(currentMove + 1);
                 } catch (e) {
-                    console.log(e);
+                    // console.log(e);
                 }
             }
         } else {
@@ -419,81 +458,91 @@ const ChessGame = ({ isMenuOpen }) => {
     return (
         <ChessOuterContainer>
             {game ? (
+                <ChessContainer isMenuOpen={isMenuOpen}>
+                    <ChessGameHeaderContainer>
+                        <ChessGameHeaderLeft>
+                            {getChessIcon(gameType)}
+                            <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
+                            <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
+                        </ChessGameHeaderLeft>
+                        <ChessGameHeaderRight>
+                            <ChessGameDate>{convertDate(date)}</ChessGameDate>
+                            <ChessGameTime>{time}</ChessGameTime>
+                        </ChessGameHeaderRight>
+                    </ChessGameHeaderContainer>
+                    
+                    <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
+                    
+                    <ChessBoardView>
+                        <ChessBoardContainer>
+                            <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
+                            <Chessboard
+                                position={fen}
+                                // change width when screen is smaller
+                                width={window.innerWidth < 800 ? window.innerWidth * 0.80 : window.innerWidth < 1400 ? window.innerWidth * 0.35 : window.innerWidth * 0.27}
+                                orientation={orientation}
+                                lightSquareStyle={{ backgroundColor: '#eeeed2' }}
+                                darkSquareStyle={{ backgroundColor: '#769656' }}
+                                dropOffBoard={'snapback'}
+                            />
+                            <h2 style={{alignSelf: 'flex-end'}}>Me ({myRating})</h2>
+                        </ChessBoardContainer>
+                        <ChessGameWinRate winRate={winRate}>
+                            <ChessGameWinRateColor winRate={winRate}>{winRate}%</ChessGameWinRateColor> <ChessGameWinRateInfo>win rate over {numberOfGames} games</ChessGameWinRateInfo>
+                        </ChessGameWinRate>
+                    </ChessBoardView>
+                    
 
-            <ChessContainer isMenuOpen={isMenuOpen}>
-                <ChessGameHeaderContainer>
-                    <ChessGameHeaderLeft>
-                        {getChessIcon(gameType)}
-                        <ChessGameControl>{gameType.charAt(0).toUpperCase() + gameType.slice(1)}</ChessGameControl>
-                        <ChessGameTimeControl>({timeControl})</ChessGameTimeControl>
-                    </ChessGameHeaderLeft>
-                    <ChessGameHeaderRight>
-                        <ChessGameDate>{convertDate(date)}</ChessGameDate>
-                        <ChessGameTime>{time}</ChessGameTime>
-                    </ChessGameHeaderRight>
-                </ChessGameHeaderContainer>
-                
-                <ChessGameResult result={result}>{convertResultString(result)}</ChessGameResult>
-                
-                <ChessBoardView>
-                    <ChessBoardContainer>
-                        <h2 style={{alignSelf: 'flex-start'}}>{opponent} ({opponentRating})</h2>
-                        <Chessboard
-                            position={fen}
-                            // change width when screen is smaller
-                            width={window.innerWidth < 800 ? window.innerWidth * 0.80 : window.innerWidth < 1400 ? window.innerWidth * 0.35 : window.innerWidth * 0.27}
-                            orientation={orientation}
-                            lightSquareStyle={{ backgroundColor: '#eeeed2' }}
-                            darkSquareStyle={{ backgroundColor: '#769656' }}
-                            dropOffBoard={'snapback'}
-                        />
-                        <h2 style={{alignSelf: 'flex-end'}}>Me ({myRating})</h2>
-                    </ChessBoardContainer>
-                    <ChessGameWinRate winRate={winRate}>
-                        <ChessGameWinRateColor winRate={winRate}>{winRate}%</ChessGameWinRateColor> <ChessGameWinRateInfo>win rate over {numberOfGames} games</ChessGameWinRateInfo>
-                    </ChessGameWinRate>
-                </ChessBoardView>
-                
+                    <ButtonContainer>
+                        <button onClick={() => onPlayMove(false)} className="button">
+                            <div className="arrow-wrapper">
+                                <div className="arrow left"></div>
+                            </div>
+                            Previous
+                        </button>
+                        <button onClick={() => onReset()} className="button">
+                            Reset
+                        </button>
+                        <button onClick={() => onPlayMove(true)} className="button">
+                            Next
+                            <div className="arrow-wrapper">
+                                <div className="arrow"></div>
+                            </div>
+                        </button>
+                    </ButtonContainer>
+                    <ButtonContainer style={{marginTop: '20px', gap: '40px'}}>
+                        <button onClick={() => onLastGame()} className="button">
+                            {/* <div class="arrow-wrapper"> */}
+                                {/* <div class="arrow left"></div> */}
+                            {/* </div> */}
+                            Last Game
+                        </button>
+                        <button onClick={() => onNextGame()} className="button">
+                            Next Game
+                            {/* <div class="arrow-wrapper"> */}
+                                {/* <div class="arrow"></div> */}
+                            {/* </div> */}
+                        </button>
+                    </ButtonContainer>
 
-                <ButtonContainer>
-                    <button onClick={() => onPlayMove(false)} className="button">
-                        <div className="arrow-wrapper">
-                            <div className="arrow left"></div>
-                        </div>
-                        Previous
-                    </button>
-                    <button onClick={() => onReset()} className="button">
-                        Reset
-                    </button>
-                    <button onClick={() => onPlayMove(true)} className="button">
-                        Next
-                        <div className="arrow-wrapper">
-                            <div className="arrow"></div>
-                        </div>
-                    </button>
-                </ButtonContainer>
-                <ButtonContainer style={{marginTop: '20px', gap: '40px'}}>
-                    <button onClick={() => onLastGame()} className="button">
-                        {/* <div class="arrow-wrapper"> */}
-                            {/* <div class="arrow left"></div> */}
-                        {/* </div> */}
-                        Last Game
-                    </button>
-                    <button onClick={() => onNextGame()} className="button">
-                        Next Game
-                        {/* <div class="arrow-wrapper"> */}
-                            {/* <div class="arrow"></div> */}
-                        {/* </div> */}
-                    </button>
-                </ButtonContainer>
+                    <ChessInfoMessage>
+                        Use the arrow keys to navigate through the moves
+                    </ChessInfoMessage>
 
-                <ChessInfoMessage>
-                    Use the arrow keys to navigate through the moves
-                </ChessInfoMessage>
-
-            </ChessContainer>) : (
+                </ChessContainer>
+            ) : (
                 <p>No game found</p>
             )}
+            <LineChartContainer>
+                <LineChart width={window.innerWidth < 800 ? window.innerWidth * 0.90 : window.innerWidth * 0.4} height={300} data={getChartData(games)}>
+                    <XAxis dataKey="gamesPlayed" />
+                    <YAxis />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="wins" stroke="#82ca9d" strokeWidth={2} />
+                    <Line type="monotone" dataKey="losses" stroke="#ca8282" strokeWidth={3} />
+                </LineChart>
+            </LineChartContainer>
         </ChessOuterContainer>
     );
 };

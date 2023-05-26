@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 const HomeContainer = styled.div`
   margin-top: 5em;
-  // width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(100% - 250px)' : '100%'};
   transition: margin-left 0.3s ease-in-out;
 
   @media (max-width: 768px) {
@@ -84,7 +83,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
     const text = useTypewriterEffect(introText, 15);
 
     return (
-        <div className="Home">
+        <HomeContainer>
           <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           <HomeContainer isMenuOpen={isMenuOpen}>
@@ -92,7 +91,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           </HomeContainer>
           <FooterText>7.1k requests © 2021 Silas Nevstad</FooterText>
           <SocialLinks />
-        </div>
+        </HomeContainer>
     );
 };
 

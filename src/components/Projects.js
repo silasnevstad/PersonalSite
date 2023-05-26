@@ -16,11 +16,15 @@ const SortProjectsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
-  margin-left: 1em;
+  align-self: flex-end;
+  margin-right: 1em;
   margin-top: 5em;
+  margin-bottom: .5em;
   gap: .2em;
   position: relative;
+  background-color: #333;
+  border-radius: 0.5em;
+  // width: 100%;
 
   @media (max-width: 768px) {
     margin-top: 3em;
@@ -34,7 +38,7 @@ const SortByItem = styled.div`
   padding: 0.5em 1em;
   padding-left: 2em;
   border-radius: 0.5em;
-  background-color: ${({ isActive }) => isActive ? '#333' : 'transparent'};
+  background-color: ${({ isActive }) => isActive ? '#444' : 'transparent'};
 
   &:hover {
     color: #fff;

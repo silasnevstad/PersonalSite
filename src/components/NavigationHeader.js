@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
 import styled, { keyframes } from "styled-components";
 import { Link } from 'react-router-dom';
 
@@ -123,17 +123,54 @@ const NavHeaderRightItem = styled.div`
   }
 `;
 
-const NavTitle = styled.h1`
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #fff;
+const scramble = keyframes`
+  0% { content: attr(data-content); }
+  100% { content: attr(data-scramble); }
+`;
 
-    @media (max-width: 768px) {
-        display: none;
-    }
+const NavTitle = styled.h1`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+
+  @media (max-width: 768px) {
+      display: none;
+  }
+
+  &:hover {
+      animation: ${scramble} 0.5s steps(20, end) infinite;
+  }
 `;
 
 const NavText = styled.p`
+  font-size: 1rem;
+  padding: 5px 5px;
+  opacity: 0.9;
+  color: ${({ theme }) => theme.colors.text};
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 5px; // this is the left padding of your NavText element
+    width: 0;
+    height: 1.5px;
+    background: #bbb;
+    transition: width 0.3s;
+  }
+
+  &:hover {
+    opacity: 1;
+    color: #33ff33;
+  }
+
+  &:hover::after {
+    width: calc(100% - 10px); // subtract twice the padding from the width
+  }
+`;
+
+const DropDownText = styled.p`
   font-size: 1rem;
   padding: 5px 5px;
   opacity: 0.9;
@@ -145,52 +182,78 @@ const NavText = styled.p`
   }
 `;
 
+
+
 const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
-    return (
-        <NavHeader>
-            <NavHeaderLeft>
-                <Link to="/" onClick={toggleMenu}>
-                    <NavTitle>Silas Nevstad</NavTitle>
-                </Link>
-            </NavHeaderLeft>
-            <NavHeaderRight>
-                <Link to="/" onClick={toggleMenu}>
-                    <NavText>Home</NavText>
-                </Link>
-                <Link to="/resume" onClick={toggleMenu}>
-                    <NavText>Resume</NavText>
-                </Link>
-                <Link to="/projects" onClick={toggleMenu}>
-                    <NavText>Portfolio</NavText>
-                </Link>
-                <Link to="/lastChess" onClick={toggleMenu}>
-                    <NavText>Chess</NavText>
-                </Link>
-                <Link to="/contact" onClick={toggleMenu}>
-                    <NavText>Contact</NavText>
-                </Link>
-                <NavHeaderRightItem> 
-                    <PinImg src={require('../images/pin.png')} alt="Pin" />
-                    <NavText>Pinned</NavText>
-                    <DropdownMenu>
-                    <DropdownMenuLink href="https://www.buddyai.me" onClick={toggleMenu}>
-                            <NavText>BuddyAI</NavText>
-                        </DropdownMenuLink>
-                        <DropdownMenuLink href="https://www.senttrac.com" onClick={toggleMenu}>
-                            <NavText>Senttrac</NavText>
-                        </DropdownMenuLink>
-                        <DropdownMenuLink href="https://marketplace.visualstudio.com/items?itemName=SilasNevstad.gpthelper" onClick={toggleMenu}>
-                            <NavText>VSCode GPT</NavText>
-                        </DropdownMenuLink>
-                        <DropdownMenuLink href="https://www.humangpt.me" onClick={toggleMenu}>
-                            <NavText>HumanGPT</NavText>
-                        </DropdownMenuLink>
-                    </DropdownMenu>
-                </NavHeaderRightItem>
-                
-            </NavHeaderRight>
-        </NavHeader>
-    );
+  const initialTitle = "Silas Nevstad";
+  const [title, setTitle] = useState(initialTitle);
+  const scrambleIntervalRef = useRef(null);
+
+  const scrambleText = () => {
+      scrambleIntervalRef.current = setInterval(() => {
+          let scrambledText = '';
+          for (let i = 0; i < initialTitle.length; i++) {
+              scrambledText += String.fromCharCode(Math.floor(Math.random() * (126 - 33) + 33));
+          }
+          setTitle(scrambledText);
+      }, 100);
+  };
+
+  const resetText = () => {
+      if (scrambleIntervalRef.current) {
+          clearInterval(scrambleIntervalRef.current);
+          scrambleIntervalRef.current = null;
+      }
+      setTitle(initialTitle);
+  };
+
+  return (
+    <NavHeader>
+      <NavHeaderLeft>
+        <Link to="/" onClick={toggleMenu}>
+          <NavTitle>
+            {title}
+          </NavTitle>
+          </Link>
+      </NavHeaderLeft>
+      <NavHeaderRight>
+        <Link to="/" onClick={toggleMenu}>
+            <NavText>Home</NavText>
+        </Link>
+        <Link to="/resume" onClick={toggleMenu}>
+            <NavText>Resume</NavText>
+        </Link>
+        <Link to="/projects" onClick={toggleMenu}>
+            <NavText>Portfolio</NavText>
+        </Link>
+        <Link to="/lastChess" onClick={toggleMenu}>
+            <NavText>Chess</NavText>
+        </Link>
+        <Link to="/contact" onClick={toggleMenu}>
+            <NavText>Contact</NavText>
+        </Link>
+        <NavHeaderRightItem> 
+          <PinImg src={require('../images/pin.png')} alt="Pin" />
+          <NavText>Pinned</NavText>
+          <DropdownMenu>
+            <DropdownMenuLink href="https://www.buddyai.me" onClick={toggleMenu}>
+                <DropDownText>BuddyAI</DropDownText>
+            </DropdownMenuLink>
+            <DropdownMenuLink href="https://www.senttrac.com" onClick={toggleMenu}>
+                <DropDownText>Senttrac</DropDownText>
+            </DropdownMenuLink>
+            <DropdownMenuLink href="https://marketplace.visualstudio.com/items?itemName=SilasNevstad.gpthelper" onClick={toggleMenu}>
+                <DropDownText>VSCode GPT</DropDownText>
+            </DropdownMenuLink>
+            <DropdownMenuLink href="https://www.humangpt.me" onClick={toggleMenu}>
+                <DropDownText>HumanGPT</DropDownText>
+            </DropdownMenuLink>
+          </DropdownMenu>
+        </NavHeaderRightItem>
+          
+      </NavHeaderRight>
+    </NavHeader>
+  );
 }
 
 export default NavigationHeader;
