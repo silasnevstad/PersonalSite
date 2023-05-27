@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Chess } from "chess.js";
 import Chessboard from "chessboardjsx";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import * as d3 from 'd3';
 import styled from 'styled-components';
 import axios from "axios";
 import '../styles/Buttons.css';
@@ -362,9 +361,9 @@ const ChessGame = ({ isMenuOpen }) => {
         setResult(res);
     }
 
-    const getLastPlayedGame = async () => {
+    const getLastPlayedGame = useCallback(async () => {
         const response = await axios.get(
-            `https://api.chess.com/pub/player/${chessUsername}/games/archives`
+          `https://api.chess.com/pub/player/${chessUsername}/games/archives`
         );
         const archivesUrl = response.data.archives.pop();
         const gamesResponse = await axios.get(archivesUrl);
@@ -374,11 +373,11 @@ const ChessGame = ({ isMenuOpen }) => {
         const lastGame = games[games.length - 1];
     
         if (lastGame) {
-            loadGame(lastGame);
-            setWinRate(calculateWinRate(games));
-            setNumberOfGames(games.length);
+          loadGame(lastGame);
+          setWinRate(calculateWinRate(games));
+          setNumberOfGames(games.length);
         }
-    };
+    }, []);
 
     const onLastGame = () => {
         if (gameIndex > 0) {
@@ -453,7 +452,7 @@ const ChessGame = ({ isMenuOpen }) => {
         };
     });
 
-    useEffect(() => { getLastPlayedGame(); }, []);
+    useEffect(() => { getLastPlayedGame(); }, [getLastPlayedGame]);
 
     return (
         <ChessOuterContainer>

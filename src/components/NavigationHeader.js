@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import styled, { keyframes } from "styled-components";
 import { Link } from 'react-router-dom';
 
@@ -185,36 +185,14 @@ const DropDownText = styled.p`
 
 
 const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
-  const initialTitle = "Silas Nevstad";
-  const [title, setTitle] = useState(initialTitle);
-  const scrambleIntervalRef = useRef(null);
-
-  const scrambleText = () => {
-      scrambleIntervalRef.current = setInterval(() => {
-          let scrambledText = '';
-          for (let i = 0; i < initialTitle.length; i++) {
-              scrambledText += String.fromCharCode(Math.floor(Math.random() * (126 - 33) + 33));
-          }
-          setTitle(scrambledText);
-      }, 100);
-  };
-
-  const resetText = () => {
-      if (scrambleIntervalRef.current) {
-          clearInterval(scrambleIntervalRef.current);
-          scrambleIntervalRef.current = null;
-      }
-      setTitle(initialTitle);
-  };
-
   return (
     <NavHeader>
       <NavHeaderLeft>
         <Link to="/" onClick={toggleMenu}>
           <NavTitle>
-            {title}
+            Silas Nevstad
           </NavTitle>
-          </Link>
+        </Link>
       </NavHeaderLeft>
       <NavHeaderRight>
         <Link to="/" onClick={toggleMenu}>

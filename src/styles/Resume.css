@@ -35,14 +35,25 @@ li {
 
 .biggerLi {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .specialLi {
-    font-size: 17px;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
 .bulletPoint {
     list-style: circle;
+    max-width: 80%;
+    margin-top: 5px;
+}
+
+.bulletPoint-indent {
+    list-style: circle;
+    margin-left: 20px;
+    margin-top: 2px;
+    max-width: 80%;
 }
 
 #myProgress {
@@ -58,14 +69,20 @@ li {
 
 .school-name {
     font-weight: bold;
+    font-size: 16px;
 }
 
 .school-year {
-    font-size: 14px;
+    font-size: 13px;
+    align-self: flex-end;
+    position: absolute;
+    right: 10px;
 }
 
 .school-location {
-    font-size: 12px;
+    font-size: 14px;
+    position: absolute;
+    right: 10px;
 }
 
 .project-language {
@@ -103,3 +120,9 @@ li {
     z-index: 0; /* The scrollable elements will have a lower z-index than the sticky element */
 }
 
+@media (max-width: 600px) {
+    .bulletPoint {
+        list-style: circle;
+        max-width: 90%;
+    }
+}

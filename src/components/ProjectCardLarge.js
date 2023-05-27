@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
-import { FaGithub } from 'react-icons/fa';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
@@ -52,14 +51,6 @@ const ProjectDescription = styled.p`
     margin-top: 25px;
     opacity: 0.8;
 `;
-
-// const ProjectVersion = styled.p`
-//     color: ${({ theme }) => theme.colors.text};
-//     font-size: 1rem;
-//     margin: 0;
-//     margin-left: 15px;
-//     opacity: 0.8;
-// `;
 
 const ProjectLanguages = styled.p`
     color: ${({ theme }) => theme.colors.text};
@@ -136,39 +127,39 @@ const ProjectLink = styled.a`
     }
 `;
 
-const GithubLink = styled.a`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  color: #fff;
-  transition: all 0.3s;
-  opacity: 0.9;
-  background-color: #333333;
-  margin-right: 15px;
+// const GithubLink = styled.a`
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 35px;
+//   height: 35px;
+//   border-radius: 50%;
+//   color: #fff;
+//   transition: all 0.3s;
+//   opacity: 0.9;
+//   background-color: #333333;
+//   margin-right: 15px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    width: calc(100% + 0px);
-    height: calc(100% + 0px);
-    border-radius: 50%;
-    transition: all 0.3s;
-    border: 1px solid #333333;
-  }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     width: calc(100% + 0px);
+//     height: calc(100% + 0px);
+//     border-radius: 50%;
+//     transition: all 0.3s;
+//     border: 1px solid #333333;
+//   }
 
-  &:hover {
-    opacity: 1;
-    transform: scale(1.1);
+//   &:hover {
+//     opacity: 1;
+//     transform: scale(1.1);
 
-    &::before {
-      transform: scale(1.1);
-    }
-  }
-`;
+//     &::before {
+//       transform: scale(1.1);
+//     }
+//   }
+// `;
 
 const ProjectCardLarge = ({ project }) => {
     return (

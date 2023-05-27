@@ -89,29 +89,25 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
             <h2>Education</h2>
             <Line />
             <ul>
-              <li><span className="school-name">Candidate for Bachelors in Computer Science</span>, <span className="school-location">2021-Present</span></li>
-              <li>Northeastern University, <span className="school-name">Khoury College of Computer Sciences</span>, Boston, MA </li>
-              <li>Relevant Coursework: Algorithms and Data, Computer Systems, Object-Orientated Design, Electrical Engineering and Design, Fundamentals of Computer Science 1 & 2, Fundamentals of Cybersecurity, Programming in C++, Data Models</li>
+              <li><span className="school-name">Northeastern University</span>, Khoury College of Computer Sciences <span className="school-year">2021-Present</span></li>
+              <li>Candidate for Bachelors in Computer Science<span className="school-location">Boston, MA</span></li>
+              <li className="bulletPoint-indent">Relevant Coursework: Algorithms and Data, Computer Systems, Object-Orientated Design, Electrical Engineering and Design, Fundamentals of Computer Science 1 & 2, Fundamentals of Cybersecurity, Programming in C++, Data Models</li>
               <br />
-              <li><span className="school-name">High School Diploma</span>, <span className="school-location">2017-2021</span></li>
-              <li>Staples High School, Westport, CT</li>
-              <li>GPA: 3.8</li>
-              <li>Relevant Coursework: AP Computer Science, Web Applications, Applied Algorithmic Design, Mobile App Development</li>
-              <li>Activities: Varsity Ice Hockey, Varsity Track</li>
+              <li><span className="school-name">Staples High School</span>, <span className="school-year">2017-2021</span></li>
+              <li>High School Diploma<span className="school-location">Westport, CT</span></li>
+              <li className="bulletPoint-indent">Relevant Coursework: AP Computer Science (5/5), Web Applications, Applied Algorithmic Design, Mobile App Development</li>
+              <li className="bulletPoint-indent">GPA: 3.8</li>
+              <li className="bulletPoint-indent"> Activities: Varsity Ice Hockey, Varsity Track</li>
               <br />
-              <li><span className="school-name">Bedford Middle School</span>, <span className="school-year">Westport, CT</span>, <span className="school-location">2016-2017</span></li>
-              <li><span className="school-name">Kingston Grammar School</span>, <span className="school-year">Kingston, England</span>, <span className="school-location">2014-2016</span></li>
-              <li><span className="school-name">Hall School Wimbledon</span>, <span className="school-year">London, England</span>, <span className="school-location">2007-2014</span></li>
+              <li><span className="school-name">Bedford Middle School</span>, <span className="school-year">2017-2018</span></li>
+              <li><span className="school-location">Westport, CT</span></li>
+              <li className="bulletPoint-indent">GPA: 3.78</li>
+              <li className="bulletPoint-indent">Activities: Club Soccer</li>
               <br />
-              <li><span className="school-name">Bedford Middle School</span>, <span className="school-location">2017-2018</span></li>
-              <li> Westport, CT </li>
-              <li>GPA: 3.78</li>
-              <li>Activities: Club Soccer</li>
-              <br />
-              <li><span className="school-name">Kingston Grammar School</span>, <span className="school-location">2015-2017</span></li>
-              <li> Kingston, London </li>
-              <li>A* German GCSE (2015), LAMBDA Certifications (2012-2016)</li>
-              <li>Activities: Field Hockey</li>
+              <li><span className="school-name">Kingston Grammar School</span>, <span className="school-year">2015-2017</span></li>
+              <li><span className="school-location">Kingston, London</span></li>
+              <li className="bulletPoint-indent">A* German GCSE (2015), LAMBDA Certifications (2012-2016)</li>
+              <li className="bulletPoint-indent">Activities: Field Hockey</li>
             </ul>
           </div>
 
@@ -144,17 +140,6 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
 
 
             </SkillsSection>
-            {/* <ul> */}
-              {/* <li className="skills-inline">Git</li>  <progress value="75" max="100" className="python"></progress> <br />
-              <li className="skills-inline">MongoDB</li>  <progress value="65" max="100" className="python"></progress> <br />
-              <li className="skills-inline">MacOS</li>  <progress value="90" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Windows</li>  <progress value="85" max="100" className="python"></progress> <br />
-              <li className="skills-inline">Linux</li>  <progress value="70" max="100" className="python"></progress> <br />
-              <li className="skills-inline">MIPS Assembly</li>  <progress value="45" max="100" className="python"></progress> <br />
-              <li className="skills-inline">German</li>  <progress value="47" max="50" className="python"></progress> <br />
-              <li className="skills-inline">Norwegian</li>  <progress value="47" max="50" className="python"></progress> <br />
-              <li className="skills-inline">English</li>  <progress value="50" max="50" className="python"></progress> <br /> */}
-            {/* </ul> */}
           </div>
 
           <br />
@@ -180,30 +165,30 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
             <h2>Projects</h2>
             <Line />
             <ul>
-              <li className="biggerLi">AlgoPicks, Personal <span className="project-language">| Swift | Python</span></li>
+              <li className="biggerLi">BuddyAI, Personal <span className="project-language">| React | Python</span></li>
               <ul>
-                <li className="bulletPoint">Designed a machine learning algorithm in Python to predict sports game outcomes</li>
-                <li className="bulletPoint">Developed an app in Swift to allow users to track sports bets and make more informed decisions using algorithm-based predictions, improving customer winnings by 10%</li>
-                <li className="bulletPoint">Utilized and configured the Firebase real-time database to store and retrieve over 5,000 data points</li>
+                <li className="bulletPoint">Conceived and launched BuddyAI, an AI co-writing tool, processing over 34,000 requests and offering a secure public API for broader accessibility and utilization</li>
+                <li className="bulletPoint">Designed a user-friendly React front-end hosted on AWS, providing a seamless and efficient user experience</li>
+                <li className="bulletPoint">Integrated Firebase Authentication and Firestore to secure user login, data storage, and manage personal information, text documents, and API keys</li>
+              </ul>
+              <br />
+              <li className="biggerLi">Senttrac, Personal <span className="project-language">| React | Python</span></li>
+              <ul>
+                <li className="bulletPoint">Developed Senttrac, a real-time sentiment tracker, proficiently handling over 15,000 user requests on senttrac.com</li>
+                <li className="bulletPoint">Built a robust Python API server to manage high-volume sentiment analysis requests efficiently and reliably</li>
+                <li className="bulletPoint">Created a user-centric React web application, offering sentiment analysis insights to a large user base on senttrac.com</li>
               </ul>
               <br />
               <li className="biggerLi">AlgoTrader, Personal <span className="project-language">| Python</span></li>
               <ul>
-                <li className="bulletPoint">Designed and deployed a machine learning algorithm for automated stock trading on a paper trading account using Python and the Alpaca trading API. Generated an $18k profit from a $100k initial investment during a period where the SPY decreased by 6%</li>
-                <li className="bulletPoint">Utilized data from the NYSE indices to screen for potential trades and make predictions for buying and selling</li>
-                <li className="bulletPoint">Continuously monitored and optimized algorithm performance to maximize profitability</li>
-              </ul>
-              <br />
-              <li className="biggerLi">ChessClock, Personal <span className="project-language">| Swift </span></li>
-              <ul>
-                <li className="bulletPoint">Developed a chess timer app in Swift in under 12 hours, allowing users to play time-controlled chess over-the-boarT</li>
-                <li className="bulletPoint">Implemented a clean, modern design that fits seamlessly with the latest iOS design guidelines, resulting in a visually appealing and professional-looking app</li>
+                <li className="bulletPoint">Devised and deployed a machine learning-powered algorithm for automated stock trading, generating an 18% profit against a 6% decrease in SPY, showcasing resilience and profitability</li>
+                <li className="bulletPoint">Incorporated data from NYSE indices for comprehensive trade screening and predictive buying/selling, optimizing investment decisions</li>
               </ul>
               <br />
               <li className="biggerLi">VS Code GPT, Personal <span className="project-language">| Javascript</span></li>
               <ul>
-                <li className="bulletPoint">Developed a VS Code extension that leverages the power of OpenAI's Chat GPT to help explain and debug code, making the process more efficient and effectiv¢</li>
-                <li className="bulletPoint">Integrated the extension with VS Code, allowing users to easily access its features and enhance their coding experience</li>
+                <li className="bulletPoint">Developed a VS Code extension leveraging OpenAI's ChatGPT to enhance code explanation and debugging</li>
+                <li className="bulletPoint">Achieved seamless integration within the VS Code environment, facilitating the extension's accessibility and augmenting coding experiences for over 46,000 users</li>
               </ul>
               
             </ul>
@@ -217,6 +202,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
             <ul>
               <li className="bulletPoint"> Related Experience: 2nd Place High School Hackathon Winner (2019) </li>
               <li className="bulletPoint"> Interests: Chess, Music Production, Playing Piano, Hockey </li>
+              <li className="bulletPoint"> Languages: English (Fluent), German (Fluent), Norwegian (Fluent) </li>
             </ul>
           </div>
 
