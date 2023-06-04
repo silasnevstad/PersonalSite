@@ -14,10 +14,13 @@ const ChessOuterContainer = styled.div`
     text-align: center;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
+    // border: 1px solid #ccc;
 
     @media (max-width: 768px) {
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 `;
 
@@ -37,6 +40,8 @@ const ChessContainer = styled.div`
     
     @media (max-width: 768px) {
         width: 90%;
+        margin-left: 0px;
+        margin-top: 10px;
     }
 `;
 
@@ -287,7 +292,7 @@ const calculateWinRate = (games) => {
     });
 
     const totalGames = wins + losses + draws;
-    const winRate = (wins / totalGames) * 100;
+    const winRate = ((wins) / totalGames) * 100;
     return winRate.toFixed(1);
 }
 
@@ -330,16 +335,14 @@ const ChessGame = ({ isMenuOpen }) => {
     const [result, setResult] = useState("");
     const [winRate, setWinRate] = useState(0);
     const [numberOfGames, setNumberOfGames] = useState(0);
-      
+    const MAX_GAMES = 1000;
 
     const loadGame = (game) => {
         const pgn = game.pgn;
         const fen = game.fen;
         const opp = game.white.username === chessUsername ? game.black.username : game.white.username;
         const newGame = new Chess();
-        let date = pgn.split("[Date ")[1].split("]")[0];
-        const dateArr = date.split('"');
-        date = dateArr[1];
+        const date = pgn.split("[Date ")[1].split("]")[0].split('"')[1];
         const res = game.white.username === chessUsername ? game.white.result : game.black.result;
         const time_control = convertTimeControl(game.time_control);
         const time = unixTimeToString(game.end_time);
@@ -363,21 +366,38 @@ const ChessGame = ({ isMenuOpen }) => {
 
     const getLastPlayedGame = useCallback(async () => {
         const response = await axios.get(
-          `https://api.chess.com/pub/player/${chessUsername}/games/archives`
+            `https://api.chess.com/pub/player/${chessUsername}/games/archives`
         );
-        const archivesUrl = response.data.archives.pop();
-        const gamesResponse = await axios.get(archivesUrl);
-        const games = gamesResponse.data.games;
+        
+        let games = [];
+        const archives = response.data.archives;
+        
+        // Start from the end of the archives, which are the most recent
+        for (let i = archives.length - 1; i >= 0; i--) {
+            const gamesResponse = await axios.get(archives[i]);
+            const newGames = gamesResponse.data.games;
+            // add the new games to the start of the array
+            games = [...newGames, ...games];
+    
+            // If we have reached the max games, truncate and break
+            if (games.length >= MAX_GAMES) {
+                // cut off the extra games from the start (so keep the last games in the array (the most recent))
+                games = games.slice(games.length - MAX_GAMES, games.length);
+                break;
+            }
+        }
+    
         setGames(games);
         setGameIndex(games.length - 1);
         const lastGame = games[games.length - 1];
     
         if (lastGame) {
-          loadGame(lastGame);
-          setWinRate(calculateWinRate(games));
-          setNumberOfGames(games.length);
+            loadGame(lastGame);
+            setWinRate(calculateWinRate(games));
+            setNumberOfGames(games.length);
         }
     }, []);
+    
 
     const onLastGame = () => {
         if (gameIndex > 0) {
@@ -530,7 +550,7 @@ const ChessGame = ({ isMenuOpen }) => {
 
                 </ChessContainer>
             ) : (
-                <p>No game found</p>
+                <p>No games found</p>
             )}
             <LineChartContainer>
                 <LineChart width={window.innerWidth < 800 ? window.innerWidth * 0.90 : window.innerWidth * 0.4} height={300} data={getChartData(games)}>

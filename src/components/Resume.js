@@ -7,9 +7,11 @@ import SocialLinks from './SocialLinks';
 import styled from 'styled-components';
 
 const ResumeContainer = styled.div`
-  margin-top: 6em;
-  width: ${({ isMenuOpen }) => isMenuOpen ? 'calc(85%)' : '100%'};
+  width: 95%;
   transition: margin-left 0.3s ease-in-out;
+  margin: 2em;
+  margin-top: 6em;
+  position: relative;
 
   @media (max-width: 768px) {
     margin-left: 0;
@@ -33,6 +35,8 @@ const SkillsSection = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-row-gap: 7%;
+  justify-items: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
@@ -47,10 +51,11 @@ const Skill = styled.div`
   width: 8em;
   margin-top: 8px;
   font-size: 1em;
+  font-family: 'Inter', sans-serif;
 
   @media (max-width: 768px) {
-    width: 50%;
-    font-size: 0.9em;
+    width: 75%;
+    font-size: 1em;
   }
 `;
 

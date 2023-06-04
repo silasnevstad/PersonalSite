@@ -172,7 +172,7 @@ const Contact = ({ isMenuOpen, toggleMenu }) => {
     return (
         <div>
             <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-            <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            <NavigationHeader currentPage={isMenuOpen} toggleMenu={toggleMenu} />
             <ContactResizeContainer isMenuOpen={isMenuOpen}>
                 <ContactInputContainer>
                     <ContactInputItem>

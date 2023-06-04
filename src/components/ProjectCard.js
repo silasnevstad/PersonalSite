@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
+import ProjectLanguages from './ProjectLanguages';
 
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -16,12 +17,13 @@ const Card = styled.div`
     transition: all 0.3s ease-in-out;
     transition: transform 0.3s;
     color: ${({ theme }) => theme.colors.text};
-    // box-shadow: rgba(50, 50, 50, 0.2) 0px 4px 6px, rgba(150, 150, 150, 0.2) 0px 5px 10px -3px, rgba(80, 80, 80, 0.2) 0px -3px 0px inset;
-    border: 1px solid #2f2f2f;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px, rgba(0, 0, 0, 0.2) 0px 5px 10px -3px, rgba(0, 0, 0, .3) 0px -3px 0px inset;
+    // border: 1px solid #2f2f2f;
     animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
+    font-family: 'Inter', sans-serif;
     
     &:hover {
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 12px, rgba(0, 0, 0, 0.3) 0px 10px 20px -3px, rgba(80, 80, 80, 0.3) 0px -3px 0px inset;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px, rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
         background-color: ${({ theme }) => theme.colors.fifth};
     }
 
@@ -40,6 +42,7 @@ const Card = styled.div`
 
     @media (max-width: 768px) {
         width: calc(screen.width - 150px);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 6px, rgba(0, 0, 0, 0.4) 0px 5px 10px -3px, rgba(0, 0, 0, .4) 0px -3px 0px inset, rgba(0, 0, 0, .2) 0px 0px 0px 1px inset;
         padding: 12px;
         margin: 5px;
     }
@@ -51,47 +54,40 @@ const ProjectInfo = styled.div`
 `;
 
 const ProjectTitle = styled.h2`
-    font-size: 1.4rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
     margin: 0;
+    color: #ddd;
 
     @media (max-width: 768px) {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 `;
 
 const ProjectVersion = styled.p`
-    color: #888;
+    font-family: 'Inter', sans-serif;
     font-size: .9rem;
+    font-weight: 500;
     margin: 0;
-    margin-top: 5px;
-    opacity: 0.8;
+    margin-top: 2px;
+    opacity: 0.5;
 
     @media (max-width: 768px) {
-        font-size: .7rem;
-    }
-`;
-
-const ProjectLanguages = styled.p`
-    color: ${({ theme }) => theme.colors.secondary};
-    font-size: 0.8rem;
-    margin: 0;
-    margin-top: 8px;
-    opacity: 0.6;
-
-    @media (max-width: 768px) {
-        font-size: 0.7rem;
+        font-size: .9rem;
     }
 `;
 
 const ProjectDate = styled.p`
-    color: ${({ theme }) => theme.colors.secondary};
+    color: #ddd;
     font-size: .8rem;
+    font-weight: 500;
     margin: 0;
-    margin-top: 8px;
+    margin-top: 15px;
     opacity: 0.4;
 
     @media (max-width: 768px) {
-        font-size: .7rem;
+        font-size: .8rem;
     }
 `;
 
@@ -104,9 +100,9 @@ const ProjectLogo = styled.img`
     margin-bottom: auto;
 
     @media (max-width: 768px) {
-        margin-top: 0;
-        width: 25px;
-        height: 25px;
+        // margin-top: 0;
+        width: 70px;
+        height: 70px;
     }
 `;
 
@@ -125,7 +121,8 @@ const ProjectCard = ({ project, onClick, index }) => {
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
           <ProjectVersion>{formatRequests(project)}</ProjectVersion>
-          <ProjectLanguages>{project.languages}</ProjectLanguages>
+          <ProjectLanguages languages={project.languages} />
+          {/* <ProjectLanguages>{project.languages.map((language, index) => <LanguageSpan key={index} style={{ backgroundColor: getLanguageColor(language), marginRight: '18px', marginLeft: '-10px' }}>{language}</LanguageSpan>)}</ProjectLanguages>  <span style={{letterSpacing: '-2.5px', fontSize: '1.5em', marginTop: '1em'}}>• </span> */}
           {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
           <ProjectDate>{convertDateString(project.date)}</ProjectDate>
           {/* <ProjectClicks>{formatRequests(project.requests)}</ProjectClicks> */}

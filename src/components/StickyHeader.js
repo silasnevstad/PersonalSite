@@ -6,10 +6,13 @@ const StickyHeaderContainer = styled.div`
   top: 4em;
   width: 100%;
   background-color: #222;
-  left: 1em;
+  left: 2em;
 
   @media (max-width: 768px) {
     top: 0em;
+    left: 0em;
+    width: 100%;
+    z-index: 999;
   }
 `;
 

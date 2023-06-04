@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
+import ProjectLanguages from './ProjectLanguages';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
@@ -33,39 +34,37 @@ const CardLargeHeaderInfo = styled.div`
 `;
 
 const ProjectLogo = styled.img`
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 15px;
     margin-right: 15px;
 `;
 
 const ProjectTitle = styled.h2`
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.text};
     font-size: 1.6rem;
     margin: 0;
+    font-family: 'Inter', sans-serif;
 `;
 
 const ProjectDescription = styled.p`
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 0;
     margin-top: 25px;
     opacity: 0.8;
-`;
-
-const ProjectLanguages = styled.p`
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
     color: ${({ theme }) => theme.colors.text};
-    font-size: .9rem;
-    margin: 0;
-    margin-top: 10px;
-    opacity: 0.5;
+    letter-spacing: 0.4px;
 `;
 
 const ProjectDeveloper = styled.p`
-    font-size: .9rem;
+    font-size: 1rem;
     margin: 0;
     margin-top: 10px;
     opacity: 0.6;
     color: ${({ theme }) => theme.colors.text};
+    font-family: 'Inter', sans-serif;
 `;
 
 const ProjectFooter = styled.div`
@@ -85,38 +84,42 @@ const ProjectFooterLeft = styled.div`
 `;
 
 const ProjectFooterRequests = styled.p`
-    font-size: .9rem;
+    font-size: 1rem;
     margin: 0;
     margin-top: 10px;
     opacity: 0.6;
     color: ${({ theme }) => theme.colors.text};
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.4px;
 `;
 
 const ProjectLink = styled.a`
     width: 4em;
-    // text-align: left;
     border: none;
     background: none;
-    font-size: 1rem;
+
     margin: 0;
     margin-top: 25px;
-    opacity: 0.6;
-    color: ${({ theme }) => theme.colors.secondary};
+    opacity: 0.9;
+    color: ${({ theme }) => theme.colors.text};
     padding-bottom: 7px;
     letter-spacing: 2px;
     padding-right: 15px;
     position: relative;
     padding-bottom: 20px;
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
 
     &:after {
         content: "";
         position: absolute;
-        width: 70%;
+        width: 50%;
         transform: scaleX(0);
         height: 2px;
         bottom: 10px;
         left: 0px;
-        background-color: #0000006a;
+        background-color: #ddd;
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
     }
@@ -126,40 +129,6 @@ const ProjectLink = styled.a`
         transform-origin: bottom left;
     }
 `;
-
-// const GithubLink = styled.a`
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 35px;
-//   height: 35px;
-//   border-radius: 50%;
-//   color: #fff;
-//   transition: all 0.3s;
-//   opacity: 0.9;
-//   background-color: #333333;
-//   margin-right: 15px;
-
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     width: calc(100% + 0px);
-//     height: calc(100% + 0px);
-//     border-radius: 50%;
-//     transition: all 0.3s;
-//     border: 1px solid #333333;
-//   }
-
-//   &:hover {
-//     opacity: 1;
-//     transform: scale(1.1);
-
-//     &::before {
-//       transform: scale(1.1);
-//     }
-//   }
-// `;
 
 const ProjectCardLarge = ({ project }) => {
     return (
@@ -172,7 +141,7 @@ const ProjectCardLarge = ({ project }) => {
                         {/* <ProjectVersion>{project.version}</ProjectVersion> */}
                     </span>
                     
-                    <ProjectLanguages>{project.languages}</ProjectLanguages>
+                    <ProjectLanguages languages={project.languages} />
                     <ProjectDeveloper>{project.developers}</ProjectDeveloper>
                 </CardLargeHeaderInfo>
             </CardLargeHeader>

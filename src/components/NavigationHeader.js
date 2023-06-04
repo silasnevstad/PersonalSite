@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from "styled-components";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavHeader = styled.div`
     position: fixed;
@@ -13,7 +13,7 @@ const NavHeader = styled.div`
     padding-top: .5em;
     padding-bottom: .5em;
     z-index: 100;
-    background-color: #333;
+    background-color: #222;
 
     @media (max-width: 768px) {
         display: none;
@@ -143,6 +143,7 @@ const NavTitle = styled.h1`
 `;
 
 const NavText = styled.p`
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
   padding: 5px 5px;
   opacity: 0.9;
@@ -162,11 +163,17 @@ const NavText = styled.p`
 
   &:hover {
     opacity: 1;
-    color: #33ff33;
+    // color: #33ff33;
   }
 
   &:hover::after {
     width: calc(100% - 10px); // subtract twice the padding from the width
+  }
+`;
+
+const NavTextActive = styled(NavText)`
+  &::after {
+    width: calc(100% - 10px);
   }
 `;
 
@@ -184,33 +191,33 @@ const DropDownText = styled.p`
 
 
 
-const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
+const NavigationHeader = ({ currentPage, toggleMenu }) => {
   return (
     <NavHeader>
       <NavHeaderLeft>
-        <Link to="/" onClick={toggleMenu}>
+        {/* <Link to="/" onClick={toggleMenu}>
           <NavTitle>
             Silas Nevstad
           </NavTitle>
-        </Link>
+        </Link> */}
       </NavHeaderLeft>
       <NavHeaderRight>
-        <Link to="/" onClick={toggleMenu}>
+      <NavLink to="/" onClick={toggleMenu} activeClassName={NavTextActive}>
             <NavText>Home</NavText>
-        </Link>
-        <Link to="/resume" onClick={toggleMenu}>
+        </NavLink>
+        <NavLink to="/resume" onClick={toggleMenu} activeClassName={NavTextActive}>
             <NavText>Resume</NavText>
-        </Link>
-        <Link to="/projects" onClick={toggleMenu}>
+        </NavLink>
+        <NavLink to="/projects" onClick={toggleMenu} activeClassName={NavTextActive}>
             <NavText>Portfolio</NavText>
-        </Link>
-        <Link to="/lastChess" onClick={toggleMenu}>
+        </NavLink>
+        <NavLink to="/lastChess" onClick={toggleMenu} activeClassName={NavTextActive}>
             <NavText>Chess</NavText>
-        </Link>
-        <Link to="/contact" onClick={toggleMenu}>
+        </NavLink>
+        <NavLink to="/contact" onClick={toggleMenu} activeClassName={NavTextActive}>
             <NavText>Contact</NavText>
-        </Link>
-        <NavHeaderRightItem> 
+        </NavLink>
+        {/* <NavHeaderRightItem> 
           <PinImg src={require('../images/pin.png')} alt="Pin" />
           <NavText>Pinned</NavText>
           <DropdownMenu>
@@ -227,7 +234,7 @@ const NavigationHeader = ({ isMenuOpen, toggleMenu }) => {
                 <DropDownText>HumanGPT</DropDownText>
             </DropdownMenuLink>
           </DropdownMenu>
-        </NavHeaderRightItem>
+        </NavHeaderRightItem> */}
           
       </NavHeaderRight>
     </NavHeader>
