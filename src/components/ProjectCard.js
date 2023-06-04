@@ -55,7 +55,7 @@ const ProjectInfo = styled.div`
 
 const ProjectTitle = styled.h2`
     font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.28rem;
     font-weight: 500;
     margin: 0;
     color: #ddd;
@@ -67,10 +67,10 @@ const ProjectTitle = styled.h2`
 
 const ProjectVersion = styled.p`
     font-family: 'Inter', sans-serif;
-    font-size: .9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     margin: 0;
-    margin-top: 2px;
+    margin-top: 3px;
     opacity: 0.5;
 
     @media (max-width: 768px) {

@@ -32,7 +32,7 @@ const getLanguageColor = (language) => {
         case 'C#':
             return '#178600';
         case 'React':
-            return '#B662DD';
+            return '#c26ceb';
         case 'Node.js':
             return '#918BDF';
         case 'HTML':

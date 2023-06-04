@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getLanguageColor } from './Utils';
 
 const Languages = styled.p`
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     margin: 0;
     margin-top: 15px;
     opacity: 0.6;
