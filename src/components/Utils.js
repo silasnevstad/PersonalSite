@@ -48,4 +48,41 @@ const getLanguageColor = (language) => {
     }
 };
 
-export { formatRequests, getLanguageColor };
+const parseDate = (dateString) => {
+    const months = {
+      Jan: 0,
+      Feb: 1,
+      Mar: 2,
+      Apr: 3,
+      May: 4,
+      Jun: 5,
+      Jul: 6,
+      Aug: 7,
+      Sep: 8,
+      Oct: 9,
+      Nov: 10,
+      Dec: 11,
+    };
+  
+    if (!dateString) return null;
+  
+    // sometimes there will be  a day as well, so its either 1 May 2023 or just May 2023 so we need to handle both cases
+    if (dateString.split(' ').length === 2) {
+      dateString = `1 ${dateString}`;
+    }
+    const [day, monthStr, year] = dateString.split(' ');
+    const month = months[monthStr];
+  
+    return new Date(year, month, day);
+};
+  
+const sortByDate = (a, b) => {
+    const dateA = parseDate(a.date);
+    const dateB = parseDate(b.date);
+
+    if (!dateA || !dateB) return dateA ? -1 : 1;
+
+    return dateB - dateA;
+};
+
+export { formatRequests, getLanguageColor, sortByDate };

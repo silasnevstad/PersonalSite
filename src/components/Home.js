@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import { PROJECTS } from './constants';
+import { sortByDate } from './Utils';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -176,60 +177,67 @@ const FooterText = styled.p`
 // const text = useTypewriterEffect(introText, 15);
 
 const Home = ({ isMenuOpen, toggleMenu }) => {
+  const sortedByRequests = [...PROJECTS].sort((a, b) => b.requests - a.requests);
+  // use sortByDate() function from utils.js
+  const sortedByDate = [...PROJECTS].sort(sortByDate);
 
-    const mostPopularProjects =  PROJECTS.sort((a, b) => b.requests - a.requests).slice(0, 3);
-    const mostRecentProjects = PROJECTS.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
-    const [selectedProject, setSelectedProject] = useState(null);
+  console.log(sortedByRequests);
+  console.log(sortedByDate);
 
-    const handleProjectClick = (project) => {
-      setSelectedProject(project);
-    };
+  const mostPopularProjects = sortedByRequests.slice(0, 3);
+  const mostRecentProjects = sortedByDate.slice(0, 3);
 
-    const handleCloseModal = () => {
-      setSelectedProject(null);
-    };
+  const [selectedProject, setSelectedProject] = useState(null);
 
-    return (
-      <AppContainer>
-        <HomeContainer>
-          <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-          <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-          <HomeCenterContainer>
-            <HomeContainer>
-              {/* <HomeText>{text}<span className="cursor">_</span></HomeText> */}
-              <HomeTextSmall>Hi, I'm</HomeTextSmall>
-              <HomeTextLarge style={{marginTop: '-.1em'}}>Silas Nevstad</HomeTextLarge>
-              <HomeTextSmall style={{marginTop: '-.9em'}}>Northeastern Student | Programmer</HomeTextSmall>
-            </HomeContainer>
-            <HomeContainer style={{marginTop: '1em'}}>
-              <HomeTitleText>
-                <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></HomeTitleIcon>
-                Popular Projects
-              </HomeTitleText>
-              <HomeProjectsContainer>
-                {mostPopularProjects.map((project, index) => (
-                  <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
-                ))}
-              </HomeProjectsContainer>
-              <Divider />
-              <HomeTitleText>
-                <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></HomeTitleIcon>
-                Recent Projects
-              </HomeTitleText>
-              <HomeProjectsContainer>
-                {mostRecentProjects.map((project, index) => (
-                  <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
-                ))}
-              </HomeProjectsContainer>
-              <MobileDivider />
-            </HomeContainer>
-            {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
-          </HomeCenterContainer>
-          <FooterText>8.5k requests © 2021 Silas Nevstad</FooterText>
-          <SocialLinks />
-        </HomeContainer>
-      </AppContainer>
-    );
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+  };
+
+  return (
+    <AppContainer>
+      <HomeContainer>
+        <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <HomeCenterContainer>
+          <HomeContainer>
+            {/* <HomeText>{text}<span className="cursor">_</span></HomeText> */}
+            <HomeTextSmall>Hi, I'm</HomeTextSmall>
+            <HomeTextLarge style={{marginTop: '-.1em'}}>Silas Nevstad</HomeTextLarge>
+            <HomeTextSmall style={{marginTop: '-.9em'}}>Northeastern Student | Programmer</HomeTextSmall>
+          </HomeContainer>
+          <HomeContainer style={{marginTop: '1em'}}>
+            <HomeTitleText>
+              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></HomeTitleIcon>
+              Popular Projects
+            </HomeTitleText>
+            <HomeProjectsContainer>
+              {mostPopularProjects.map((project, index) => (
+                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
+              ))}
+            </HomeProjectsContainer>
+            <Divider />
+            <HomeTitleText>
+              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></HomeTitleIcon>
+              Recent Projects
+            </HomeTitleText>
+            <HomeProjectsContainer>
+              {mostRecentProjects.map((project, index) => (
+                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
+              ))}
+            </HomeProjectsContainer>
+            <MobileDivider />
+          </HomeContainer>
+          {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
+        </HomeCenterContainer>
+        <FooterText>8.5k requests © 2021 Silas Nevstad</FooterText>
+        <SocialLinks />
+      </HomeContainer>
+    </AppContainer>
+  );
 };
 
 export default Home;
