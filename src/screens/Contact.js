@@ -159,7 +159,7 @@ const Contact = ({ isMenuOpen, toggleMenu }) => {
         }
 
         // Send the form data to EmailJS
-        emailjs.send('service_hc9akgh', 'template_2cjai8y', { name, email, message }, '5zJalJbOIpV3-eipy')
+        emailjs.send('service_hc9akgh', 'template_damsors', { name, email, message }, '5zJalJbOIpV3-eipy')
             .then((response) => {
                 setLoading(false);
                 setSuccess(true);
