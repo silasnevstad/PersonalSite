@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme';
-import Home from './components/Home';
-import Resume from './components/Resume';
-import Projects from './components/Projects';
-import LastChess from './components/LastChess';
-import Contact from './components/Contact';
-import MiniGPTPrivacy from './components/MiniGPTPrivacy';
-import ChessPrivacy from './components/ChessPrivacy';
+import Home from './screens/Home';
+import Resume from './screens/Resume';
+import Projects from './screens/Projects';
+import LastChess from './screens/LastChess';
+import Contact from './screens/Contact';
+import MiniGPTPrivacy from './screens/MiniGPTPrivacy';
+import ChessPrivacy from './screens/ChessPrivacy';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/" element={<Home isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/resume" element={<Resume isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/projects" element={<Projects isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
-          <Route path="/lastChess" element={<LastChess isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
+          <Route path="/chess" element={<LastChess isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/contact" element={<Contact isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />} />
           <Route path="/minigpt" element={<MiniGPTPrivacy />} />
           <Route path="/chessapp" element={<ChessPrivacy />} />

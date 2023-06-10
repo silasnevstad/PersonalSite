@@ -1,9 +1,9 @@
 import React from 'react';
-import NavigationMenu from './NavigationMenu';
-import NavigationHeader from './NavigationHeader';
-import StickyHeader from './StickyHeader';
+import NavigationMenu from '../components/NavigationMenu';
+import NavigationHeader from '../components/NavigationHeader';
+import StickyHeader from '../components/StickyHeader';
 import '../styles/Resume.css'
-import SocialLinks from './SocialLinks';
+import SocialLinks from '../components/SocialLinks';
 import styled from 'styled-components';
 
 const ResumeContainer = styled.div`
@@ -81,7 +81,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
   return (
     <div className="Resume">
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-      <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationHeader currentPage={"/resume"} toggleMenu={toggleMenu} />
       <ResumeContainer isMenuOpen={isMenuOpen}>
         <div class="sticky-div">
           <h1>Silas Nevstad</h1>

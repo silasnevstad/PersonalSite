@@ -1,7 +1,7 @@
 
-import NavigationMenu from "./NavigationMenu";
-import NavigationHeader from './NavigationHeader';
-import SocialLinks from './SocialLinks';
+import NavigationMenu from "../components/NavigationMenu";
+import NavigationHeader from '../components/NavigationHeader';
+import SocialLinks from '../components/SocialLinks';
 import styled from "styled-components";
 import '../styles/Buttons.css';
 import emailjs from 'emailjs-com';
@@ -172,7 +172,7 @@ const Contact = ({ isMenuOpen, toggleMenu }) => {
     return (
         <div>
             <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-            <NavigationHeader currentPage={isMenuOpen} toggleMenu={toggleMenu} />
+            <NavigationHeader currentPage={"/contact"} toggleMenu={toggleMenu} />
             <ContactResizeContainer isMenuOpen={isMenuOpen}>
                 <ContactInputContainer>
                     <ContactInputItem>

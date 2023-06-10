@@ -12,6 +12,8 @@ const CardLarge = styled.div`
     align-items: left;
     text-align: left;
 
+    max-height: 90vh;
+
     animation: fadein 0.5s;
 
     @keyframes fadein {
@@ -56,6 +58,11 @@ const ProjectDescription = styled.p`
     line-height: 1.5;
     color: ${({ theme }) => theme.colors.text};
     letter-spacing: 0.4px;
+
+
+    @media (max-width: 768px) {
+        overflow-y: scroll;
+    }
 `;
 
 const ProjectDeveloper = styled.p`

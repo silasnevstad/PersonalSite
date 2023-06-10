@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import NavigationMenu from './NavigationMenu';
-import NavigationHeader from './NavigationHeader';
-import SocialLinks from './SocialLinks';
-import ProjectCard from './ProjectCard';
-import ProjectModal from './ProjectModal';
+import NavigationMenu from '../components/NavigationMenu';
+import NavigationHeader from '../components/NavigationHeader';
+import SocialLinks from '../components/SocialLinks';
+import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
 import styled from 'styled-components';
 import downArrow from '../images/arrow-down.svg';
-import { PROJECTS } from './constants';
-import { sortByDate } from './Utils';
+import { PROJECTS } from '../components/constants';
+import { sortByDate } from '../components/Utils';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -135,7 +135,7 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
   return (
     <AppContainer>
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-      <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <NavigationHeader currentPage={"/projects"} toggleMenu={toggleMenu} />
       <OuterProjectsContainer isMenuOpen={isMenuOpen}>
         <SortProjectsContainer>
           <SortByItem

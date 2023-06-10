@@ -1,6 +1,6 @@
-import ChessGame from "./ChessGame";
-import NavigationMenu from "./NavigationMenu";
-import NavigationHeader from './NavigationHeader';
+import ChessGame from "../components/ChessGame";
+import NavigationMenu from "../components/NavigationMenu";
+import NavigationHeader from '../components/NavigationHeader';
 import styled from "styled-components";
 
 const ChessResizeContainer = styled.div`
@@ -20,7 +20,7 @@ const LastChess = ({ isMenuOpen, toggleMenu }) => {
     return (
         <div>
             <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-            <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            <NavigationHeader currentPage={"/chess"} toggleMenu={toggleMenu} />
             <ChessResizeContainer isMenuOpen={isMenuOpen}>
                 <ChessGame isMenuOpen={isMenuOpen} />
             </ChessResizeContainer>

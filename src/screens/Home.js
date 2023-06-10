@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import NavigationMenu from './NavigationMenu';
-import NavigationHeader from './NavigationHeader';
-import SocialLinks from './SocialLinks';
+import NavigationMenu from '../components/NavigationMenu';
+import NavigationHeader from '../components/NavigationHeader';
+import SocialLinks from '../components/SocialLinks';
 import styled from 'styled-components';
-import ProjectCard from './ProjectCard';
-import ProjectModal from './ProjectModal';
-import { PROJECTS } from './constants';
-import { sortByDate } from './Utils';
+import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
+import { PROJECTS } from '../components/constants';
+import { sortByDate } from '../components/Utils';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -57,7 +57,7 @@ const Divider = styled.div`
   height: 20px;
 
   @media (max-width: 768px) {
-    height: 10px;
+    height: 30px;
   }
 `;
 
@@ -66,7 +66,7 @@ const MobileDivider = styled.div`
   height: 0px;
 
   @media (max-width: 768px) {
-    height: 60px; 
+    height: 100px; 
   }
 `;
 
@@ -78,7 +78,7 @@ const HomeTitleText = styled.h1`
   opacity: 0.8;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -181,9 +181,6 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
   // use sortByDate() function from utils.js
   const sortedByDate = [...PROJECTS].sort(sortByDate);
 
-  console.log(sortedByRequests);
-  console.log(sortedByDate);
-
   const mostPopularProjects = sortedByRequests.slice(0, 3);
   const mostRecentProjects = sortedByDate.slice(0, 3);
 
@@ -201,7 +198,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
     <AppContainer>
       <HomeContainer>
         <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-        <NavigationHeader isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <NavigationHeader toggleMenu={toggleMenu} currentPage={"/"} />
         <HomeCenterContainer>
           <HomeContainer>
             {/* <HomeText>{text}<span className="cursor">_</span></HomeText> */}
@@ -211,7 +208,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           </HomeContainer>
           <HomeContainer style={{marginTop: '1em'}}>
             <HomeTitleText>
-              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></HomeTitleIcon>
+              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></HomeTitleIcon>
               Popular Projects
             </HomeTitleText>
             <HomeProjectsContainer>
@@ -221,7 +218,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
             </HomeProjectsContainer>
             <Divider />
             <HomeTitleText>
-              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></HomeTitleIcon>
+              <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></HomeTitleIcon>
               Recent Projects
             </HomeTitleText>
             <HomeProjectsContainer>

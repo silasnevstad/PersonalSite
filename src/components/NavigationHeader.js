@@ -171,6 +171,12 @@ const NavText = styled.p`
   }
 `;
 
+const UnderLinedNavText = styled(NavText)`
+  &::after {
+    width: calc(100% - 10px);
+  }
+`;
+
 const NavTextActive = styled(NavText)`
   &::after {
     width: calc(100% - 10px);
@@ -202,20 +208,20 @@ const NavigationHeader = ({ currentPage, toggleMenu }) => {
         </Link> */}
       </NavHeaderLeft>
       <NavHeaderRight>
-      <NavLink to="/" onClick={toggleMenu} activeClassName={NavTextActive}>
-            <NavText>Home</NavText>
+        <NavLink to="/" onClick={toggleMenu} activeclassname={NavTextActive}>
+            {currentPage === "/" ? <UnderLinedNavText>Home</UnderLinedNavText> : <NavText>Home</NavText>}
         </NavLink>
-        <NavLink to="/resume" onClick={toggleMenu} activeClassName={NavTextActive}>
-            <NavText>Resume</NavText>
+        <NavLink to="/resume" onClick={toggleMenu} activeclassname={NavTextActive}>
+            {currentPage === "/resume" ? <UnderLinedNavText>Resume</UnderLinedNavText> : <NavText>Resume</NavText>}
         </NavLink>
-        <NavLink to="/projects" onClick={toggleMenu} activeClassName={NavTextActive}>
-            <NavText>Portfolio</NavText>
+        <NavLink to="/projects" onClick={toggleMenu} activeclassname={NavTextActive}>
+            {currentPage === "/projects" ? <UnderLinedNavText>Projects</UnderLinedNavText> : <NavText>Projects</NavText>}
         </NavLink>
-        <NavLink to="/lastChess" onClick={toggleMenu} activeClassName={NavTextActive}>
-            <NavText>Chess</NavText>
+        <NavLink to="/chess" onClick={toggleMenu} activeclassname={NavTextActive}>
+            {currentPage === "/chess" ? <UnderLinedNavText>Last Chess</UnderLinedNavText> : <NavText>Last Chess</NavText>}
         </NavLink>
-        <NavLink to="/contact" onClick={toggleMenu} activeClassName={NavTextActive}>
-            <NavText>Contact</NavText>
+        <NavLink to="/contact" onClick={toggleMenu} activeclassname={NavTextActive}>
+            {currentPage === "/contact" ? <UnderLinedNavText>Contact</UnderLinedNavText> : <NavText>Contact</NavText>}
         </NavLink>
         {/* <NavHeaderRightItem> 
           <PinImg src={require('../images/pin.png')} alt="Pin" />

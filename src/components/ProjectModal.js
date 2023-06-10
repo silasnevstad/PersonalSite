@@ -24,6 +24,7 @@ const ModalWrapper = styled.div`
   box-shadow: rgba(51, 51, 51, 0.6) 0px 4px 6px, rgba(51, 51, 51, 0.6) 0px 5px 10px -3px, rgba(51, 51, 51, 0.5) 0px -3px 0px inset;
   border: 2px solid #2f2f2f;
   z-index: 1001;
+  // overflow-y: scroll;
 
   @media (max-width: 768px) {
     width: 90%;
