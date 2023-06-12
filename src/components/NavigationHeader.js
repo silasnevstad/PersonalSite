@@ -215,10 +215,10 @@ const NavigationHeader = ({ currentPage, toggleMenu }) => {
             {currentPage === "/resume" ? <UnderLinedNavText>Resume</UnderLinedNavText> : <NavText>Resume</NavText>}
         </NavLink>
         <NavLink to="/projects" onClick={toggleMenu} activeclassname={NavTextActive}>
-            {currentPage === "/projects" ? <UnderLinedNavText>Projects</UnderLinedNavText> : <NavText>Projects</NavText>}
+            {currentPage === "/projects" ? <UnderLinedNavText>Portfolio</UnderLinedNavText> : <NavText>Portfolio</NavText>}
         </NavLink>
         <NavLink to="/chess" onClick={toggleMenu} activeclassname={NavTextActive}>
-            {currentPage === "/chess" ? <UnderLinedNavText>Last Chess</UnderLinedNavText> : <NavText>Last Chess</NavText>}
+            {currentPage === "/chess" ? <UnderLinedNavText>My Chess</UnderLinedNavText> : <NavText>My Chess</NavText>}
         </NavLink>
         <NavLink to="/contact" onClick={toggleMenu} activeclassname={NavTextActive}>
             {currentPage === "/contact" ? <UnderLinedNavText>Contact</UnderLinedNavText> : <NavText>Contact</NavText>}
