@@ -6,7 +6,7 @@ const Languages = styled.p`
     font-size: 0.95rem;
     margin: 0;
     margin-top: 15px;
-    opacity: 0.6;
+    opacity: 0.8;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,11 +15,17 @@ const Languages = styled.p`
     @media (max-width: 768px) {
         font-size: 0.8rem;
     }
+
+    &:hover {
+        opacity: 1;
+    }
+
 `;
 
 const LanguageSpan = styled.span`
     color: #000;
-    padding: 3px 6px;
+    font-size: 1rem;
+    padding: 4px 8px;
     border-radius: 5px;
     margin-right: 5px;
 `;

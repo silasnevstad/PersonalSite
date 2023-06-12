@@ -25,6 +25,7 @@ const Card = styled.div`
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px, rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
         background-color: ${({ theme }) => theme.colors.fifth};
+        transform: scale(1.02);
     }
 
     @keyframes bounce-in-right {
@@ -67,10 +68,10 @@ const ProjectTitle = styled.h2`
 
 const ProjectVersion = styled.p`
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     margin: 0;
-    margin-top: 3px;
+    margin-top: 5px;
     opacity: 0.5;
 
     @media (max-width: 768px) {
@@ -80,7 +81,7 @@ const ProjectVersion = styled.p`
 
 const ProjectDate = styled.p`
     color: #ddd;
-    font-size: .8rem;
+    font-size: .9rem;
     font-weight: 500;
     margin: 0;
     margin-top: 15px;

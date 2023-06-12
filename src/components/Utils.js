@@ -20,11 +20,11 @@ const formatRequests = (project) => {
 const getLanguageColor = (language) => {
     switch (language) {
         case 'JavaScript':
-            return '#F5E960';
+            return '#fcef56';
         case 'TypeScript':
             return '#2b7489';
         case 'Python':
-            return '#7497F3';
+            return '#81a1f7';
         case 'Java':
             return '#f1a017';
         case 'C++':
