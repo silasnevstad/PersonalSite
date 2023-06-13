@@ -221,7 +221,7 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
           <Link to="/projects" onClick={toggleMenu}>
             <NavText>Portfolio</NavText>
           </Link>
-          <Link to="/lastChess" onClick={toggleMenu}>
+          <Link to="/chess" onClick={toggleMenu}>
             <NavText>Chess</NavText>
           </Link>
           <Link to="/contact" onClick={toggleMenu}>
