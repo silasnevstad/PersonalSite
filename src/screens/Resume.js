@@ -123,22 +123,22 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
             <h2>Skills</h2>
             <Line />
             <SkillsSection>
-              <Skill className="skills-inline">Python<SkillProgress value="85" max="100"></SkillProgress> </Skill> 
-              <Skill className="skills-inline">React<SkillProgress value="80" max="100"></SkillProgress> </Skill>
-              <Skill className="skills-inline">Java<SkillProgress value="68" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Python<SkillProgress value="85" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Javascript<SkillProgress value="68" max="100"></SkillProgress> </Skill>
-              <Skill className="skills-inline">Swift<SkillProgress value="80" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">NodeJS<SkillProgress value="70" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">C++<SkillProgress value="66" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">React<SkillProgress value="80" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Swift<SkillProgress value="80" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Java<SkillProgress value="68" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">HTML<SkillProgress value="75" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">CSS<SkillProgress value="78" max="100"></SkillProgress> </Skill>
-              <Skill className="skills-inline">C++<SkillProgress value="66" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Dart<SkillProgress value="45" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Git<SkillProgress value="75" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">MongoDB<SkillProgress value="60" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">MacOS<SkillProgress value="90" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Windows<SkillProgress value="80" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Linux<SkillProgress value="60" max="100"></SkillProgress> </Skill>
-              <Skill className="skills-inline">MIPS Assembly<SkillProgress value="45" max="100"></SkillProgress> </Skill>
+              <Skill className="skills-inline">Assembly<SkillProgress value="45" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">German<SkillProgress value="96" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">Norwegian<SkillProgress value="96" max="100"></SkillProgress> </Skill>
               <Skill className="skills-inline">English<SkillProgress value="100" max="100"></SkillProgress> </Skill>
