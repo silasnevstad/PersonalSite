@@ -192,7 +192,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           </HomeContainer>
           {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
         </HomeCenterContainer>
-        <FooterText>11.4k requests © 2022 Silas Nevstad</FooterText>
+        <FooterText>11.7k requests © 2022 Silas Nevstad</FooterText>
         <SocialLinks />
       </HomeContainer>
     </AppContainer>
