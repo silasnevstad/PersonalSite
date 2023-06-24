@@ -100,40 +100,71 @@ const ProjectFooterRequests = styled.p`
     letter-spacing: 0.4px;
 `;
 
-const ProjectLink = styled.a`
-    width: 4em;
+const ProjectVisitButton = styled.button`
+    --primary-color: #bbb;
+    --hovered-color: #81a1f7;
+    padding: 0;
+    margin: 0;
     border: none;
     background: none;
-
-    margin: 0;
-    margin-top: 25px;
-    opacity: 0.9;
-    color: ${({ theme }) => theme.colors.text};
-    padding-bottom: 7px;
-    letter-spacing: 2px;
-    padding-right: 15px;
     position: relative;
-    padding-bottom: 20px;
-    font-size: 1.2rem;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 2px;
+    display: flex;
+    font-weight: 500;
+    font-size: 20px;
+    gap: 0.5rem;
+    align-items: center;
 
-    &:after {
-        content: "";
-        position: absolute;
-        width: 50%;
-        transform: scaleX(0);
-        height: 2px;
-        bottom: 10px;
-        left: 0px;
-        background-color: #ddd;
-        transform-origin: bottom right;
-        transition: transform 0.25s ease-out;
+    & p {
+        margin: 0;
+        position: relative;
+        font-size: 20px;
+        color: var(--primary-color)
     }
 
-    &:hover:after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
+    & p::before {
+        position: absolute;
+        content: "Visit";
+        width: 0%;
+        inset: 0;
+        color: var(--hovered-color);
+        overflow: hidden;
+        transition: 0.3s ease-out;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 0;
+        left: 0;
+        bottom: -7px;
+        background: var(--hovered-color);
+        height: 2px;
+        transition: 0.3s ease-out;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+
+    &:hover p::before {
+        width: 100%;
+    }
+
+    &:hover svg {
+        transform: translateX(4px);
+        color: var(--hovered-color) 
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    & svg {
+        color: var(--primary-color);
+        transition: 0.2s;
+        position: relative;
+        width: 15px;
+        transition-delay: 0.2s;
     }
 `;
 
@@ -158,9 +189,16 @@ const ProjectCardLarge = ({ project }) => {
                 <ProjectFooterLeft>
                     {/* {project.github !== '' && <GithubLink href={'https://github.com/silasnevstad/' + project.github}><FaGithub size={30} /></GithubLink>} */}
                     {project.url !== '' && 
-                    <ProjectLink href={project.url}>
-                        Visit
-                    </ProjectLink>}
+                        <ProjectVisitButton onClick={() => window.open(project.url, '_blank')}>
+                            <p>Visit</p>
+                            <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" fill="none" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </ProjectVisitButton>
+                        // <ProjectLink href={project.url}>
+                        //     Visit
+                        // </ProjectLink>
+                    }
                 </ProjectFooterLeft>
                     
                 <ProjectFooterRequests>{formatRequests(project)}</ProjectFooterRequests>
