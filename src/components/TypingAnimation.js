@@ -21,6 +21,7 @@ const TypingAnimation = () => {
     "Code Whisperer",
     "Algorithm Alchemist",
     "Zenith Zealot",
+    "Enigma Engineer"
   ], []);
 
   const randomSpeed = (min, max) => Math.random() * (max - min) + min;
@@ -37,6 +38,7 @@ const TypingAnimation = () => {
 
   useEffect(() => {
     let timer;
+    setTextIndex(getNextWordIndex());
 
     if (isDeleting) {
       timer = setTimeout(() => {
