@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 const TypingAnimation = () => {
-  const [textIndex, setTextIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const words = useMemo(() => [
     "Programmer",
     "Software Developer",
@@ -24,6 +19,11 @@ const TypingAnimation = () => {
     "Enigma Engineer"
   ], []);
 
+  const [textIndex, setTextIndex] = useState(Math.floor(Math.random() * words.length));  // Changed here
+  const [charIndex, setCharIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const randomSpeed = (min, max) => Math.random() * (max - min) + min;
 
   const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -38,7 +38,6 @@ const TypingAnimation = () => {
 
   useEffect(() => {
     let timer;
-    setTextIndex(getNextWordIndex());
 
     if (isDeleting) {
       timer = setTimeout(() => {
