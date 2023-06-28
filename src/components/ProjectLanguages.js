@@ -16,10 +16,9 @@ const Languages = styled.p`
         font-size: 0.8rem;
     }
 
-    &:hover {
+    &.project-languages:hover {
         opacity: 1;
     }
-
 `;
 
 const LanguageSpan = styled.span`
@@ -30,9 +29,9 @@ const LanguageSpan = styled.span`
     margin-right: 5px;
 `;
 
-const ProjectLanguages = ({ languages }) => {
+const ProjectLanguages = ({ className, languages }) => {
     return (
-        <Languages>{languages.map((language, index) => <LanguageSpan key={index} style={{ backgroundColor: getLanguageColor(language), marginRight: '10px' }}>{language}</LanguageSpan>)}</Languages>
+        <Languages className={className}>{languages.map((language, index) => <LanguageSpan key={index} style={{ backgroundColor: getLanguageColor(language), marginRight: '10px' }}>{language}</LanguageSpan>)}</Languages>
     )
 }
 

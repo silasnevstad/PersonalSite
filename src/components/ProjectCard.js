@@ -26,6 +26,9 @@ const Card = styled.div`
         box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px, rgba(0, 0, 0, 0.3) 0px 5px 10px -3px, rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
         background-color: ${({ theme }) => theme.colors.fifth};
         transform: scale(1.02);
+        .project-languages {
+            opacity: 1;
+        }
     }
 
     @keyframes bounce-in-right {
@@ -122,7 +125,7 @@ const ProjectCard = ({ project, onClick, index }) => {
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
           <ProjectVersion>{formatRequests(project)}</ProjectVersion>
-          <ProjectLanguages languages={project.languages} />
+          <ProjectLanguages className="project-languages" languages={project.languages} />
           {/* <ProjectLanguages>{project.languages.map((language, index) => <LanguageSpan key={index} style={{ backgroundColor: getLanguageColor(language), marginRight: '18px', marginLeft: '-10px' }}>{language}</LanguageSpan>)}</ProjectLanguages>  <span style={{letterSpacing: '-2.5px', fontSize: '1.5em', marginTop: '1em'}}>• </span> */}
           {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
           <ProjectDate>{convertDateString(project.date)}</ProjectDate>

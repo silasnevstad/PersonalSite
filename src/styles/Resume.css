@@ -1,14 +1,18 @@
+@keyframes fadeDownIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 h1 {
     font-size: 30px;
     margin-left: 10px;
     font-family: 'Inter', sans-serif;
-}
-
-h2 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin-left: 10px;
 }
 
 a {
@@ -27,37 +31,6 @@ p {
 nav ul {
     list-style: none;
     /* margin-left: 0px; */
-}
-
-li {
-    font-family: 'Inter', sans-serif;
-    list-style: none;
-    font-size: 18px;
-    line-height: 1.3;
-    /* margin-left: 10px; */
-}
-
-.biggerLi {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.specialLi {
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-
-.bulletPoint {
-    list-style: circle;
-    max-width: 80%;
-    margin-top: 5px;
-}
-
-.bulletPoint-indent {
-    list-style: circle;
-    margin-left: 20px;
-    margin-top: 2px;
-    max-width: 80%;
 }
 
 #myProgress {
@@ -118,6 +91,7 @@ li {
     /* padding-top: 1px; */
     z-index: 999; /* The sticky element will have a higher z-index than the scrollable elements */
     background-color: #222;
+    animation: fadeDownIn .3s ease-in-out;
 }
 
 .scrollable-div {

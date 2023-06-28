@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import NavigationMenu from '../components/NavigationMenu';
 import NavigationHeader from '../components/NavigationHeader';
 import SocialLinks from '../components/SocialLinks';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import TypingAnimation from '../components/TypingAnimation';
 import { PROJECTS } from '../components/constants';
 import { sortByDate } from '../components/Utils';
+
+const fadeAndDropInFromCeiling = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -16,7 +28,7 @@ const AppContainer = styled.div`
 `;
 
 const HomeContainer = styled.div`
-  transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.2s ease-in-out;
   width: 100%;
   margin-top: 1em;
 
@@ -45,6 +57,8 @@ const HomeProjectsContainer = styled.div`
   gap: 1em;
   align-items: flex-start;
   margin-top: 1em;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+  opacity: 0;
 
   @media (max-width: 768px) {
     margin-top: 0.5em;
@@ -76,6 +90,8 @@ const HomeTitleText = styled.h1`
   margin-top: 0.5rem;
   font-weight: 500;
   opacity: 0.8;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+  opacity: 0;
 
   @media (max-width: 768px) {
     font-size: 1.3rem;
@@ -86,9 +102,9 @@ const HomeTitleIcon = styled.svg`
   width: 1em;
   height: 1em;
   margin-right: 0.5em;
-  // margin-top: 0.2em;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
   margin-bottom: -0.2em;
-  opacity: 0.8; 
+  opacity: 0; 
   color: #fff;
 
   @media (max-width: 768px) {
@@ -101,8 +117,9 @@ const HomeTextSmall = styled.h1`
   font-size: 1.1rem;
   margin-left: .5rem;
   margin-top: 0.1rem;
-  opacity: 0.8;
+  opacity: 0;
   font-weight: 500;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -114,6 +131,7 @@ const HomeTextLarge = styled.h1`
   font-weight: 500;
   margin-left: .5rem;
   margin-top: 0.1rem;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
   
   @media (max-width: 768px) {
     max-width: 100%;
@@ -164,26 +182,28 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
         <NavigationHeader toggleMenu={toggleMenu} currentPage={"/"} />
         <HomeCenterContainer>
           <HomeContainer>
-            <HomeTextSmall>Hi, I'm</HomeTextSmall>
-            <HomeTextLarge style={{marginTop: '-.1em'}}>Silas Nevstad</HomeTextLarge>
-            <HomeTextSmall style={{marginTop: '-.9em'}}>Northeastern Student | Programmer</HomeTextSmall>
+            <HomeTextSmall style={{animationDelay: '0s'}}>Hi, I'm</HomeTextSmall>
+            <HomeTextLarge style={{marginTop: '-.1em', animationDelay: '0.05s'}}>Silas Nevstad</HomeTextLarge>
+            <HomeTextSmall style={{marginTop: '-.9em', animationDelay: '0.1s'}}>
+              Northeastern Student | <TypingAnimation />
+            </HomeTextSmall>
           </HomeContainer>
           <HomeContainer style={{marginTop: '1em'}}>
-            <HomeTitleText>
+            <HomeTitleText style={{animationDelay: '0.15s'}}>
               <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></HomeTitleIcon>
               Popular Projects
             </HomeTitleText>
-            <HomeProjectsContainer>
+            <HomeProjectsContainer style={{animationDelay: '0.2s'}}>
               {mostPopularProjects.map((project, index) => (
                 <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
               ))}
             </HomeProjectsContainer>
             <Divider />
-            <HomeTitleText>
+            <HomeTitleText style={{animationDelay: '.25s'}}>
               <HomeTitleIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></HomeTitleIcon>
               Recent Projects
             </HomeTitleText>
-            <HomeProjectsContainer>
+            <HomeProjectsContainer style={{animationDelay: '0.3s'}}>
               {mostRecentProjects.map((project, index) => (
                 <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
               ))}
@@ -192,7 +212,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           </HomeContainer>
           {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
         </HomeCenterContainer>
-        <FooterText>12.6k requests © 2022 Silas Nevstad</FooterText>
+        <FooterText>12.8k requests © 2022 Silas Nevstad</FooterText>
         <SocialLinks />
       </HomeContainer>
     </AppContainer>

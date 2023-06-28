@@ -2,10 +2,21 @@
 import NavigationMenu from "../components/NavigationMenu";
 import NavigationHeader from '../components/NavigationHeader';
 import SocialLinks from '../components/SocialLinks';
-import styled from "styled-components";
+import styled, { keyframes } from 'styled-components';
 import '../styles/Buttons.css';
 import emailjs from 'emailjs-com';
 import { useState } from "react";
+
+const fadeAndDropInFromCeiling = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
 
 const ContactResizeContainer = styled.div`
     margin-top: 6.2em;
@@ -42,6 +53,8 @@ const ContactButtonContainer = styled.div`
     width: 100%;
     margin-top: 1em;
     gap: 1em;
+    animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+    opacity: 0;
 `;
 
 const ContactInputItem = styled.div`
@@ -56,6 +69,8 @@ const ContactInputItem = styled.div`
     padding: .2em .8em;
     margin-bottom: 1em;
     width: 95%;
+    animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+    opacity: 0;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -77,12 +92,13 @@ const ContactInputItemLarge = styled.div`
     width: 95%;
     height: 10em;
     position: relative;
+    animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+    opacity: 0;
 
     @media (max-width: 768px) {
         width: 100%;
     }
 `;
-
 
 const ContactInput = styled.input`
     width: 100%;
@@ -175,21 +191,21 @@ const Contact = ({ isMenuOpen, toggleMenu }) => {
             <NavigationHeader currentPage={"/contact"} toggleMenu={toggleMenu} />
             <ContactResizeContainer isMenuOpen={isMenuOpen}>
                 <ContactInputContainer>
-                    <ContactInputItem>
+                    <ContactInputItem style={{animationDelay: '0s'}}>
                         <ContactIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="feather feather-user">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </ContactIcon>
                         <ContactInput type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
                     </ContactInputItem>
-                    <ContactInputItem>
+                    <ContactInputItem style={{animationDelay: '0.1s'}}>
                         <ContactIcon xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
                             <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </ContactIcon>
                         
                         <ContactInput type="text" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </ContactInputItem>
-                    <ContactInputItemLarge>
+                    <ContactInputItemLarge style={{animationDelay: '.2s'}}>
                         {!message &&
                         <ContactIconLock xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -197,7 +213,7 @@ const Contact = ({ isMenuOpen, toggleMenu }) => {
                         </ContactIconLock>}
                         <ContactLargeInput type="text" placeholder="Your Message" value={message} onChange={(e) => setMessage(e.target.value)} style={!message ? {left: '2.3em'} : {left: '.5em'}} />
                     </ContactInputItemLarge>
-                    <ContactButtonContainer>
+                    <ContactButtonContainer style={{animationDelay: '0.3s'}}>
                         <button className="button" onClick={handleSubmit}>
                             {loading ? 'Sending...' : success ? 'Sent!' : error ? error : 'Send Message'}
                             {/* Send Message */}
