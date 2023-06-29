@@ -12,8 +12,8 @@ const NavHeader = styled.div`
     flex-direction: row;
     padding-top: .5em;
     padding-bottom: .5em;
-    z-index: 100;
-    background-color: #222;
+    z-index: 10;
+    background-color: transparent;
 
     @media (max-width: 768px) {
         display: none;

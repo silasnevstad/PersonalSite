@@ -166,7 +166,7 @@ const Resume = ({ isMenuOpen, toggleMenu }) => {
       <NavigationMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <NavigationHeader currentPage={"/resume"} toggleMenu={toggleMenu} />
       <ResumeContainer isMenuOpen={isMenuOpen}>
-        <div class="sticky-div">
+        <div className="sticky-div">
           <h1>Silas Nevstad</h1>
           <ResumeSubHeader> Boston, MA | nevstads@gmail.com | <a href="https://www.linkedin.com/in/silas-nevstad-3091a420b/">LinkedIn</a> | <a href="https://github.com/silasnevstad/">Github</a> </ResumeSubHeader>
           <StickyHeader isMenuOpen={isMenuOpen} />

@@ -231,6 +231,12 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
         <NavMenuContainerFooter>
           <NavMenuFooterItem>
             <PinImg src={require('../images/pin.png')} alt="Pin" />
+            <NavMenuFooterItemAnchor href="https://www.opexis.me" onClick={toggleMenu}>
+              <NavText>Opexis</NavText>
+            </NavMenuFooterItemAnchor>
+          </NavMenuFooterItem>
+          <NavMenuFooterItem>
+            <PinImg src={require('../images/pin.png')} alt="Pin" />
             <NavMenuFooterItemAnchor href="https://www.buddyai.me" onClick={toggleMenu}>
               <NavText>BuddyAI</NavText>
             </NavMenuFooterItemAnchor>
@@ -245,12 +251,6 @@ const NavigationMenu = ({ isMenuOpen, toggleMenu }) => {
             <PinImg src={require('../images/pin.png')} alt="Pin" />
             <NavMenuFooterItemAnchor href="https://marketplace.visualstudio.com/items?itemName=SilasNevstad.gpthelper" onClick={toggleMenu}>
               <NavText>VSCode GPT</NavText>
-            </NavMenuFooterItemAnchor>
-          </NavMenuFooterItem>
-          <NavMenuFooterItem>
-            <PinImg src={require('../images/pin.png')} alt="Pin" />
-            <NavMenuFooterItemAnchor href="https://www.humangpt.me" onClick={toggleMenu}>
-              <NavText>HumanGPT</NavText>
             </NavMenuFooterItemAnchor>
           </NavMenuFooterItem>
         </NavMenuContainerFooter>

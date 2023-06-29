@@ -6,7 +6,7 @@ import styled, { keyframes } from 'styled-components';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
 import TypingAnimation from '../components/TypingAnimation';
-import { PROJECTS } from '../components/constants';
+import { PROJECTS, QUOTES } from '../components/constants';
 import { sortByDate } from '../components/Utils';
 
 const fadeAndDropInFromCeiling = keyframes`
@@ -41,7 +41,7 @@ const HomeCenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10em;
+  margin: 8em;
   margin-top: 4em;
 
   @media (max-width: 768px) {
@@ -98,6 +98,44 @@ const HomeTitleText = styled.h1`
   }
 `;
 
+const QuoteText = styled.h1`
+  align-self: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 4rem;
+  font-weight: 500;
+  opacity: 0.5;
+  text-align: center;
+  max-width: 70%;
+  color: #999;
+  letter-spacing: 0.4px;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+  opacity: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-top: -3rem;
+  }
+`;
+
+const QuoteAuthor = styled.h1`
+  align-self: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  opacity: 0.5;
+  color: #666;
+  animation: ${fadeAndDropInFromCeiling} 0.2s ease-in-out forwards;
+  opacity: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-bottom: 10.5rem;
+  }
+`;
+
 const HomeTitleIcon = styled.svg`
   width: 1em;
   height: 1em;
@@ -139,13 +177,13 @@ const HomeTextLarge = styled.h1`
 `;
 
 const FooterText = styled.p`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   align-self: center;
   font-size: 0.9rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  // margin-top: 1rem;
+  // margin-bottom: 0.5rem;
   opacity: 0.5;
 
   &:hover {
@@ -161,6 +199,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
   const sortedByRequests = [...PROJECTS].sort((a, b) => b.requests - a.requests);
   // use sortByDate() function from utils.js
   const sortedByDate = [...PROJECTS].sort(sortByDate);
+  const selectedQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
 
   const mostPopularProjects = sortedByRequests.slice(0, 3);
   const mostRecentProjects = sortedByDate.slice(0, 3);
@@ -210,9 +249,12 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
             </HomeProjectsContainer>
             <MobileDivider />
           </HomeContainer>
+          <QuoteText style={{animationDelay: '0.35s'}}>{selectedQuote.quote}</QuoteText>
+          <QuoteAuthor style={{animationDelay: '0.4s'}}>{selectedQuote.author}</QuoteAuthor>
+          {/* // <QuoteAuthor style={{animationDelay: '0.4s'}}>- {selectedQuote.author}</QuoteAuthor> */}
           {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
         </HomeCenterContainer>
-        <FooterText>13.3k requests © 2022 Silas Nevstad</FooterText>
+        <FooterText>13.3k requests{window.innerWidth > 768 && " © 2022 Silas Nevstad"}</FooterText>
         <SocialLinks />
       </HomeContainer>
     </AppContainer>

@@ -155,13 +155,13 @@ const ChessGameRapidIcon = styled.img`
     }
 `;
 
-const ChessGameTimeControl = styled.p`
+const ChessGameTimeControl = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     opacity: 0.8;
 `;
 
-const ChessGameDate = styled.p`
+const ChessGameDate = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     margin: 0;
@@ -169,14 +169,14 @@ const ChessGameDate = styled.p`
     opacity: 0.8;
 `;
 
-const ChessGameTime = styled.p`
+const ChessGameTime = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     margin: 0;
     opacity: 0.8;
 `;
 
-const ChessGameResult = styled.p`
+const ChessGameResult = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     margin: 0;
@@ -186,7 +186,7 @@ const ChessGameResult = styled.p`
     color: ${({ result }) => result === "win" ? "#9ED15D" : result === "stalemate" ? "#E3C95F" : result === "timevsinsufficient" ? "#E3C95F" : "#CC4E44"};
 `;
 
-const ChessGameWinRate = styled.p`
+const ChessGameWinRate = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     margin-top: -30px;
@@ -199,7 +199,7 @@ const ChessGameWinRateColor = styled.span`
     color: ${({ winRate }) => winRate >= 50 ? "#9ED15D" : "#CC4E44"};
 `;
 
-const ChessGameWinRateInfo = styled.p`
+const ChessGameWinRateInfo = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 0.8rem;
     margin: 0;
@@ -208,7 +208,7 @@ const ChessGameWinRateInfo = styled.p`
     text-align: left;
 `;
 
-const ChessInfoMessage = styled.p`
+const ChessInfoMessage = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: .8rem;
     margin: 0;
