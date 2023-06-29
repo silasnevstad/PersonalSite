@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 const TypingAnimation = () => {
   const words = useMemo(() => [
     "Programmer",
-    "Full Stack Developer",
+    "Full Stack Developer", 
     "Software Developer",
     "Web Designer",
     "Data Scientist",
