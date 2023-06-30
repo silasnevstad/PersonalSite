@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
 import ProjectLanguages from './ProjectLanguages';
+import CountUp from 'react-countup';
 
 const CardLarge = styled.div`
     padding: 10px 5px;
@@ -201,7 +202,14 @@ const ProjectCardLarge = ({ project }) => {
                     }
                 </ProjectFooterLeft>
                     
-                <ProjectFooterRequests>{formatRequests(project)}</ProjectFooterRequests>
+                <ProjectFooterRequests>
+                    <CountUp 
+                        start={0} 
+                        end={project.requests} 
+                        duration={1.5} 
+                        formattingFn={number => formatRequests(number)}
+                    />
+                </ProjectFooterRequests>
             </ProjectFooter>
         </CardLarge>
     );

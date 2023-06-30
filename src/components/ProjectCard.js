@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { formatRequests } from './Utils';
 import ProjectLanguages from './ProjectLanguages';
+import CountUp from 'react-countup';
 
 const Card = styled.div`
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
@@ -18,8 +19,7 @@ const Card = styled.div`
     transition: transform 0.3s;
     color: ${({ theme }) => theme.colors.text};
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px, rgba(0, 0, 0, 0.2) 0px 5px 10px -3px, rgba(0, 0, 0, .3) 0px -3px 0px inset;
-    // border: 1px solid #2f2f2f;
-    animation: bounce-in-right 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
+    animation: bounce-in-right .5s cubic-bezier(0.215, 0.610, 0.355, 1.000) ${({ index }) => index * 0.1}s both;
     font-family: 'Inter', sans-serif;
     
     &:hover {
@@ -34,7 +34,7 @@ const Card = styled.div`
     @keyframes bounce-in-right {
         0% {
           opacity: 0;
-          transform: translateX(2000px);
+          transform: translateX(1000px);
         }
         60% {
           opacity: 1;
@@ -119,21 +119,39 @@ const convertDateString = (dateString) => {
     return date.join(' ');
 };
 
-const ProjectCard = ({ project, onClick, index }) => {
-  return (
+const ProjectCard = ({ project, onClick, index, isCountUpDone }) => {
+    const [requests, setRequests] = useState(0);
+  
+    useEffect(() => {
+        // Delay the counting animation a bit to allow for smooth page loading
+        const timer = setTimeout(() => {
+            setRequests(project.requests);
+        }, 0);
+   
+        return () => clearTimeout(timer);
+    }, [project.requests]);
+  
+    return (
       <Card onClick={onClick} index={index}>
         <ProjectInfo>
           <ProjectTitle>{project.title}</ProjectTitle>
-          <ProjectVersion>{formatRequests(project)}</ProjectVersion>
+          <ProjectVersion>
+            {isCountUpDone ? formatRequests(requests) : 
+                <CountUp 
+                start={0} 
+                end={requests} 
+                duration={2.5} 
+                formattingFn={number => formatRequests(number)}
+                />
+            }
+          </ProjectVersion>
           <ProjectLanguages className="project-languages" languages={project.languages} />
-          {/* <ProjectLanguages>{project.languages.map((language, index) => <LanguageSpan key={index} style={{ backgroundColor: getLanguageColor(language), marginRight: '18px', marginLeft: '-10px' }}>{language}</LanguageSpan>)}</ProjectLanguages>  <span style={{letterSpacing: '-2.5px', fontSize: '1.5em', marginTop: '1em'}}>• </span> */}
-          {/* <ProjectDeveloper>{project.developers}</ProjectDeveloper> */}
           <ProjectDate>{convertDateString(project.date)}</ProjectDate>
-          {/* <ProjectClicks>{formatRequests(project.requests)}</ProjectClicks> */}
         </ProjectInfo>
         {project.logo !== '' && <ProjectLogo src={require('../images/' + project.logo)} alt='Project Logo' />}
       </Card>
-  );
-};
-
-export default ProjectCard;
+    );
+  };
+  
+  export default ProjectCard;
+  

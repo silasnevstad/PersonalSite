@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavigationMenu from '../components/NavigationMenu';
 import NavigationHeader from '../components/NavigationHeader';
 import SocialLinks from '../components/SocialLinks';
@@ -108,6 +108,13 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [sortBy, setSortBy] = useState('date');
   const [sortKey, setSortKey] = useState(0); // to retrigger sort animation
+  const [isCountUpDone, setIsCountUpDone] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsCountUpDone(true);
+    }, 1000);
+  }, []);
 
   const handleSortChange = (newSortBy) => {
     setSortBy(newSortBy);
@@ -159,6 +166,7 @@ const Projects = ({ isMenuOpen, toggleMenu }) => {
               project={project}
               index={index}
               onClick={() => handleProjectClick(project)}
+              isCountUpDone={isCountUpDone}
             />
           ))}
         </ProjectsContainer>

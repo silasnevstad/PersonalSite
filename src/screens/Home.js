@@ -195,7 +195,7 @@ const FooterText = styled.p`
   }
 `;
 
-const typingDelay = 25;
+const typingDelay = 1;
 
 const Home = ({ isMenuOpen, toggleMenu }) => {
   const sortedByRequests = [...PROJECTS].sort((a, b) => b.requests - a.requests);
@@ -204,37 +204,49 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [displayedQuote, setDisplayedQuote] = useState("");
   const [displayedAuthor, setDisplayedAuthor] = useState("");
+  const [isCountUpDone, setIsCountUpDone] = useState(false);
+
+  // set countUpDone to true after 1.5 seconds
   
   useEffect(() => {
     const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
     setSelectedQuote(quote);
+
+    setTimeout(() => {
+      setIsCountUpDone(true);
+    }, 500);
   }, []);  // This will run only once, when the component mounts
   
   useEffect(() => {
-    if (selectedQuote) {
-      let quoteIndex = 0;
-      let authorIndex = 0;
-      let localDisplayedQuote = "";
-      let localDisplayedAuthor = "";
+    if (selectedQuote && isCountUpDone) {
+        let quoteIndex = 0;
+        let authorIndex = 0;
+        let localDisplayedQuote = "";
+        let localDisplayedAuthor = "";
 
-      const typingInterval = setInterval(() => {
-        if (quoteIndex < selectedQuote.quote.length) {
-          localDisplayedQuote += selectedQuote.quote.charAt(quoteIndex);
-          quoteIndex++;
-        } else if (authorIndex < selectedQuote.author.length) {
-          localDisplayedAuthor += selectedQuote.author.charAt(authorIndex);
-          authorIndex++;
-        } else {
-          clearInterval(typingInterval);
-        }
-        
-        setDisplayedQuote(localDisplayedQuote);
-        setDisplayedAuthor(localDisplayedAuthor);
-      }, typingDelay);
+        const typeCharacter = () => {
+            if (quoteIndex < selectedQuote.quote.length) {
+                localDisplayedQuote += selectedQuote.quote.charAt(quoteIndex);
+                quoteIndex++;
+            } else if (authorIndex < selectedQuote.author.length) {
+                localDisplayedAuthor += selectedQuote.author.charAt(authorIndex);
+                authorIndex++;
+            } else {
+                // Stop the animation once both the quote and author are completely displayed.
+                return;
+            }
+            
+            setDisplayedQuote(localDisplayedQuote);
+            setDisplayedAuthor(localDisplayedAuthor);
+            // Continue the animation on the next frame.
+            requestAnimationFrame(typeCharacter);
+        };
 
-      return () => clearInterval(typingInterval);
+        // Start the animation.
+        requestAnimationFrame(typeCharacter);
     }
-  }, [selectedQuote]);
+}, [selectedQuote, isCountUpDone]);
+
 
   
   const mostPopularProjects = sortedByRequests.slice(0, 3);
@@ -270,7 +282,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
             </HomeTitleText>
             <HomeProjectsContainer style={{animationDelay: '0.2s'}}>
               {mostPopularProjects.map((project, index) => (
-                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
+                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} isCountUpDone={isCountUpDone} />
               ))}
             </HomeProjectsContainer>
             <Divider />
@@ -280,7 +292,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
             </HomeTitleText>
             <HomeProjectsContainer style={{animationDelay: '0.3s'}}>
               {mostRecentProjects.map((project, index) => (
-                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} />
+                <ProjectCard key={index} project={project} onClick={() => handleProjectClick(project)} isCountUpDone={isCountUpDone} />
               ))}
             </HomeProjectsContainer>
             <MobileDivider />
