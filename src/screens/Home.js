@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavigationMenu from '../components/NavigationMenu';
 import NavigationHeader from '../components/NavigationHeader';
 import SocialLinks from '../components/SocialLinks';
@@ -195,12 +195,48 @@ const FooterText = styled.p`
   }
 `;
 
+const typingDelay = 25;
+
 const Home = ({ isMenuOpen, toggleMenu }) => {
   const sortedByRequests = [...PROJECTS].sort((a, b) => b.requests - a.requests);
   // use sortByDate() function from utils.js
   const sortedByDate = [...PROJECTS].sort(sortByDate);
-  const selectedQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  const [selectedQuote, setSelectedQuote] = useState(null);
+  const [displayedQuote, setDisplayedQuote] = useState("");
+  const [displayedAuthor, setDisplayedAuthor] = useState("");
+  
+  useEffect(() => {
+    const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    setSelectedQuote(quote);
+  }, []);  // This will run only once, when the component mounts
+  
+  useEffect(() => {
+    if (selectedQuote) {
+      let quoteIndex = 0;
+      let authorIndex = 0;
+      let localDisplayedQuote = "";
+      let localDisplayedAuthor = "";
 
+      const typingInterval = setInterval(() => {
+        if (quoteIndex < selectedQuote.quote.length) {
+          localDisplayedQuote += selectedQuote.quote.charAt(quoteIndex);
+          quoteIndex++;
+        } else if (authorIndex < selectedQuote.author.length) {
+          localDisplayedAuthor += selectedQuote.author.charAt(authorIndex);
+          authorIndex++;
+        } else {
+          clearInterval(typingInterval);
+        }
+        
+        setDisplayedQuote(localDisplayedQuote);
+        setDisplayedAuthor(localDisplayedAuthor);
+      }, typingDelay);
+
+      return () => clearInterval(typingInterval);
+    }
+  }, [selectedQuote]);
+
+  
   const mostPopularProjects = sortedByRequests.slice(0, 3);
   const mostRecentProjects = sortedByDate.slice(0, 3);
 
@@ -249,8 +285,8 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
             </HomeProjectsContainer>
             <MobileDivider />
           </HomeContainer>
-          <QuoteText style={{animationDelay: '0.35s'}}>{selectedQuote.quote}</QuoteText>
-          <QuoteAuthor style={{animationDelay: '0.4s'}}>{selectedQuote.author}</QuoteAuthor>
+          <QuoteText style={{animationDelay: '0.35s'}}>{displayedQuote}</QuoteText>
+          <QuoteAuthor style={{animationDelay: '0.4s'}}>{displayedAuthor}</QuoteAuthor>
           {/* // <QuoteAuthor style={{animationDelay: '0.4s'}}>- {selectedQuote.author}</QuoteAuthor> */}
           {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
         </HomeCenterContainer>

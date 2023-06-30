@@ -42,7 +42,7 @@ export const QUOTES = [
   { quote: "It is far better to be alone, than to be in bad company.", author: "George Washington" },
   { quote: "If you cannot do great things, do small things in a great way.", author: "Napoleon Hill" },
   { quote: "Don’t compare; the only person you should try to beat is the person you were yesterday.", author: "" },
-  { quote: "Yesterday is history, tomorrow is a mystery, but today is a present", author: "Master Oogway" },
+  { quote: "Yesterday is history, tomorrow is a mystery, but today is a present", author: "Oogway" },
   { quote: "I do not know with what weapons World War III will be fought, but World War IV will be fought with sticks and stones.", author: "Albert Einstein" },
   { quote: "Discipline is doing what you hate to do, but doing it like you love it.", author: "Mike Tyson" },
   { quote: "Life passes most people by, while they’re making grand plans for it.", author: "" },
