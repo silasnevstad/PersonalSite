@@ -195,8 +195,6 @@ const FooterText = styled.p`
   }
 `;
 
-const typingDelay = 1;
-
 const Home = ({ isMenuOpen, toggleMenu }) => {
   const sortedByRequests = [...PROJECTS].sort((a, b) => b.requests - a.requests);
   // use sortByDate() function from utils.js
