@@ -300,7 +300,7 @@ const Home = ({ isMenuOpen, toggleMenu }) => {
           {/* // <QuoteAuthor style={{animationDelay: '0.4s'}}>- {selectedQuote.author}</QuoteAuthor> */}
           {selectedProject && <ProjectModal project={selectedProject} onClose={handleCloseModal} />}
         </HomeCenterContainer>
-        <FooterText>13.4k requests{window.innerWidth > 768 && " © 2022 Silas Nevstad"}</FooterText>
+        <FooterText>13.9k requests{window.innerWidth > 768 && " © 2022 Silas Nevstad"}</FooterText>
         <SocialLinks />
       </HomeContainer>
     </AppContainer>
