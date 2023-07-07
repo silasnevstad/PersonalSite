@@ -290,13 +290,12 @@ const determineWinOrLoss = (game) => {
     return "draw";
 } 
 
-const calculateWinRate = (games) => {
+const calculateWinRate = (gamesForStats) => {
     let wins = 0;
     let losses = 0;
     let draws = 0;
     
-    games.forEach(game => {
-        const result = determineWinOrLoss(game);
+    gamesForStats.forEach(result => {
         if (result === "win") {
             wins++;
         } else if (result === "loss") {
@@ -311,14 +310,12 @@ const calculateWinRate = (games) => {
     return winRate.toFixed(1);
 }
 
-const getChartData = (games) => {
+const getChartData = (gamesForStats) => {
     let wins = 0;
     let losses = 0;
     let chartData = [];
 
-    games.forEach(game => {
-        const result = determineWinOrLoss(game);
-
+    gamesForStats.forEach(result => {
         if (result === "win") {
             wins++;
         } else if (result === "loss") {
@@ -335,6 +332,8 @@ const ChessGame = ({ isMenuOpen }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [game, setGame] = useState(new Chess());
     const [games, setGames] = useState([]);
+    const [gamesForStats, setGamesForStats] = useState([]);
+    const [archiveUrls, setArchiveUrls] = useState([]);
     const [gameIndex, setGameIndex] = useState(-1);
     const [fen, setFen] = useState("start");
     const [history, setHistory] = useState([]);
@@ -387,42 +386,54 @@ const ChessGame = ({ isMenuOpen }) => {
         );
         
         let games = [];
+        let gamesForStats = [];
         const archives = response.data.archives;
+        setArchiveUrls(archives);
         
         // Start from the end of the archives, which are the most recent
         for (let i = archives.length - 1; i >= 0; i--) {
             const gamesResponse = await axios.get(archives[i]);
             const newGames = gamesResponse.data.games;
+    
             // add the new games to the start of the array
             games = [...newGames, ...games];
+            gamesForStats = [...newGames.map(game => determineWinOrLoss(game)), ...gamesForStats];
     
             // If we have reached the max games, truncate and break
-            if (games.length >= MAX_GAMES) {
+            if (gamesForStats.length >= MAX_GAMES) {
                 // cut off the extra games from the start (so keep the last games in the array (the most recent))
-                games = games.slice(games.length - MAX_GAMES, games.length);
+                games = games.slice(games.length - 100, games.length);
+                gamesForStats = gamesForStats.slice(gamesForStats.length - MAX_GAMES, gamesForStats.length);
                 break;
             }
         }
     
         setGames(games);
+        setGamesForStats(gamesForStats);
         setGameIndex(games.length - 1);
         setIsLoading(false);
         const lastGame = games[games.length - 1];
     
         if (lastGame) {
             loadGame(lastGame);
-            setWinRate(calculateWinRate(games));
-            setNumberOfGames(games.length);
+            setWinRate(calculateWinRate(gamesForStats));
+            setNumberOfGames(gamesForStats.length);
         }
     }, []);
-    
 
-    const onLastGame = () => {
+    const onLastGame = async () => {
         if (gameIndex > 0) {
             setGameIndex(gameIndex - 1);
             loadGame(games[gameIndex - 1]);
+        } else if (gamesForStats.length - gameIndex > 100) {
+            const archiveIndex = Math.floor((gamesForStats.length - gameIndex - 1) / 100);
+            const gamesResponse = await axios.get(archiveUrls[archiveIndex]);
+            const newGames = gamesResponse.data.games;
+            setGames([...newGames, ...games].slice(-100));  // maintain a rolling window of last 100 games
+            setGameIndex(gameIndex - 1);
+            loadGame(newGames[0]);
         }
-    };
+    };    
     
     const onNextGame = () => {
         if (gameIndex < games.length - 1) {
@@ -430,6 +441,7 @@ const ChessGame = ({ isMenuOpen }) => {
             loadGame(games[gameIndex + 1]);
         }
     };
+    
 
     // reset the current game to the start if one is in progress
     const onReset = () => {
